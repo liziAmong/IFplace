@@ -108,7 +108,7 @@ const artworks = [
     link: "https://wplace.live/?lat=35.934394884752294&lng=128.12106412177735&zoom=14.73263011416146",
     hintLink: "1",
     image: "images/image11.jpg",
-    size: "치",
+    size: "치비",
     quizHints: ["1", "2", "위치 공개!"],
     tags: ["하네"]
   },
@@ -116,7 +116,7 @@ const artworks = [
     id: 12,
     link: "https://wplace.live/?lat=35.9493379363319&lng=128.12000943427734&zoom=14.598776121940784",
     hintLink: "1",
-    image: "images/image11.jpg",
+    image: "images/image12.jpg",
     size: "치비",
     quizHints: ["1", "2", "위치 공개!"],
     tags: ["하루"]
