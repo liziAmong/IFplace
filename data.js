@@ -40,7 +40,7 @@ const artworks = [
     id: 5,
     link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
     image: "images/image5.jpg",
-    size: "중간",
+    size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["하유"]
   },
