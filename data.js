@@ -7,10 +7,10 @@ const artworks = [
 {
     id: 0,
     link: "https://wplace.live/?lat=38.414897142801934&lng=127.59125943427733&zoom=11.972094337239767",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=38.643030049034095&lng=127.35870084052732&zoom=14.621848974633494",
     image: "images/image0.jpg",
     size: "완커",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["북쪽으로 떠납니다.", "동남쪽으로 가세요", "위치 공개!"],
     tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
   },
   {
