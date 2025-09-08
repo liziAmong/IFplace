@@ -25,7 +25,7 @@
       color: #444;
     }
 
-    /* 버튼 스타일 */
+    /* 버튼 투명 + 글씨 뒤만 블러 */
     #hint-btn {
       position: relative;
       padding: 120px 160px;
@@ -34,25 +34,29 @@
       border: none;
       border-radius: 20px;
       color: #fff;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
       margin-bottom: 20px;
+      background: transparent; /* 완전 투명 */
       overflow: hidden;
-      z-index: 1;
-      background: #999; /* 기본색 (이미지 없을 때 대비) */
     }
 
-    /* 블러된 배경 이미지 */
     #hint-btn::before {
       content: "";
       position: absolute;
       inset: 0;
       background-size: cover;
       background-position: center;
-      filter: blur(8px) brightness(0.8);
-      z-index: -1;
+      filter: blur(10px) brightness(0.7);
+      z-index: 0;
+      border-radius: 20px;
+    }
+
+    #hint-btn span {
+      position: relative;
+      z-index: 1; /* 글씨는 위에 표시 */
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.7);
     }
 
     #hint-btn:hover {
@@ -98,7 +102,7 @@
   <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
 
-  <button id="hint-btn"></button>
+  <button id="hint-btn"><span></span></button>
 
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
@@ -113,6 +117,7 @@
   <script src="data.js"></script>
   <script>
     const hintBtn = document.getElementById("hint-btn");
+    const hintText = hintBtn.querySelector("span");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const viewHintBtn = document.getElementById("view-hint-btn");
@@ -126,13 +131,38 @@
       const artwork = artworks[index];
       if (!artwork) return;
 
-      // 버튼 배경에 퀴즈 이미지 넣기 (블러 효과는 CSS ::before에서 적용됨)
+      // 이미지 배경 (버튼의 ::before에 적용)
       const quizImagePath = `images/images${index}.jpg`;
-      hintBtn.style.setProperty("--bg-image", `url(${quizImagePath})`);
-      hintBtn.style.background = "rgba(0,0,0,0.3)"; // 텍스트 가독성 유지
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("background-image", `url(${quizImagePath})`);
+      hintBtn.style.backgroundSize = "cover";
+      hintBtn.style.backgroundPosition = "center";
+      hintBtn.style.setProperty("--bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--image", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--img", `url(${quizImagePath})`);
 
-      // ::before에 이미지 배경 적용
-      hintBtn.querySelector("::before");
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--image-url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--quiz-bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--hint-bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--bg-image", `url(${quizImagePath})`);
+
+      // ::before 배경 업데이트
+      hintBtn.style.setProperty("position", "relative");
+      hintBtn.style.setProperty("overflow", "hidden");
+      hintBtn.style.setProperty("isolation", "isolate");
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.cssText += `--bg-url:url(${quizImagePath});`;
+
+      hintBtn.style.setProperty("--bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--image", `url(${quizImagePath})`);
+
+      hintBtn.style.setProperty("--quiz-bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+
+      hintBtn.style.setProperty("--bg-image", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("--url", `url(${quizImagePath})`);
 
       // 사이즈 표시
       const sizeText = artwork.size || "사이즈 없음";
@@ -140,7 +170,7 @@
 
       // 첫 번째 힌트 표시
       currentHintStep = 0;
-      hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
+      hintText.textContent = artwork.quizHints[0] || "힌트 없음";
 
       // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
@@ -153,37 +183,11 @@
 
       viewHintBtn.textContent = "힌트보기";
 
-      // 동적으로 ::before에 배경 적용
-      hintBtn.style.setProperty("--hint-bg", `url(${quizImagePath})`);
-      hintBtn.style.setProperty("position", "relative");
-      hintBtn.style.setProperty("z-index", "1");
-      hintBtn.style.setProperty("--image-url", `url(${quizImagePath})`);
+      // ::before 동적으로 배경 이미지 설정
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("background", "transparent");
       hintBtn.style.setProperty("background-image", "none");
-      hintBtn.style.setProperty("background", "rgba(0,0,0,0.35)");
-      hintBtn.style.setProperty("backdrop-filter", "blur(8px)");
-      hintBtn.style.setProperty("-webkit-backdrop-filter", "blur(8px)");
-      hintBtn.style.setProperty("background-blend-mode", "darken");
-
-      // 직접 ::before 스타일 주입 (동적으로 이미지 변경 반영)
-      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
-      hintBtn.style.cssText += `
-        --bg-url: url(${quizImagePath});
-      `;
-      hintBtn.setAttribute("style", hintBtn.getAttribute("style") + `
-        --bg-url: url(${quizImagePath});
-      `);
-      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
-      hintBtn.style.background = "rgba(0,0,0,0.35)";
-      hintBtn.style.setProperty("position", "relative");
-      hintBtn.style.setProperty("overflow", "hidden");
-      hintBtn.style.setProperty("isolation", "isolate");
-
-      // 배경 업데이트
-      hintBtn.style.setProperty("background", `rgba(0,0,0,0.4)`);
-      hintBtn.style.setProperty("background-image", `url(${quizImagePath})`);
-      hintBtn.style.setProperty("background-size", "cover");
-      hintBtn.style.setProperty("background-position", "center");
-      hintBtn.style.setProperty("filter", "blur(6px)");
+      hintBtn.style.setProperty("backdrop-filter", "none");
     }
 
     // 이전/다음
@@ -204,11 +208,11 @@
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
         currentHintStep = 1;
-        hintBtn.textContent = artwork.quizHints[1];
+        hintText.textContent = artwork.quizHints[1];
         viewHintBtn.textContent = "정답보기";
       } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
         currentHintStep = 2;
-        hintBtn.textContent = artwork.quizHints[2];
+        hintText.textContent = artwork.quizHints[2];
         viewHintBtn.textContent = "정답 확인 완료";
         hintBtn.onclick = () => {
           if (artwork.link) window.open(artwork.link, "_blank");
