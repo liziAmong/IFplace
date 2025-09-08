@@ -60,6 +60,16 @@ const artworks = [
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["반님"]
   },
+  {
+    id: 8,
+    link: "https://wplace.live/?lat=38.02780901836128&lng=126.32036099677731&zoom=14.848925910534648",
+    image: "images/image8.jpg",
+    size: "치비",
+    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    tags: ["테리"]
+  },
+
+
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
