@@ -22,15 +22,17 @@
       margin-bottom: 15px;
       font-size: 1.2rem;
       font-weight: 600;
-      color: #333;
+      color: #444;
     }
 
     #hint-btn {
       padding: 120px 160px;
-      font-size: 3rem;
+      font-size: 2.8rem;
+      font-weight: 700;
       border: none;
-      border-radius: 16px;
+      border-radius: 20px;
       color: #fff;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
@@ -40,29 +42,31 @@
 
     #hint-btn:hover {
       transform: scale(1.05);
-      filter: brightness(1.1);
+      filter: brightness(1.05);
     }
 
     #controls button {
-      padding: 10px 16px;
+      padding: 12px 20px;
       margin: 5px;
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 10px;
       border: none;
-      background-color: #666;
+      background-color: #888;
       color: #fff;
       font-weight: 600;
-      transition: background-color 0.3s ease;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     #controls button:hover {
-      background-color: #444;
+      background-color: #555;
+      transform: scale(1.05);
     }
 
     .buttons .btn {
       margin-top: 20px;
       display: inline-block;
-      padding: 8px 16px;
+      padding: 10px 20px;
       border-radius: 12px;
       background-color: #666;
       color: #fff;
@@ -100,8 +104,21 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
+    // 부드러운 파스텔 톤 색상 팔레트
+    const pastelColors = [
+      "#FFB3BA", // 핑크
+      "#FFDFBA", // 피치
+      "#FFFFBA", // 연노랑
+      "#BAFFC9", // 민트
+      "#BAE1FF", // 연하늘
+      "#E0BBE4", // 라벤더
+      "#FFCCE5", // 베이비핑크
+      "#C7CEEA", // 소프트 블루
+      "#F1F0C0", // 라이트 베이지
+      "#B5EAD7"  // 파스텔 민트
+    ];
+
     const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
-    const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#51B6E0","#FFD700","#32CD32"];
 
     let currentQuizIndex = 0;
     let currentHintStep = 0;
@@ -110,18 +127,19 @@
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      // 중앙 버튼 배경색: 그라데이션
+      // 중앙 버튼 배경: 태그 → 파스텔 색상 매핑
       if (artwork.tags && artwork.tags.length > 0) {
-        const colors = artwork.tags.map(tag => tagColors[tagNames.indexOf(tag)] || "#ffb347");
+        const colors = artwork.tags.map(tag => {
+          const i = tagNames.indexOf(tag);
+          return pastelColors[i % pastelColors.length]; // 안전 처리
+        });
         if (colors.length === 1) {
           hintBtn.style.background = colors[0];
         } else {
-          // 좀 더 부드럽고 예쁜 그라데이션
-          const gradient = `linear-gradient(135deg, ${colors.join(", ")})`;
-          hintBtn.style.background = gradient;
+          hintBtn.style.background = `linear-gradient(135deg, ${colors.join(", ")})`;
         }
       } else {
-        hintBtn.style.background = "#ffb347";
+        hintBtn.style.background = "#B5EAD7"; // 기본 파스텔 민트
       }
 
       // 사이즈만 표시
@@ -132,7 +150,7 @@
       currentHintStep = 0;
       hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
 
-      // 클릭 시 첫 번째 힌트 링크 열기
+      // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
         if (artwork.hintLink) {
           window.open(artwork.hintLink, "_blank");
@@ -144,20 +162,18 @@
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전/다음 버튼
+    // 이전/다음
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex--;
-      if (currentQuizIndex < 0) currentQuizIndex = getAllArtworks().length - 1;
+      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     nextBtn.addEventListener("click", () => {
-      currentQuizIndex++;
-      if (currentQuizIndex >= getAllArtworks().length) currentQuizIndex = 0;
+      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 힌트보기/정답보기 버튼
+    // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
       const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
@@ -166,9 +182,6 @@
         currentHintStep = 1;
         hintBtn.textContent = artwork.quizHints[1];
         viewHintBtn.textContent = "정답보기";
-        hintBtn.onclick = () => {
-          if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
-        };
       } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
         currentHintStep = 2;
         hintBtn.textContent = artwork.quizHints[2];
@@ -180,13 +193,13 @@
       }
     });
 
-    // 키보드 이벤트
+    // 키보드 이동
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") nextBtn.click();
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기 표시
+    // 초기화
     showQuiz(currentQuizIndex);
   </script>
 </body>
