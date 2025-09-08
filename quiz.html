@@ -19,7 +19,7 @@
     }
 
     #hint-btn {
-      padding: 120px 160px; /* 중앙 버튼 4배 크기 */
+      padding: 120px 160px;
       font-size: 3rem;
       border: none;
       border-radius: 16px;
@@ -52,16 +52,27 @@
     #controls button:hover {
       background-color: #444;
     }
+
+    .buttons .btn {
+      margin-top: 20px;
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 12px;
+      background-color: #666;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    .buttons .btn:hover { background-color: #444; }
   </style>
 </head>
 <body>
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-  <!-- 큰 힌트 버튼 -->
   <button id="hint-btn"></button>
 
-  <!-- 이전/다음/힌트보기 버튼 -->
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
     <button id="next-btn">다음 ➡</button>
@@ -80,17 +91,17 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
 
     let currentQuizIndex = 0;
-    let currentHintIndex = 0;
+    let currentHintStep = 0; // 0=첫 번째, 1=두 번째, 2=정답
 
     function showQuiz(index) {
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      // 중앙 버튼은 첫 번째 힌트 표시
-      currentHintIndex = 0;
-      hintBtn.textContent = artwork.quizHints[currentHintIndex] || "힌트 없음";
+      // 첫 번째 힌트 표시
+      currentHintStep = 0;
+      hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
 
-      // 클릭하면 hintLink 열기
+      // 클릭 시 첫 번째 힌트 링크 열기
       hintBtn.onclick = () => {
         if (artwork.hintLink) {
           window.open(artwork.hintLink, "_blank");
@@ -98,6 +109,9 @@
           alert("힌트 링크가 없습니다.");
         }
       };
+
+      // 버튼 초기 상태
+      viewHintBtn.textContent = "힌트보기";
     }
 
     // 이전/다음 버튼
@@ -113,12 +127,31 @@
       showQuiz(currentQuizIndex);
     });
 
-    // 힌트보기 버튼: 두 번째 힌트 표시
+    // 힌트보기/정답보기 버튼
     viewHintBtn.addEventListener("click", () => {
       const artwork = getAllArtworks()[currentQuizIndex];
-      if (!artwork || artwork.quizHints.length < 2) return;
-      currentHintIndex = 1; // 두 번째 힌트
-      hintBtn.textContent = artwork.quizHints[currentHintIndex];
+      if (!artwork) return;
+
+      if (currentHintStep === 0 && artwork.quizHints.length > 1) {
+        // 두 번째 힌트
+        currentHintStep = 1;
+        hintBtn.textContent = artwork.quizHints[1];
+        viewHintBtn.textContent = "정답보기";
+        // 클릭은 여전히 hintLink
+        hintBtn.onclick = () => {
+          if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
+        };
+      } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
+        // 정답 힌트
+        currentHintStep = 2;
+        hintBtn.textContent = artwork.quizHints[2];
+        viewHintBtn.textContent = "정답 확인 완료";
+        // 클릭 시 정답 링크 연결
+        hintBtn.onclick = () => {
+          if (artwork.link) window.open(artwork.link, "_blank");
+          else alert("정답 링크가 없습니다.");
+        };
+      }
     });
 
     // 키보드 이벤트
