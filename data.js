@@ -85,7 +85,42 @@ const artworks = [
     quizHints: ["클릭하시면 개성시로 떠납니다", "서쪽으로", "위치 공개!"],
     tags: ["테리"]
   },
-
+{
+    id: 9,
+    link: "https://wplace.live/?lat=35.872315425094484&lng=127.76440396552732&zoom=12.176181112850301",
+    hintLink: "1",
+    image: "images/image9.jpg",
+    size: "완커",
+    quizHints: ["1", "2", "위치 공개!"],
+    tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
+  },
+  {
+    id: 10,
+    link: "https://wplace.live/?lat=35.943930301052404&lng=128.09206021552734&zoom=13.65518660183689",
+    hintLink: "1",
+    image: "images/image10.jpg",
+    size: "중간",
+    quizHints: ["1", "2", "위치 공개!"],
+    tags: ["하유"]
+  },
+  {
+    id: 11,
+    link: "https://wplace.live/?lat=35.934394884752294&lng=128.12106412177735&zoom=14.73263011416146",
+    hintLink: "1",
+    image: "images/image11.jpg",
+    size: "치",
+    quizHints: ["1", "2", "위치 공개!"],
+    tags: ["하네"]
+  },
+  { 
+    id: 12,
+    link: "https://wplace.live/?lat=35.9493379363319&lng=128.12000943427734&zoom=14.598776121940784",
+    hintLink: "1",
+    image: "images/image11.jpg",
+    size: "치비",
+    quizHints: ["1", "2", "위치 공개!"],
+    tags: ["하루"]
+  },
 
   // 나머지 작품들도 같은 형식으로 추가
 ];
