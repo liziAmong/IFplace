@@ -13,30 +13,20 @@
       background-color: #fff;
     }
 
-    h1, h2, p {
+    h1, p {
       text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, 1fr); /* 가로 2개 */
-      grid-auto-rows: auto;
-      gap: 20px;
-      justify-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
       margin-top: 20px;
-    }
-
-    .art-card { 
-      display: flex; 
-      flex-direction: column; 
-      align-items: center;
-      text-align: center;
-      color: #222;
     }
 
     .art-card img { 
       width: 100%; 
-      max-height: 180px; 
+      max-height: 200px; 
       object-fit: cover; 
       border-radius: 8px; 
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -54,10 +44,8 @@
       cursor: pointer; 
       border-radius: 14px; 
       border: none;
-      font-family: 'Nunito', sans-serif;
       font-weight: 600;
       color: #888; /* OFF 상태 글자색 */
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
     }
 
@@ -81,7 +69,6 @@
       background-color: #444;
     }
 
-    /* 페이징 버튼 */
     .pagination {
       display: flex;
       justify-content: center;
@@ -102,7 +89,6 @@
       background-color: #666;
     }
 
-    /* 사이즈 버튼 div */
     #size-buttons {
       margin-top: 10px;
     }
@@ -113,13 +99,8 @@
     <h1>🖼 감상 모드</h1>
     <p>태그와 사이즈를 선택하여 작품을 감상하세요</p>
 
-    <!-- 태그 버튼 -->
     <div id="tag-buttons"></div>
-
-    <!-- 사이즈 버튼 -->
     <div id="size-buttons"></div>
-
-    <!-- 갤러리 -->
     <div id="gallery-container" class="gallery"></div>
 
     <div class="buttons">
@@ -133,73 +114,61 @@
     const tagButtonsContainer = document.getElementById("tag-buttons");
     const sizeButtonsContainer = document.getElementById("size-buttons");
 
-    // ==============================
     // 태그 버튼
-    // ==============================
     const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
-    const tagColors = ["#FE5069", "#2F2F2F", "#D8BFD8", "#FFC0CB", "#ADFF2F", "#ADD8E6", "#FF00FF", "#00008B", "#FFFFE0", "#7CFC00"];
+    const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#00008B","#FFFFE0","#7CFC00"];
     const tagStates = Array(tagNames.length).fill(false);
 
-    tagNames.forEach((name, i) => {
-      const btn = document.createElement("button");
-      btn.textContent = name;
-      btn.dataset.index = i;
-
-      btn.addEventListener("click", () => {
-        tagStates[i] = !tagStates[i];
-        btn.style.backgroundColor = tagStates[i] ? tagColors[i] : "";
-        btn.style.color = tagStates[i] ? "#fff" : "#888";
-        currentPage = 1;
+    tagNames.forEach((name,i)=>{
+      const btn=document.createElement("button");
+      btn.textContent=name;
+      btn.addEventListener("click",()=>{
+        tagStates[i]=!tagStates[i];
+        btn.style.backgroundColor = tagStates[i]?tagColors[i]:"";
+        btn.style.color = tagStates[i]?"#fff":"#888";
+        currentPage=1;
         renderGallery();
       });
-
       tagButtonsContainer.appendChild(btn);
     });
 
-    // ==============================
     // 사이즈 버튼
-    // ==============================
-    const sizeNames = ["치비","중간","완커"];
-    const sizeColors = ["#FFB347","#FFD700","#FF7F50"];
-    const sizeStates = Array(sizeNames.length).fill(false);
+    const sizeNames=["치비","중간","완커"];
+    const sizeColors=["#FFB347","#FFD700","#FF7F50"];
+    const sizeStates=Array(sizeNames.length).fill(false);
 
-    sizeNames.forEach((name, i) => {
-      const btn = document.createElement("button");
-      btn.textContent = name;
-      btn.dataset.index = i;
-
-      btn.addEventListener("click", () => {
-        sizeStates[i] = !sizeStates[i];
-        btn.style.backgroundColor = sizeStates[i] ? sizeColors[i] : "";
-        btn.style.color = sizeStates[i] ? "#fff" : "#888";
-        currentPage = 1;
+    sizeNames.forEach((name,i)=>{
+      const btn=document.createElement("button");
+      btn.textContent=name;
+      btn.addEventListener("click",()=>{
+        sizeStates[i]=!sizeStates[i];
+        btn.style.backgroundColor = sizeStates[i]?sizeColors[i]:"";
+        btn.style.color = sizeStates[i]?"#fff":"#888";
+        currentPage=1;
         renderGallery();
       });
-
       sizeButtonsContainer.appendChild(btn);
     });
 
-    // ==============================
     // 페이징
-    // ==============================
-    let currentPage = 1;
-    const itemsPerPage = 6; // 한 페이지에 6개 (2x3)
+    let currentPage=1;
+    const itemsPerPage=6;
 
-    function renderGallery() {
-      galleryContainer.innerHTML = "";
+    function renderGallery(){
+      galleryContainer.innerHTML="";
 
-      const activeTags = tagStates.map((state,i)=>state?tagNames[i]:null).filter(t=>t!==null);
-      const activeSizes = sizeStates.map((state,i)=>state?sizeNames[i]:null).filter(s=>s!==null);
+      const activeTags = tagStates.map((s,i)=>s?tagNames[i]:null).filter(t=>t);
+      const activeSizes = sizeStates.map((s,i)=>s?sizeNames[i]:null).filter(s=>s);
 
-      const filteredArts = getAllArtworks().filter(art => {
-        const matchesTag = activeTags.length===0 || art.tags.some(tag=>activeTags.includes(tag));
-        const matchesSize = activeSizes.length===0 || activeSizes.includes(art.size);
-        return matchesTag && matchesSize;
+      const filtered = getAllArtworks().filter(a=>{
+        const tagMatch = activeTags.length===0 || a.tags.some(tag=>activeTags.includes(tag));
+        const sizeMatch = activeSizes.length===0 || activeSizes.includes(a.size);
+        return tagMatch && sizeMatch;
       });
 
-      const totalPages = Math.ceil(filteredArts.length/itemsPerPage);
-      const startIndex = (currentPage-1)*itemsPerPage;
-      const pageItems = filteredArts.slice(startIndex,startIndex+itemsPerPage);
+      const totalPages = Math.ceil(filtered.length/itemsPerPage);
+      const start = (currentPage-1)*itemsPerPage;
+      const pageItems = filtered.slice(start,start+itemsPerPage);
 
       pageItems.forEach(art=>{
         const card = document.createElement("div");
@@ -216,23 +185,23 @@
     }
 
     function renderPagination(totalPages){
-      const existing = document.querySelector(".pagination");
+      const existing=document.querySelector(".pagination");
       if(existing) existing.remove();
 
       if(totalPages<=1) return;
 
-      const pagination = document.createElement("div");
+      const pagination=document.createElement("div");
       pagination.className="pagination";
 
       if(currentPage>1){
-        const prev = document.createElement("button");
+        const prev=document.createElement("button");
         prev.textContent="⬅ 이전";
         prev.onclick=()=>{currentPage--;renderGallery();};
         pagination.appendChild(prev);
       }
 
       if(currentPage<totalPages){
-        const next = document.createElement("button");
+        const next=document.createElement("button");
         next.textContent="다음 ➡";
         next.onclick=()=>{currentPage++;renderGallery();};
         pagination.appendChild(next);
