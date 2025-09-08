@@ -8,9 +8,9 @@ const artworks = [
     id: 1,
     link: "https://wplace.live/?lat=38.016038550337875&lng=126.27413052802731&zoom=12.078841361844278",
     image: "images/image1.jpg",
-    size: "치비",
+    size: "완커",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
-    tags: ["tag1", "tag2"]
+    tags: ["테리"]
   },
   {
     id: 2,
