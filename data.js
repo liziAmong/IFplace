@@ -15,7 +15,7 @@ const artworks = [
   },
   {
     id: 1,
-    link: "https://wplace.live/?lat=38.016038550337875&lng=126.27413052802731&zoom=12.078841361844278",
+    link: "https://wplace.live/?lat=38.03528574531568&lng=126.27536099677732&zoom=11.908473128408984",
     hintLink: "https://hint.example.com/1",
     image: "images/image1.jpg",
     size: "완커",
