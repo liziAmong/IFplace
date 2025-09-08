@@ -38,6 +38,7 @@
       font-size: 1.2rem;
       font-weight: 600;
       color: #eee;
+      padding: 0 10px;
     }
 
     /* 버튼 (투명) */
@@ -56,6 +57,7 @@
       max-width: 90%;
       margin-bottom: 20px;
       transition: transform 0.2s ease, background-color 0.3s ease;
+      word-break: break-word;
     }
 
     #hint-btn:hover {
@@ -95,6 +97,25 @@
 
     .buttons .btn:hover {
       background-color: #444;
+    }
+
+    /* 모바일 대응 */
+    @media (max-width: 600px) {
+      #hint-btn {
+        padding: 60px 40px;
+        font-size: 1.8rem;
+      }
+      #tag-size-display {
+        font-size: 1rem;
+      }
+      #controls button {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+      .buttons .btn {
+        padding: 8px 14px;
+        font-size: 0.9rem;
+      }
     }
   </style>
 </head>
@@ -167,7 +188,7 @@
       showQuiz(currentQuizIndex);
     });
 
-    // 다음 버튼 (현재는 순차)
+    // 다음 버튼
     nextBtn.addEventListener("click", () => {
       currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
