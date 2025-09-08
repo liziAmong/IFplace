@@ -19,10 +19,10 @@
     }
 
     #hint-btn {
-      padding: 30px 40px;
-      font-size: 1.5rem;
+      padding: 120px 160px; /* 중앙 버튼 4배 크기 */
+      font-size: 3rem;
       border: none;
-      border-radius: 12px;
+      border-radius: 16px;
       background-color: #ffb347;
       color: #fff;
       cursor: pointer;
@@ -61,11 +61,11 @@
   <!-- 큰 힌트 버튼 -->
   <button id="hint-btn"></button>
 
-  <!-- 이전/다음/새 힌트 버튼 -->
+  <!-- 이전/다음/힌트보기 버튼 -->
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
     <button id="next-btn">다음 ➡</button>
-    <button id="new-hint-btn">힌트 새로보기</button>
+    <button id="view-hint-btn">힌트보기</button>
   </div>
 
   <div class="buttons">
@@ -77,7 +77,7 @@
     const hintBtn = document.getElementById("hint-btn");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
-    const newHintBtn = document.getElementById("new-hint-btn");
+    const viewHintBtn = document.getElementById("view-hint-btn");
 
     let currentQuizIndex = 0;
     let currentHintIndex = 0;
@@ -86,7 +86,7 @@
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      // 첫 번째 힌트 버튼
+      // 중앙 버튼은 첫 번째 힌트 표시
       currentHintIndex = 0;
       hintBtn.textContent = artwork.quizHints[currentHintIndex] || "힌트 없음";
 
@@ -100,7 +100,7 @@
       };
     }
 
-    // 버튼 이벤트
+    // 이전/다음 버튼
     prevBtn.addEventListener("click", () => {
       currentQuizIndex--;
       if (currentQuizIndex < 0) currentQuizIndex = getAllArtworks().length - 1;
@@ -113,12 +113,11 @@
       showQuiz(currentQuizIndex);
     });
 
-    newHintBtn.addEventListener("click", () => {
+    // 힌트보기 버튼: 두 번째 힌트 표시
+    viewHintBtn.addEventListener("click", () => {
       const artwork = getAllArtworks()[currentQuizIndex];
-      if (!artwork || artwork.quizHints.length === 0) return;
-
-      // 랜덤 힌트
-      currentHintIndex = Math.floor(Math.random() * artwork.quizHints.length);
+      if (!artwork || artwork.quizHints.length < 2) return;
+      currentHintIndex = 1; // 두 번째 힌트
       hintBtn.textContent = artwork.quizHints[currentHintIndex];
     });
 
