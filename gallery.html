@@ -8,9 +8,9 @@
   <style>
     body {
       font-family: 'Nunito', sans-serif;
-      color: #333; /* 글자 조금 어둡게 */
+      color: #333;
       margin: 20px;
-      background-color: #fff; /* 배경 원래대로 */
+      background-color: #fff;
     }
 
     h1, h2, p {
@@ -23,7 +23,7 @@
       align-items: center;
       margin: 10px 0; 
       text-align: center;
-      color: #222; /* 카드 안 글자 조금 어둡게 */
+      color: #222;
     }
 
     .art-card img { 
@@ -34,7 +34,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    #tag-buttons button { 
+    #tag-buttons button, #size-buttons button { 
       margin: 4px; 
       padding: 10px 18px; 
       cursor: pointer; 
@@ -47,18 +47,8 @@
       transition: all 0.3s ease;
     }
 
-    #tag-buttons button:hover {
+    #tag-buttons button:hover, #size-buttons button:hover {
       transform: scale(1.05);
-    }
-
-    .search-bar {
-      width: 100%;
-      padding: 10px;
-      border-radius: 12px;
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 16px;
     }
 
     .buttons .btn {
@@ -97,23 +87,23 @@
     .pagination button:hover {
       background-color: #666;
     }
+
+    /* 사이즈 버튼 div */
+    #size-buttons {
+      margin-top: 10px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🖼 감상 모드</h1>
-    <p>작품을 감상하고 #이름으로 검색해보세요</p>
-
-    <!-- 검색 바 -->
-    <input 
-      type="text" 
-      id="search" 
-      placeholder="#이름 검색 (예: #리쟈)" 
-      class="search-bar"
-    >
+    <p>태그와 사이즈를 선택하여 작품을 감상하세요</p>
 
     <!-- 태그 버튼 -->
     <div id="tag-buttons"></div>
+
+    <!-- 사이즈 버튼 -->
+    <div id="size-buttons"></div>
 
     <!-- 갤러리 -->
     <div id="gallery-container" class="gallery"></div>
@@ -127,14 +117,15 @@
   <script>
     const galleryContainer = document.getElementById("gallery-container");
     const tagButtonsContainer = document.getElementById("tag-buttons");
-    const searchInput = document.getElementById("search");
+    const sizeButtonsContainer = document.getElementById("size-buttons");
 
-    // 버튼 이름과 색상
+    // ==============================
+    // 태그 버튼
+    // ==============================
     const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
     const tagColors = ["#FE5069", "#2F2F2F", "#D8BFD8", "#FFC0CB", "#ADFF2F", "#ADD8E6", "#FF00FF", "#00008B", "#FFFFE0", "#7CFC00"];
     const tagStates = Array(tagNames.length).fill(false);
 
-    // 버튼 생성
     tagNames.forEach((name, i) => {
       const btn = document.createElement("button");
       btn.textContent = name;
@@ -142,44 +133,66 @@
 
       btn.addEventListener("click", () => {
         tagStates[i] = !tagStates[i];
-        btn.style.backgroundColor = tagStates[i] ? tagColors[i] : ""; // 배경색
-        btn.style.color = tagStates[i] ? "#fff" : "#888"; // 글자색
-        currentPage = 1; // 페이지 초기화
+        btn.style.backgroundColor = tagStates[i] ? tagColors[i] : "";
+        btn.style.color = tagStates[i] ? "#fff" : "#888";
+        currentPage = 1;
         renderGallery();
       });
 
       tagButtonsContainer.appendChild(btn);
     });
 
-    // 페이징
-    let currentPage = 1;
-    const itemsPerPage = 4; // 한 페이지 4개
+    // ==============================
+    // 사이즈 버튼
+    // ==============================
+    const sizeNames = ["치비","중간","완커"];
+    const sizeColors = ["#FFB347","#FFD700","#FF7F50"];
+    const sizeStates = Array(sizeNames.length).fill(false);
 
-    function renderGallery() {
-      const searchText = searchInput.value.trim();
-      galleryContainer.innerHTML = "";
+    sizeNames.forEach((name, i) => {
+      const btn = document.createElement("button");
+      btn.textContent = name;
+      btn.dataset.index = i;
 
-      const activeTags = tagStates
-        .map((state, i) => (state ? tagNames[i] : null))
-        .filter(t => t !== null);
-
-      const filteredArts = getAllArtworks().filter(art => {
-        const matchesSearch = searchText === "" || art.tags.some(tag => tag.includes(searchText));
-        const matchesTag = activeTags.length === 0 || art.tags.some(tag => activeTags.includes(tag));
-        return matchesSearch && matchesTag;
+      btn.addEventListener("click", () => {
+        sizeStates[i] = !sizeStates[i];
+        btn.style.backgroundColor = sizeStates[i] ? sizeColors[i] : "";
+        btn.style.color = sizeStates[i] ? "#fff" : "#888";
+        currentPage = 1;
+        renderGallery();
       });
 
-      const totalPages = Math.ceil(filteredArts.length / itemsPerPage);
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const pageItems = filteredArts.slice(startIndex, startIndex + itemsPerPage);
+      sizeButtonsContainer.appendChild(btn);
+    });
 
-      pageItems.forEach(art => {
+    // ==============================
+    // 페이징
+    // ==============================
+    let currentPage = 1;
+    const itemsPerPage = 4;
+
+    function renderGallery() {
+      galleryContainer.innerHTML = "";
+
+      const activeTags = tagStates.map((state,i)=>state?tagNames[i]:null).filter(t=>t!==null);
+      const activeSizes = sizeStates.map((state,i)=>state?sizeNames[i]:null).filter(s=>s!==null);
+
+      const filteredArts = getAllArtworks().filter(art => {
+        const matchesTag = activeTags.length===0 || art.tags.some(tag=>activeTags.includes(tag));
+        const matchesSize = activeSizes.length===0 || activeSizes.includes(art.size);
+        return matchesTag && matchesSize;
+      });
+
+      const totalPages = Math.ceil(filteredArts.length/itemsPerPage);
+      const startIndex = (currentPage-1)*itemsPerPage;
+      const pageItems = filteredArts.slice(startIndex,startIndex+itemsPerPage);
+
+      pageItems.forEach(art=>{
         const card = document.createElement("div");
-        card.className = "art-card";
-        card.innerHTML = `
+        card.className="art-card";
+        card.innerHTML=`
           <img src="${art.image}" alt="${art.title}">
           <h3>${art.title}</h3>
-          <p>${art.artist}</p>
         `;
         galleryContainer.appendChild(card);
       });
@@ -187,33 +200,32 @@
       renderPagination(totalPages);
     }
 
-    function renderPagination(totalPages) {
+    function renderPagination(totalPages){
       const existing = document.querySelector(".pagination");
-      if (existing) existing.remove();
+      if(existing) existing.remove();
 
-      if (totalPages <= 1) return;
+      if(totalPages<=1) return;
 
       const pagination = document.createElement("div");
-      pagination.className = "pagination";
+      pagination.className="pagination";
 
-      if (currentPage > 1) {
+      if(currentPage>1){
         const prev = document.createElement("button");
-        prev.textContent = "⬅ 이전";
-        prev.onclick = () => { currentPage--; renderGallery(); };
+        prev.textContent="⬅ 이전";
+        prev.onclick=()=>{currentPage--;renderGallery();};
         pagination.appendChild(prev);
       }
 
-      if (currentPage < totalPages) {
+      if(currentPage<totalPages){
         const next = document.createElement("button");
-        next.textContent = "다음 ➡";
-        next.onclick = () => { currentPage++; renderGallery(); };
+        next.textContent="다음 ➡";
+        next.onclick=()=>{currentPage++;renderGallery();};
         pagination.appendChild(next);
       }
 
       galleryContainer.after(pagination);
     }
 
-    searchInput.addEventListener("input", () => { currentPage = 1; renderGallery(); });
     renderGallery();
   </script>
 </body>
