@@ -43,37 +43,37 @@ const artworks = [
   {
     id: 4,
     link: "https://wplace.live/?lat=37.82995320348113&lng=126.31754849677733&zoom=13.342813453931972",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=37.83425705885131&lng=126.50493130927732&zoom=12.754722897506843",
     image: "images/image4.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
   {
     id: 5,
     link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=36.207192269375824&lng=128.24903287177733&zoom=12.86007207259177",
     image: "images/image5.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북쪽으로 가세요", "위치 공개!"],
     tags: ["하유"]
   },
   {
     id: 6,
     link: "https://wplace.live/?lat=36.434082561640416&lng=128.23004849677733&zoom=13.876831573294917",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=36.59626645460909&lng=128.2033297467773&zoom=11.32839199606277",
     image: "images/image6.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "남쪽으로 가세요", "위치 공개!"],
     tags: ["하루","소리","아테","하네"]
   },
   {
     id: 7,
     link: "https://wplace.live/?lat=38.32972973964912&lng=128.17450162177732&zoom=14.109423166041323",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=38.33855431737365&lng=128.4318453717773&zoom=11.285266180288883",
     image: "images/image7.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["반님"]
   },
   {
@@ -82,52 +82,52 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image8.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
 {
     id: 9,
     link: "https://wplace.live/?lat=35.872315425094484&lng=127.76440396552732&zoom=12.176181112850301",
-    hintLink: "1",
+    hintLink: "https://wplace.live/?lat=35.835699910355316&lng=127.15321255927734&zoom=11.739502744493342",
     image: "images/image9.jpg",
     size: "완커",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
     tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
   },
   {
     id: 10,
     link: "https://wplace.live/?lat=35.943930301052404&lng=128.09206021552734&zoom=13.65518660183689",
-    hintLink: "1",
+    hintLink: "https://wplace.live/?lat=36.13879772689444&lng=128.11368130927733&zoom=12.327593300918485",
     image: "images/image10.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "남쪽으로 가세요", "위치 공개!"],
     tags: ["하유"]
   },
   {
     id: 11,
     link: "https://wplace.live/?lat=35.934394884752294&lng=128.12106412177735&zoom=14.73263011416146",
-    hintLink: "1",
+    hintLink: "https://wplace.live/?lat=36.13879772689444&lng=128.11368130927733&zoom=12.327593300918485",
     image: "images/image11.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "남쪽으로 가세요", "위치 공개!"],
     tags: ["하네"]
   },
   { 
     id: 12,
     link: "https://wplace.live/?lat=35.9493379363319&lng=128.12000943427734&zoom=14.598776121940784",
-    hintLink: "1",
+    hintLink: "https://wplace.live/?lat=35.98191821791775&lng=128.48668912177732&zoom=10.69717562386377",
     image: "images/image12.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["하루"]
   },
     { 
     id: 13,
     link: "https://wplace.live/?lat=36.92776361480092&lng=125.14913052802731&zoom=11.774619136188255",
-    hintLink: "1",
+    hintLink: "https://wplace.live/?lat=36.92748257746297&lng=125.83608365302732&zoom=11",
     image: "images/image13.jpg",
     size: "완커",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["반님"]
   },
 
