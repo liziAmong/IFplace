@@ -6,7 +6,7 @@
 const artworks = [
   {
     id: 1,
-    title: "들어오세요",
+    link: "https://wplace.live/?lat=38.016038550337875&lng=126.27413052802731&zoom=12.078841361844278",
     image: "images/image1.jpg",
     size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -14,7 +14,7 @@ const artworks = [
   },
   {
     id: 2,
-    title: "사탕물어요",
+    link: "https://example.com/art2",
     image: "images/image2.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -22,7 +22,7 @@ const artworks = [
   },
   {
     id: 3,
-    title: "어제어땠어",
+    link: "https://example.com/art3",
     image: "images/image3.jpg",
     size: "완커",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -67,11 +67,6 @@ function getArtworksByTag(tag) {
 // ==============================
 // 예시 사용
 // ==============================
-// 퀴즈 힌트 가져오기
 // console.log(getRandomQuizHint(1));
-
-// 갤러리용 데이터 가져오기
 // console.log(getArtworkById(2));
-
-// 모든 작품 가져오기
 // console.log(getAllArtworks());
