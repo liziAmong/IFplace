@@ -16,19 +16,19 @@ const artworks = [
   {
     id: 1,
     link: "https://wplace.live/?lat=38.03528574531568&lng=126.27536099677732&zoom=11.908473128408984",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image1.jpg",
     size: "완커",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["개성시로 떠납니다", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
   {
     id: 2,
     link: "https://wplace.live/?lat=37.97157067432562&lng=126.19854459052732&zoom=12.230253549912431",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image2.jpg",
     size: "중간",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["개성시로 떠납니다", "서쪽으로 가세요", "위치 공개!"],
     tags: ["메이"]
   },
   {
@@ -79,10 +79,10 @@ const artworks = [
   {
     id: 8,
     link: "https://wplace.live/?lat=38.02780901836128&lng=126.32036099677731&zoom=14.848925910534648",
-    hintLink: "https://hint.example.com/1",
+    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image8.jpg",
     size: "치비",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["개성시로 떠납니다", "서쪽으로", "위치 공개!"],
     tags: ["테리"]
   },
 
