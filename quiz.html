@@ -18,23 +18,29 @@
       text-align: center;
     }
 
+    #tag-size-display {
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+    }
+
     #hint-btn {
       padding: 120px 160px;
       font-size: 3rem;
       border: none;
       border-radius: 16px;
-      background-color: #ffb347;
       color: #fff;
       cursor: pointer;
       text-align: center;
       max-width: 90%;
-      transition: transform 0.2s ease, background-color 0.3s ease;
+      transition: transform 0.2s ease, background 0.3s ease;
       margin-bottom: 20px;
     }
 
     #hint-btn:hover {
       transform: scale(1.05);
-      background-color: #ffa500;
+      filter: brightness(1.1);
     }
 
     #controls button {
@@ -71,6 +77,9 @@
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
+  <!-- 태그와 사이즈 표시 -->
+  <div id="tag-size-display"></div>
+
   <button id="hint-btn"></button>
 
   <div id="controls">
@@ -89,6 +98,10 @@
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const viewHintBtn = document.getElementById("view-hint-btn");
+    const tagSizeDisplay = document.getElementById("tag-size-display");
+
+    const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
+    const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#51B6E0","#FFD700","#32CD32"];
 
     let currentQuizIndex = 0;
     let currentHintStep = 0; // 0=첫 번째, 1=두 번째, 2=정답
@@ -96,6 +109,24 @@
     function showQuiz(index) {
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
+
+      // 중앙 버튼 배경색: 태그가 여러 개면 그라데이션
+      if (artwork.tags && artwork.tags.length > 0) {
+        const colors = artwork.tags.map(tag => tagColors[tagNames.indexOf(tag)] || "#ffb347");
+        if (colors.length === 1) {
+          hintBtn.style.background = colors[0];
+        } else {
+          const gradient = `linear-gradient(90deg, ${colors.join(", ")})`;
+          hintBtn.style.background = gradient;
+        }
+      } else {
+        hintBtn.style.background = "#ffb347";
+      }
+
+      // 태그와 사이즈 표시
+      const tagsText = artwork.tags && artwork.tags.length > 0 ? artwork.tags.join(", ") : "태그 없음";
+      const sizeText = artwork.size || "사이즈 없음";
+      tagSizeDisplay.textContent = `태그: ${tagsText} | 사이즈: ${sizeText}`;
 
       // 첫 번째 힌트 표시
       currentHintStep = 0;
@@ -133,20 +164,16 @@
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
-        // 두 번째 힌트
         currentHintStep = 1;
         hintBtn.textContent = artwork.quizHints[1];
         viewHintBtn.textContent = "정답보기";
-        // 클릭은 여전히 hintLink
         hintBtn.onclick = () => {
           if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
         };
       } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
-        // 정답 힌트
         currentHintStep = 2;
         hintBtn.textContent = artwork.quizHints[2];
         viewHintBtn.textContent = "정답 확인 완료";
-        // 클릭 시 정답 링크 연결
         hintBtn.onclick = () => {
           if (artwork.link) window.open(artwork.link, "_blank");
           else alert("정답 링크가 없습니다.");
