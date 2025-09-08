@@ -4,6 +4,15 @@
 // 작품 데이터
 // ==============================
 const artworks = [
+{
+    id: 0,
+    link: "https://wplace.live/?lat=38.414897142801934&lng=127.59125943427733&zoom=11.972094337239767",
+    hintLink: "https://hint.example.com/1",
+    image: "images/image0.jpg",
+    size: "완커",
+    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
+  },
   {
     id: 1,
     link: "https://wplace.live/?lat=38.016038550337875&lng=126.27413052802731&zoom=12.078841361844278",
