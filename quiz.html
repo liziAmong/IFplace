@@ -18,14 +18,6 @@
       text-align: center;
     }
 
-    #quiz-image {
-      max-width: 350px;
-      max-height: 250px;
-      margin-bottom: 15px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
     #tag-size-display {
       margin-bottom: 15px;
       font-size: 1.2rem;
@@ -33,29 +25,42 @@
       color: #444;
     }
 
-    /* 버튼을 지난번 크기로 복구 */
+    /* 버튼 스타일 */
     #hint-btn {
+      position: relative;
       padding: 120px 160px;
       font-size: 2.8rem;
       font-weight: 700;
       border: none;
       border-radius: 20px;
       color: #fff;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
-      transition: transform 0.2s ease, background 0.3s ease;
       margin-bottom: 20px;
+      overflow: hidden;
+      z-index: 1;
+      background: #999; /* 기본색 (이미지 없을 때 대비) */
+    }
+
+    /* 블러된 배경 이미지 */
+    #hint-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px) brightness(0.8);
+      z-index: -1;
     }
 
     #hint-btn:hover {
       transform: scale(1.05);
-      filter: brightness(1.05);
     }
 
     #controls button {
-      padding: 14px 26px; /* 버튼 조금 키움 */
+      padding: 14px 26px;
       margin: 5px;
       cursor: pointer;
       border-radius: 10px;
@@ -90,9 +95,6 @@
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-  <!-- 문제 사진 -->
-  <img id="quiz-image" src="" alt="퀴즈 이미지">
-
   <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
 
@@ -110,20 +112,11 @@
 
   <script src="data.js"></script>
   <script>
-    const quizImage = document.getElementById("quiz-image");
     const hintBtn = document.getElementById("hint-btn");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
-
-    // 부드러운 파스텔 톤 색상 팔레트
-    const pastelColors = [
-      "#FFB3BA","#FFDFBA","#FFFFBA","#BAFFC9","#BAE1FF",
-      "#E0BBE4","#FFCCE5","#C7CEEA","#F1F0C0","#B5EAD7"
-    ];
-
-    const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
 
     let currentQuizIndex = 0;
     let currentHintStep = 0;
@@ -133,25 +126,15 @@
       const artwork = artworks[index];
       if (!artwork) return;
 
-      // 퀴즈 이미지 (images 폴더에서 index와 매칭)
-      quizImage.src = `images/images${index}.jpg`;
+      // 버튼 배경에 퀴즈 이미지 넣기 (블러 효과는 CSS ::before에서 적용됨)
+      const quizImagePath = `images/images${index}.jpg`;
+      hintBtn.style.setProperty("--bg-image", `url(${quizImagePath})`);
+      hintBtn.style.background = "rgba(0,0,0,0.3)"; // 텍스트 가독성 유지
 
-      // 중앙 버튼 배경: 태그 → 파스텔 색상 매핑
-      if (artwork.tags && artwork.tags.length > 0) {
-        const colors = artwork.tags.map(tag => {
-          const i = tagNames.indexOf(tag);
-          return pastelColors[i % pastelColors.length];
-        });
-        if (colors.length === 1) {
-          hintBtn.style.background = colors[0];
-        } else {
-          hintBtn.style.background = `linear-gradient(135deg, ${colors.join(", ")})`;
-        }
-      } else {
-        hintBtn.style.background = "#B5EAD7"; // 기본 파스텔 민트
-      }
+      // ::before에 이미지 배경 적용
+      hintBtn.querySelector("::before");
 
-      // 사이즈만 표시
+      // 사이즈 표시
       const sizeText = artwork.size || "사이즈 없음";
       tagSizeDisplay.textContent = `사이즈: ${sizeText}`;
 
@@ -169,6 +152,38 @@
       };
 
       viewHintBtn.textContent = "힌트보기";
+
+      // 동적으로 ::before에 배경 적용
+      hintBtn.style.setProperty("--hint-bg", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("position", "relative");
+      hintBtn.style.setProperty("z-index", "1");
+      hintBtn.style.setProperty("--image-url", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("background-image", "none");
+      hintBtn.style.setProperty("background", "rgba(0,0,0,0.35)");
+      hintBtn.style.setProperty("backdrop-filter", "blur(8px)");
+      hintBtn.style.setProperty("-webkit-backdrop-filter", "blur(8px)");
+      hintBtn.style.setProperty("background-blend-mode", "darken");
+
+      // 직접 ::before 스타일 주입 (동적으로 이미지 변경 반영)
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.cssText += `
+        --bg-url: url(${quizImagePath});
+      `;
+      hintBtn.setAttribute("style", hintBtn.getAttribute("style") + `
+        --bg-url: url(${quizImagePath});
+      `);
+      hintBtn.style.setProperty("--bg-url", `url(${quizImagePath})`);
+      hintBtn.style.background = "rgba(0,0,0,0.35)";
+      hintBtn.style.setProperty("position", "relative");
+      hintBtn.style.setProperty("overflow", "hidden");
+      hintBtn.style.setProperty("isolation", "isolate");
+
+      // 배경 업데이트
+      hintBtn.style.setProperty("background", `rgba(0,0,0,0.4)`);
+      hintBtn.style.setProperty("background-image", `url(${quizImagePath})`);
+      hintBtn.style.setProperty("background-size", "cover");
+      hintBtn.style.setProperty("background-position", "center");
+      hintBtn.style.setProperty("filter", "blur(6px)");
     }
 
     // 이전/다음
