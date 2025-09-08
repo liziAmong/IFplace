@@ -14,11 +14,11 @@ const artworks = [
   },
   {
     id: 2,
-    link: "https://example.com/art2",
+    link: "https://wplace.live/?lat=37.97157067432562&lng=126.19854459052732&zoom=12.230253549912431",
     image: "images/image2.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
-    tags: ["tag1", "tag2"]
+    tags: ["메이"]
   },
   {
     id: 3,
