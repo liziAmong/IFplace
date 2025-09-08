@@ -121,6 +121,15 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
     tags: ["하루"]
   },
+    { 
+    id: 13,
+    link: "https://wplace.live/?lat=36.92776361480092&lng=125.14913052802731&zoom=11.774619136188255",
+    hintLink: "1",
+    image: "images/image12.jpg",
+    size: "완커",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
+    tags: ["반님"]
+  },
 
   // 나머지 작품들도 같은 형식으로 추가
 ];
