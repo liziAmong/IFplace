@@ -10,7 +10,7 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=38.643030049034095&lng=127.35870084052732&zoom=14.621848974633494",
     image: "images/image0.jpg",
     size: "완커",
-    quizHints: ["클릭하시면 북쪽으로 떠납니다.", "동남쪽으로 가세요", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동남쪽으로 가세요", "위치 공개!"],
     tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
   },
   {
@@ -19,7 +19,7 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image1.jpg",
     size: "완커",
-    quizHints: ["클릭하시면 개성시로 떠납니다", "서쪽으로 가세요", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
   {
@@ -28,7 +28,7 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image2.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 개성시로 떠납니다", "서쪽으로 가세요", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["메이"]
   },
   {
@@ -37,7 +37,7 @@ const artworks = [
     hintLink: "https://hint.example.com/1",
     image: "images/image3.jpg",
     size: "중간",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "세 번째 힌트"],
     tags: ["하유"]
   },
   {
@@ -46,7 +46,7 @@ const artworks = [
     hintLink: "https://hint.example.com/1",
     image: "images/image4.jpg",
     size: "중간",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "세 번째 힌트"],
     tags: ["테리"]
   },
   {
@@ -55,7 +55,7 @@ const artworks = [
     hintLink: "https://hint.example.com/1",
     image: "images/image5.jpg",
     size: "치비",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "세 번째 힌트"],
     tags: ["하유"]
   },
   {
@@ -64,7 +64,7 @@ const artworks = [
     hintLink: "https://hint.example.com/1",
     image: "images/image6.jpg",
     size: "중간",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "세 번째 힌트"],
     tags: ["하루","소리","아테","하네"]
   },
   {
@@ -73,7 +73,7 @@ const artworks = [
     hintLink: "https://hint.example.com/1",
     image: "images/image7.jpg",
     size: "치비",
-    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "두 번째 힌트", "세 번째 힌트"],
     tags: ["반님"]
   },
   {
@@ -82,7 +82,7 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
     image: "images/image8.jpg",
     size: "치비",
-    quizHints: ["클릭하시면 개성시로 떠납니다", "서쪽으로", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로", "위치 공개!"],
     tags: ["테리"]
   },
 {
@@ -91,7 +91,7 @@ const artworks = [
     hintLink: "1",
     image: "images/image9.jpg",
     size: "완커",
-    quizHints: ["1", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
     tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
   },
   {
@@ -100,7 +100,7 @@ const artworks = [
     hintLink: "1",
     image: "images/image10.jpg",
     size: "중간",
-    quizHints: ["1", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
     tags: ["하유"]
   },
   {
@@ -109,7 +109,7 @@ const artworks = [
     hintLink: "1",
     image: "images/image11.jpg",
     size: "치비",
-    quizHints: ["1", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
     tags: ["하네"]
   },
   { 
@@ -118,7 +118,7 @@ const artworks = [
     hintLink: "1",
     image: "images/image12.jpg",
     size: "치비",
-    quizHints: ["1", "2", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "2", "위치 공개!"],
     tags: ["하루"]
   },
 
