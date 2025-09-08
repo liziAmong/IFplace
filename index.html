@@ -21,17 +21,26 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
       text-align: center;
       color: #333;
       overflow: hidden;
-      animation: bgMove 20s ease-in-out infinite alternate;
+
+      /* 픽셀 배경 */
+      background-color: #1f1c2c;
+      background-image:
+        repeating-linear-gradient(
+          0deg, #1f1c2c, #1f1c2c 10px, #928dab 10px, #928dab 20px
+        ),
+        repeating-linear-gradient(
+          90deg, #1f1c2c, #1f1c2c 10px, #928dab 10px, #928dab 20px
+        );
+      background-size: 20px 20px;
+      animation: movePixels 15s linear infinite;
     }
 
-    @keyframes bgMove {
-      0% { background-position: 0% 0%; }
-      50% { background-position: 10% 10%; }
-      100% { background-position: 0% 0%; }
+    @keyframes movePixels {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 100px 100px, -100px -100px; }
     }
 
     .container {
