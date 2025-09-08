@@ -37,45 +37,6 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=37.63490639116564&lng=125.98145474677733&zoom=12.96975629440576",
     image: "images/image3.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동북쪽으로 가세요/ data.js
-
-// ==============================
-// 작품 데이터
-// ==============================
-const artworks = [
-{
-    id: 0,
-    link: "https://wplace.live/?lat=38.414897142801934&lng=127.59125943427733&zoom=11.972094337239767",
-    hintLink: "https://wplace.live/?lat=38.643030049034095&lng=127.35870084052732&zoom=14.621848974633494",
-    image: "images/image0.jpg",
-    size: "완커",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동남쪽으로 가세요", "위치 공개!"],
-    tags: ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"]
-  },
-  {
-    id: 1,
-    link: "https://wplace.live/?lat=38.03528574531568&lng=126.27536099677732&zoom=11.908473128408984",
-    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
-    image: "images/image1.jpg",
-    size: "완커",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["테리"]
-  },
-  {
-    id: 2,
-    link: "https://wplace.live/?lat=37.97157067432562&lng=126.19854459052732&zoom=12.230253549912431",
-    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
-    image: "images/image2.jpg",
-    size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["메이"]
-  },
-  {
-    id: 3,
-    link: "https://wplace.live/?lat=37.785789482476105&lng=126.25180630927736&zoom=12.550636121896222",
-    hintLink: "https://wplace.live/?lat=37.63490639116564&lng=125.98145474677733&zoom=12.96975629440576",
-    image: "images/image3.jpg",
-    size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동북쪽으로 가세요", "위치 공개!"],
     tags: ["하유"]
   },
