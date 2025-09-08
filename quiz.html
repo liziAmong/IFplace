@@ -28,7 +28,7 @@
       background: #000;
       background-size: cover;
       background-position: center;
-      filter: blur(12px) brightness(0.6);
+      filter: blur(12px) brightness(0.5);
       z-index: -1;
       transform: scale(1.1);
     }
@@ -37,10 +37,14 @@
       margin-bottom: 15px;
       font-size: 1.2rem;
       font-weight: 600;
-      color: #eee;
+      color: #fff;
+      padding: 8px 15px;
+      background: rgba(0,0,0,0.5);
+      border-radius: 12px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
     }
 
-    /* 버튼 (투명) */
+    /* 버튼 (투명 + 진하게) */
     #hint-btn {
       position: relative;
       padding: 120px 160px;
@@ -49,8 +53,8 @@
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 20px;
       color: #fff;
-      background: rgba(0,0,0,0.35); /* 반투명만 */
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.65); /* 더 진하게 */
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
@@ -60,7 +64,7 @@
 
     #hint-btn:hover {
       transform: scale(1.05);
-      background: rgba(0,0,0,0.5);
+      background: rgba(0,0,0,0.75);
     }
 
     #controls button {
@@ -69,15 +73,16 @@
       cursor: pointer;
       border-radius: 10px;
       border: none;
-      background-color: #888;
+      background-color: rgba(0,0,0,0.7);
       color: #fff;
       font-weight: 600;
       font-size: 1.05rem;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
     #controls button:hover {
-      background-color: #555;
+      background-color: rgba(0,0,0,0.85);
       transform: scale(1.05);
     }
 
@@ -86,13 +91,16 @@
       display: inline-block;
       padding: 10px 20px;
       border-radius: 12px;
-      background-color: #666;
+      background-color: rgba(0,0,0,0.7);
       color: #fff;
       text-decoration: none;
       font-weight: 600;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
       transition: all 0.3s ease;
     }
-    .buttons .btn:hover { background-color: #444; }
+    .buttons .btn:hover { 
+      background-color: rgba(0,0,0,0.85); 
+    }
   </style>
 </head>
 <body>
@@ -100,7 +108,7 @@
   <div id="bg-blur"></div>
 
   <h1>🧩 퀴즈 모드</h1>
-  <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
+  <p>주변에서 작품을 찾아보세요!</p>
 
   <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
@@ -109,7 +117,7 @@
 
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
-    <button id="next-btn">다음 ➡</button>
+    <button id="next-btn">랜덤 ➡</button>
     <button id="view-hint-btn">힌트보기</button>
   </div>
 
@@ -126,11 +134,11 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
-    let currentQuizIndex = 0;
+    const artworks = getAllArtworks();
+    let currentQuizIndex = Math.floor(Math.random() * artworks.length);
     let currentHintStep = 0;
 
     function showQuiz(index) {
-      const artworks = getAllArtworks();
       const artwork = artworks[index];
       if (!artwork) return;
 
@@ -148,30 +156,32 @@
 
       // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
-        if (artwork.hintLink) {
-          window.open(artwork.hintLink, "_blank");
-        } else {
-          alert("힌트 링크가 없습니다.");
-        }
+        if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
+        else alert("힌트 링크가 없습니다.");
       };
 
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전/다음
+    // 이전 버튼: 순차적
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
+      currentQuizIndex = (currentQuizIndex - 1 + artworks.length) % artworks.length;
       showQuiz(currentQuizIndex);
     });
 
+    // 다음 버튼: 랜덤
     nextBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * artworks.length);
+      } while (nextIndex === currentQuizIndex); // 같은 작품 연속 방지
+      currentQuizIndex = nextIndex;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = getAllArtworks()[currentQuizIndex];
+      const artwork = artworks[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
@@ -195,7 +205,7 @@
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기화
+    // 초기화: 랜덤 작품
     showQuiz(currentQuizIndex);
   </script>
 </body>
