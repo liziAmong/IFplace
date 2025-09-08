@@ -16,7 +16,7 @@
       margin: 0;
       background-color: #000;
       text-align: center;
-      color: #fff;
+      color: #eee;
       overflow: hidden;
       position: relative;
     }
@@ -37,7 +37,7 @@
       margin-bottom: 15px;
       font-size: 1.2rem;
       font-weight: 600;
-      color: #eee;
+      color: #ccc;
     }
 
     /* 버튼 (투명) */
@@ -49,7 +49,7 @@
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 20px;
       color: #fff;
-      background: rgba(0,0,0,0.35); /* 반투명만 */
+      background: rgba(0,0,0,0.35);
       text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
       cursor: pointer;
       text-align: center;
@@ -126,11 +126,11 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
-    let currentQuizIndex = 0;
+    const artworks = getAllArtworks();
+    let currentQuizIndex = Math.floor(Math.random() * artworks.length); // 처음 접속 랜덤
     let currentHintStep = 0;
 
     function showQuiz(index) {
-      const artworks = getAllArtworks();
       const artwork = artworks[index];
       if (!artwork) return;
 
@@ -158,20 +158,25 @@
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전/다음
+    // 이전 버튼: 순차
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
+      currentQuizIndex = (currentQuizIndex - 1 + artworks.length) % artworks.length;
       showQuiz(currentQuizIndex);
     });
 
+    // 다음 버튼: 랜덤
     nextBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
+      let randomIndex;
+      do {
+        randomIndex = Math.floor(Math.random() * artworks.length);
+      } while (randomIndex === currentQuizIndex && artworks.length > 1);
+      currentQuizIndex = randomIndex;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = getAllArtworks()[currentQuizIndex];
+      const artwork = artworks[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
