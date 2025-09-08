@@ -49,7 +49,7 @@
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 20px;
       color: #fff;
-      background: rgba(0,0,0,0.35);
+      background: rgba(0,0,0,0.35); /* 반투명만 */
       text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
       cursor: pointer;
       text-align: center;
@@ -109,7 +109,7 @@
 
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
-    <button id="next-btn">랜덤 ➡</button>
+    <button id="next-btn">다음 ➡</button>
     <button id="view-hint-btn">힌트보기</button>
   </div>
 
@@ -126,11 +126,11 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
-    const artworks = getAllArtworks();
-    let currentQuizIndex = Math.floor(Math.random() * artworks.length);
+    let currentQuizIndex = 0;
     let currentHintStep = 0;
 
     function showQuiz(index) {
+      const artworks = getAllArtworks();
       const artwork = artworks[index];
       if (!artwork) return;
 
@@ -148,32 +148,30 @@
 
       // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
-        if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
-        else alert("힌트 링크가 없습니다.");
+        if (artwork.hintLink) {
+          window.open(artwork.hintLink, "_blank");
+        } else {
+          alert("힌트 링크가 없습니다.");
+        }
       };
 
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전 버튼: 순차적으로 이전
+    // 이전/다음
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + artworks.length) % artworks.length;
+      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 다음 버튼: 랜덤
     nextBtn.addEventListener("click", () => {
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * artworks.length);
-      } while (nextIndex === currentQuizIndex); // 같은 작품 연속 방지
-      currentQuizIndex = nextIndex;
+      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = artworks[currentQuizIndex];
+      const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
@@ -197,7 +195,7 @@
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기화: 랜덤 작품
+    // 초기화
     showQuiz(currentQuizIndex);
   </script>
 </body>
