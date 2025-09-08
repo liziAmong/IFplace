@@ -12,10 +12,11 @@
     /* 갤러리 그리드 */
     .gallery { 
       display: grid; 
-      grid-template-columns: repeat(2, 1fr); 
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
       gap: 15px; 
       margin-top: 20px; 
-      justify-items: center; /* 카드 가운데 정렬 */
+      justify-content: center; /* 그리드 전체 가운데 정렬 */
+      justify-items: center;   /* 각 카드 개별 가운데 정렬 */
     }
 
     /* 각 카드 */
@@ -90,7 +91,7 @@
     // 태그 버튼
     const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
     const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#51B6E0","#FFD700","#32CD32"];
-    const tagStates = Array(tagNames.length).fill(true); // 초기 활성화
+    const tagStates = Array(tagNames.length).fill(true);
 
     tagNames.forEach((name,i)=>{
       const btn=document.createElement("button");
@@ -111,7 +112,7 @@
     // 사이즈 버튼
     const sizeNames=["치비","중간","완커"];
     const sizeColors=["#FFB347","#FFD700","#FF7F50"];
-    const sizeStates=Array(sizeNames.length).fill(true); // 초기 활성화
+    const sizeStates=Array(sizeNames.length).fill(true);
 
     sizeNames.forEach((name,i)=>{
       const btn=document.createElement("button");
