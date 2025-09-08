@@ -28,6 +28,22 @@ const artworks = [
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["하유"]
   },
+  {
+    id: 4,
+    link: "https://wplace.live/?lat=37.82995320348113&lng=126.31754849677733&zoom=13.342813453931972",
+    image: "images/image4.jpg",
+    size: "중간",
+    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    tags: ["테리"]
+  },
+  {
+    id: 5,
+    link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
+    image: "images/image5.jpg",
+    size: "중간",
+    quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
+    tags: ["하"]
+  },
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
