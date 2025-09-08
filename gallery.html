@@ -4,63 +4,146 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>감상 모드 | IFplace</title>
-  <link rel="stylesheet" href="style.css">
   <style>
-    body { font-family: 'Nunito', sans-serif; color: #333; margin: 20px; background-color: #fff; }
-    h1, p { text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
-    /* 갤러리: 항상 2열, 최대 3행, 중앙 정렬 */
-    .gallery { 
-      display: grid; 
-      grid-template-columns: repeat(2, 300px); 
-      grid-template-rows: repeat(3, 220px); 
-      gap: 20px; 
-      justify-content: center; 
-      align-content: center; 
-      margin-top: 20px; 
+    body {
+      font-family: 'Nunito', sans-serif;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
-    .art-card { width: 100%; text-align: center; }
-    .art-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.2s ease; }
-    .art-card img:hover { transform: scale(1.03); }
-
-    /* 태그 & 사이즈 버튼 */
-    #tag-buttons button, #size-buttons button { 
-      margin: 4px; padding: 10px 18px; cursor: pointer; border-radius: 14px; border: none;
-      font-weight: 600; color: #888; transition: all 0.3s ease;
+    h1 {
+      margin-top: 30px;
+      font-size: 2.8rem;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
     }
-    #tag-buttons button:hover, #size-buttons button:hover { transform: scale(1.05); }
+
+    p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    }
+
+    /* 태그 / 사이즈 버튼 */
+    #tag-buttons, #size-buttons {
+      margin: 10px 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    #tag-buttons button, #size-buttons button {
+      padding: 10px 18px;
+      border-radius: 20px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    #tag-buttons button:hover, #size-buttons button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    }
+
+    /* 갤러리 */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      justify-items: center;
+      width: 90%;
+      max-width: 1000px;
+      margin: 20px 0;
+    }
+
+    .art-card {
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .art-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.7);
+    }
+
+    .art-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
     /* 메인 버튼 */
-    .buttons .btn { 
-      display: inline-block; margin-top: 20px; padding: 8px 16px; border-radius: 12px;
-      background-color: #666; color: #fff; text-decoration: none; font-weight: 600; transition: all 0.3s ease; 
+    .buttons .btn {
+      display: inline-block;
+      margin: 20px 0;
+      padding: 10px 20px;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
-    .buttons .btn:hover { background-color: #444; }
+
+    .buttons .btn:hover {
+      background: rgba(255,255,255,0.35);
+      transform: scale(1.05);
+    }
 
     /* 페이지 네비게이션 */
-    .pagination { display: flex; justify-content: center; margin-top: 20px; gap: 10px; }
-    .pagination button { 
-      padding: 14px 28px; font-size: 1.2rem; border-radius: 10px; border: none; 
-      background-color: #444; color: #fff; cursor: pointer; transition: all 0.3s ease; 
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 30px;
     }
-    .pagination button:hover { background-color: #666; transform: scale(1.05); }
 
-    #size-buttons { margin-top: 10px; }
+    .pagination button {
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+    }
+
+    .pagination button:hover {
+      background: rgba(255,255,255,0.35);
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🖼 감상 모드</h1>
-    <p>태그와 사이즈를 선택하여 작품을 감상하세요</p>
+  <h1>🖼 감상 모드</h1>
+  <p>태그와 사이즈를 선택하여 작품을 감상하세요</p>
 
-    <div id="tag-buttons"></div>
-    <div id="size-buttons"></div>
-    <div id="gallery-container" class="gallery"></div>
+  <div id="tag-buttons"></div>
+  <div id="size-buttons"></div>
+  <div id="gallery-container" class="gallery"></div>
 
-    <div class="buttons">
-      <a href="index.html" class="btn">⬅ 메인으로</a>
-    </div>
+  <div class="buttons">
+    <a href="index.html" class="btn">⬅ 메인으로</a>
   </div>
 
   <script src="data.js"></script>
@@ -69,55 +152,47 @@
     const tagButtonsContainer = document.getElementById("tag-buttons");
     const sizeButtonsContainer = document.getElementById("size-buttons");
 
-    // 태그 버튼
     const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
     const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#51B6E0","#FFD700","#32CD32"];
-    const tagStates = Array(tagNames.length).fill(false); // 처음 꺼져 있음
+    const tagStates = Array(tagNames.length).fill(false);
 
     tagNames.forEach((name,i)=>{
       const btn=document.createElement("button");
       btn.textContent=name;
-      btn.style.backgroundColor = ""; // 비활성화 색
-      btn.style.color = "#888";
-
+      btn.style.backgroundColor="";
+      btn.style.color="#fff";
       btn.addEventListener("click",()=>{
-        tagStates[i] = !tagStates[i];
-        btn.style.backgroundColor = tagStates[i] ? tagColors[i] : "";
-        btn.style.color = tagStates[i] ? "#fff" : "#888";
-        currentPage=1;
-        renderGallery();
+        tagStates[i]=!tagStates[i];
+        btn.style.backgroundColor = tagStates[i]?tagColors[i]:"";
+        btn.style.color = tagStates[i]?"#fff":"#fff";
+        currentPage=1; renderGallery();
       });
       tagButtonsContainer.appendChild(btn);
     });
 
-    // 사이즈 버튼
     const sizeNames=["치비","중간","완커"];
     const sizeColors=["#FFB347","#FFD700","#FF7F50"];
-    const sizeStates=Array(sizeNames.length).fill(true); // 사이즈는 기본 활성화
+    const sizeStates=Array(sizeNames.length).fill(true);
 
     sizeNames.forEach((name,i)=>{
       const btn=document.createElement("button");
       btn.textContent=name;
-      btn.style.backgroundColor = sizeColors[i];
-      btn.style.color = "#fff";
-
+      btn.style.backgroundColor=sizeColors[i];
+      btn.style.color="#fff";
       btn.addEventListener("click",()=>{
-        sizeStates[i] = !sizeStates[i];
+        sizeStates[i]=!sizeStates[i];
         btn.style.backgroundColor = sizeStates[i]?sizeColors[i]:"";
-        btn.style.color = sizeStates[i]?"#fff":"#888";
-        currentPage=1;
-        renderGallery();
+        btn.style.color = sizeStates[i]?"#fff":"#fff";
+        currentPage=1; renderGallery();
       });
       sizeButtonsContainer.appendChild(btn);
     });
 
-    // 페이징
     let currentPage=1;
     const itemsPerPage=6;
 
     function renderGallery(){
       galleryContainer.innerHTML="";
-
       const activeTags = tagStates.map((s,i)=>s?tagNames[i]:null).filter(t=>t);
       const activeSizes = sizeStates.map((s,i)=>s?sizeNames[i]:null).filter(s=>s);
 
@@ -132,13 +207,9 @@
       const pageItems = filtered.slice(start,start+itemsPerPage);
 
       pageItems.forEach(art=>{
-        const card = document.createElement("div");
+        const card=document.createElement("div");
         card.className="art-card";
-        card.innerHTML=`
-          <a href="${art.link}" target="_blank">
-            <img src="${art.image}" alt="">
-          </a>
-        `;
+        card.innerHTML=`<a href="${art.link}" target="_blank"><img src="${art.image}" alt=""></a>`;
         galleryContainer.appendChild(card);
       });
 
@@ -148,7 +219,6 @@
     function renderPagination(totalPages){
       const existing=document.querySelector(".pagination");
       if(existing) existing.remove();
-
       if(totalPages<=1) return;
 
       const pagination=document.createElement("div");
@@ -157,14 +227,13 @@
       if(currentPage>1){
         const prev=document.createElement("button");
         prev.textContent="⬅ 이전";
-        prev.onclick=()=>{currentPage--;renderGallery();};
+        prev.onclick=()=>{currentPage--; renderGallery();};
         pagination.appendChild(prev);
       }
-
       if(currentPage<totalPages){
         const next=document.createElement("button");
         next.textContent="다음 ➡";
-        next.onclick=()=>{currentPage++;renderGallery();};
+        next.onclick=()=>{currentPage++; renderGallery();};
         pagination.appendChild(next);
       }
 
