@@ -14,57 +14,55 @@
       flex-direction: column;
       height: 100vh;
       margin: 0;
-      background-color: #000;
+      background-color: #fefefe;
       text-align: center;
-      color: #fff;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* 전체 블러 배경 */
-    #bg-blur {
-      position: fixed;
-      inset: 0;
-      background: #000;
-      background-size: cover;
-      background-position: center;
-      filter: blur(12px) brightness(0.6);
-      z-index: -1;
-      transform: scale(1.1);
     }
 
     #tag-size-display {
       margin-bottom: 15px;
       font-size: 1.2rem;
       font-weight: 600;
-      color: #eee;
+      color: #444;
     }
 
-    /* 버튼 (투명) */
     #hint-btn {
       position: relative;
       padding: 120px 160px;
       font-size: 2.8rem;
       font-weight: 700;
-      border: 2px solid rgba(255,255,255,0.3);
+      border: none;
       border-radius: 20px;
       color: #fff;
-      background: rgba(0,0,0,0.35);
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
+      overflow: hidden;
       margin-bottom: 20px;
-      transition: transform 0.2s ease, background-color 0.3s ease;
+      transition: transform 0.2s ease;
+    }
+
+    #hint-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px) brightness(0.7);
+      z-index: 0;
+    }
+
+    #hint-btn span {
+      position: relative;
+      z-index: 1;
     }
 
     #hint-btn:hover {
       transform: scale(1.05);
-      background: rgba(0,0,0,0.5);
     }
 
     #controls button {
-      padding: 14px 26px;
+      padding: 14px 24px;
       margin: 5px;
       cursor: pointer;
       border-radius: 10px;
@@ -72,7 +70,7 @@
       background-color: #888;
       color: #fff;
       font-weight: 600;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
@@ -96,20 +94,16 @@
   </style>
 </head>
 <body>
-  <!-- 블러 배경 -->
-  <div id="bg-blur"></div>
-
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-  <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
 
-  <button id="hint-btn"></button>
+  <button id="hint-btn"><span></span></button>
 
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
-    <button id="next-btn">랜덤 ➡</button>
+    <button id="next-btn">다음 ➡</button>
     <button id="view-hint-btn">힌트보기</button>
   </div>
 
@@ -119,70 +113,76 @@
 
   <script src="data.js"></script>
   <script>
-    const bgBlur = document.getElementById("bg-blur");
     const hintBtn = document.getElementById("hint-btn");
+    const hintBtnText = hintBtn.querySelector("span");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
-    const artworks = getAllArtworks();
-    let currentQuizIndex = Math.floor(Math.random() * artworks.length);
+    let currentQuizIndex = 0;
     let currentHintStep = 0;
 
     function showQuiz(index) {
-      const artwork = artworks[index];
+      const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      // 배경 업데이트
-      bgBlur.style.backgroundImage = `url(${artwork.image})`;
+      // 배경을 이미지(블러)로 설정
+      if (artwork.image) {
+        hintBtn.style.setProperty("--bg-image", `url(${artwork.image})`);
+        hintBtn.style.setProperty("background", "none");
+        hintBtn.style.setProperty("position", "relative");
+        hintBtn.querySelector("::before");
+        hintBtn.style.setProperty("--bg-image", `url(${artwork.image})`);
+        hintBtn.style.setProperty("background-image", `url(${artwork.image})`);
+      }
 
-      // 사이즈 + 태그 표시
+      hintBtn.style.setProperty("--bg-image", `url(${artwork.image || ""})`);
+      hintBtn.style.setProperty("--color", "#fff");
+
+      // 사이즈 표시
       const sizeText = artwork.size || "사이즈 없음";
-      const tags = artwork.tags ? artwork.tags.join(", ") : "태그 없음";
-      tagSizeDisplay.textContent = `사이즈: ${sizeText} | 태그: ${tags}`;
+      tagSizeDisplay.textContent = `사이즈: ${sizeText}`;
 
       // 첫 번째 힌트 표시
       currentHintStep = 0;
-      hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
+      hintBtnText.textContent = artwork.quizHints[0] || "힌트 없음";
 
       // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
-        if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
-        else alert("힌트 링크가 없습니다.");
+        if (artwork.hintLink) {
+          window.open(artwork.hintLink, "_blank");
+        } else {
+          alert("힌트 링크가 없습니다.");
+        }
       };
 
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전 버튼: 순차적으로 이전
+    // 이전/다음
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + artworks.length) % artworks.length;
+      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 다음 버튼: 랜덤
     nextBtn.addEventListener("click", () => {
-      let nextIndex;
-      do {
-        nextIndex = Math.floor(Math.random() * artworks.length);
-      } while (nextIndex === currentQuizIndex); // 같은 작품 연속 방지
-      currentQuizIndex = nextIndex;
+      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = artworks[currentQuizIndex];
+      const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
         currentHintStep = 1;
-        hintBtn.textContent = artwork.quizHints[1];
+        hintBtnText.textContent = artwork.quizHints[1];
         viewHintBtn.textContent = "정답보기";
       } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
         currentHintStep = 2;
-        hintBtn.textContent = artwork.quizHints[2];
+        hintBtnText.textContent = artwork.quizHints[2];
         viewHintBtn.textContent = "정답 확인 완료";
         hintBtn.onclick = () => {
           if (artwork.link) window.open(artwork.link, "_blank");
@@ -197,7 +197,7 @@
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기화: 랜덤 작품
+    // 초기화
     showQuiz(currentQuizIndex);
   </script>
 </body>
