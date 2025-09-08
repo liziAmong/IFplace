@@ -6,46 +6,98 @@
   <title>퀴즈 모드 | IFplace</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    #quiz-container { padding: 20px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; }
-    button { padding: 8px 12px; margin: 5px; cursor: pointer; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      margin: 0;
+      background-color: #fefefe;
+      text-align: center;
+    }
+
+    #hint-btn {
+      padding: 30px 40px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 12px;
+      background-color: #ffb347;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      max-width: 90%;
+      transition: transform 0.2s ease, background-color 0.3s ease;
+      margin-bottom: 20px;
+    }
+
+    #hint-btn:hover {
+      transform: scale(1.05);
+      background-color: #ffa500;
+    }
+
+    #controls button {
+      padding: 10px 16px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: #666;
+      color: #fff;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    #controls button:hover {
+      background-color: #444;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🧩 퀴즈 모드</h1>
-    <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
+  <h1>🧩 퀴즈 모드</h1>
+  <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-    <div id="quiz-container">
-      <h2 id="quiz-title"></h2>
-      <p id="quiz-hint"></p>
-      <div>
-        <button id="prev-btn">⬅ 이전</button>
-        <button id="next-btn">다음 ➡</button>
-        <button id="new-hint-btn">힌트 새로보기</button>
-      </div>
-    </div>
+  <!-- 큰 힌트 버튼 -->
+  <button id="hint-btn"></button>
 
-    <div class="buttons">
-      <a href="index.html" class="btn">⬅ 메인으로</a>
-    </div>
+  <!-- 이전/다음/새 힌트 버튼 -->
+  <div id="controls">
+    <button id="prev-btn">⬅ 이전</button>
+    <button id="next-btn">다음 ➡</button>
+    <button id="new-hint-btn">힌트 새로보기</button>
+  </div>
+
+  <div class="buttons">
+    <a href="index.html" class="btn">⬅ 메인으로</a>
   </div>
 
   <script src="data.js"></script>
   <script>
-    const quizTitle = document.getElementById("quiz-title");
-    const quizHint = document.getElementById("quiz-hint");
+    const hintBtn = document.getElementById("hint-btn");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const newHintBtn = document.getElementById("new-hint-btn");
 
-    let currentQuizIndex = 0; // 0부터 시작
+    let currentQuizIndex = 0;
+    let currentHintIndex = 0;
 
     function showQuiz(index) {
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      quizTitle.textContent = artwork.title;
-      quizHint.textContent = getRandomQuizHint(artwork.id);
+      // 첫 번째 힌트 버튼
+      currentHintIndex = 0;
+      hintBtn.textContent = artwork.quizHints[currentHintIndex] || "힌트 없음";
+
+      // 클릭하면 hintLink 열기
+      hintBtn.onclick = () => {
+        if (artwork.hintLink) {
+          window.open(artwork.hintLink, "_blank");
+        } else {
+          alert("힌트 링크가 없습니다.");
+        }
+      };
     }
 
     // 버튼 이벤트
@@ -62,10 +114,15 @@
     });
 
     newHintBtn.addEventListener("click", () => {
-      showQuiz(currentQuizIndex); // 같은 작품에서 힌트 새로보기
+      const artwork = getAllArtworks()[currentQuizIndex];
+      if (!artwork || artwork.quizHints.length === 0) return;
+
+      // 랜덤 힌트
+      currentHintIndex = Math.floor(Math.random() * artwork.quizHints.length);
+      hintBtn.textContent = artwork.quizHints[currentHintIndex];
     });
 
-    // 키보드 이벤트 (선택)
+    // 키보드 이벤트
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") nextBtn.click();
       if (e.key === "ArrowLeft") prevBtn.click();
