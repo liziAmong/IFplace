@@ -18,6 +18,14 @@
       text-align: center;
     }
 
+    #quiz-image {
+      max-width: 350px;
+      max-height: 250px;
+      margin-bottom: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
     #tag-size-display {
       margin-bottom: 15px;
       font-size: 1.2rem;
@@ -25,44 +33,29 @@
       color: #444;
     }
 
+    /* 버튼을 지난번 크기로 복구 */
     #hint-btn {
-      position: relative;
       padding: 120px 160px;
       font-size: 2.8rem;
       font-weight: 700;
       border: none;
       border-radius: 20px;
       color: #fff;
-      text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
       cursor: pointer;
       text-align: center;
       max-width: 90%;
-      overflow: hidden;
+      transition: transform 0.2s ease, background 0.3s ease;
       margin-bottom: 20px;
-      transition: transform 0.2s ease;
-    }
-
-    #hint-btn::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center;
-      filter: blur(8px) brightness(0.7);
-      z-index: 0;
-    }
-
-    #hint-btn span {
-      position: relative;
-      z-index: 1;
     }
 
     #hint-btn:hover {
       transform: scale(1.05);
+      filter: brightness(1.05);
     }
 
     #controls button {
-      padding: 14px 24px;
+      padding: 14px 26px; /* 버튼 조금 키움 */
       margin: 5px;
       cursor: pointer;
       border-radius: 10px;
@@ -70,7 +63,7 @@
       background-color: #888;
       color: #fff;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
@@ -97,9 +90,13 @@
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
+  <!-- 문제 사진 -->
+  <img id="quiz-image" src="" alt="퀴즈 이미지">
+
+  <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
 
-  <button id="hint-btn"><span></span></button>
+  <button id="hint-btn"></button>
 
   <div id="controls">
     <button id="prev-btn">⬅ 이전</button>
@@ -113,49 +110,54 @@
 
   <script src="data.js"></script>
   <script>
+    const quizImage = document.getElementById("quiz-image");
     const hintBtn = document.getElementById("hint-btn");
-    const hintBtnText = hintBtn.querySelector("span");
     const prevBtn = document.getElementById("prev-btn");
     const nextBtn = document.getElementById("next-btn");
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
+    // 부드러운 파스텔 톤 색상 팔레트
+    const pastelColors = [
+      "#FFB3BA","#FFDFBA","#FFFFBA","#BAFFC9","#BAE1FF",
+      "#E0BBE4","#FFCCE5","#C7CEEA","#F1F0C0","#B5EAD7"
+    ];
+
+    const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
+
     let currentQuizIndex = 0;
     let currentHintStep = 0;
 
-    // 작품 순서를 랜덤으로 섞기
-    const artworks = getAllArtworks();
-    const quizOrder = artworks.map((_, i) => i);
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-    shuffle(quizOrder);
-
-    function showQuiz(orderIndex) {
-      const artworkIndex = quizOrder[orderIndex];
-      const artwork = artworks[artworkIndex];
+    function showQuiz(index) {
+      const artworks = getAllArtworks();
+      const artwork = artworks[index];
       if (!artwork) return;
 
-      // 버튼 배경 이미지 블러 처리
-      if (artwork.image) {
-        hintBtn.style.setProperty("--bg-image", `url(${artwork.image})`);
-        hintBtn.style.backgroundImage = `url(${artwork.image})`;
-        hintBtn.style.backgroundSize = "cover";
-        hintBtn.style.backgroundPosition = "center";
+      // 퀴즈 이미지 (images 폴더에서 index와 매칭)
+      quizImage.src = `images/images${index}.jpg`;
+
+      // 중앙 버튼 배경: 태그 → 파스텔 색상 매핑
+      if (artwork.tags && artwork.tags.length > 0) {
+        const colors = artwork.tags.map(tag => {
+          const i = tagNames.indexOf(tag);
+          return pastelColors[i % pastelColors.length];
+        });
+        if (colors.length === 1) {
+          hintBtn.style.background = colors[0];
+        } else {
+          hintBtn.style.background = `linear-gradient(135deg, ${colors.join(", ")})`;
+        }
+      } else {
+        hintBtn.style.background = "#B5EAD7"; // 기본 파스텔 민트
       }
 
-      // 사이즈 표시
+      // 사이즈만 표시
       const sizeText = artwork.size || "사이즈 없음";
       tagSizeDisplay.textContent = `사이즈: ${sizeText}`;
 
       // 첫 번째 힌트 표시
       currentHintStep = 0;
-      hintBtnText.textContent = artwork.quizHints[0] || "힌트 없음";
+      hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
 
       // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
@@ -171,27 +173,27 @@
 
     // 이전/다음
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + quizOrder.length) % quizOrder.length;
+      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     nextBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex + 1) % quizOrder.length;
+      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = artworks[quizOrder[currentQuizIndex]];
+      const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
         currentHintStep = 1;
-        hintBtnText.textContent = artwork.quizHints[1];
+        hintBtn.textContent = artwork.quizHints[1];
         viewHintBtn.textContent = "정답보기";
       } else if (currentHintStep === 1 && artwork.quizHints.length > 2) {
         currentHintStep = 2;
-        hintBtnText.textContent = artwork.quizHints[2];
+        hintBtn.textContent = artwork.quizHints[2];
         viewHintBtn.textContent = "정답 확인 완료";
         hintBtn.onclick = () => {
           if (artwork.link) window.open(artwork.link, "_blank");
