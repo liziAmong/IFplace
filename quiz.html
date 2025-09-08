@@ -129,11 +129,11 @@
     const viewHintBtn = document.getElementById("view-hint-btn");
     const tagSizeDisplay = document.getElementById("tag-size-display");
 
-    let artworks = getAllArtworks();
-    let currentQuizIndex = Math.floor(Math.random() * artworks.length);
+    let currentQuizIndex = 0;
     let currentHintStep = 0;
 
     function showQuiz(index) {
+      const artworks = getAllArtworks();
       const artwork = artworks[index];
       if (!artwork) return;
 
@@ -161,25 +161,21 @@
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전 버튼 (순차)
+    // 이전 버튼
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + artworks.length) % artworks.length;
+      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 다음 버튼 (랜덤)
+    // 다음 버튼 (현재는 순차)
     nextBtn.addEventListener("click", () => {
-      let newIndex;
-      do {
-        newIndex = Math.floor(Math.random() * artworks.length);
-      } while (newIndex === currentQuizIndex && artworks.length > 1);
-      currentQuizIndex = newIndex;
+      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
     // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
-      const artwork = artworks[currentQuizIndex];
+      const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
@@ -203,7 +199,7 @@
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기화 (랜덤 작품)
+    // 초기화
     showQuiz(currentQuizIndex);
   </script>
 </body>
