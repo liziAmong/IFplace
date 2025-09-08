@@ -77,7 +77,7 @@
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-  <!-- 태그와 사이즈 표시 -->
+  <!-- 사이즈만 표시 -->
   <div id="tag-size-display"></div>
 
   <button id="hint-btn"></button>
@@ -104,29 +104,29 @@
     const tagColors = ["#FE5069","#2F2F2F","#D8BFD8","#FFC0CB","#ADFF2F","#ADD8E6","#FF00FF","#51B6E0","#FFD700","#32CD32"];
 
     let currentQuizIndex = 0;
-    let currentHintStep = 0; // 0=첫 번째, 1=두 번째, 2=정답
+    let currentHintStep = 0;
 
     function showQuiz(index) {
       const artwork = getAllArtworks()[index];
       if (!artwork) return;
 
-      // 중앙 버튼 배경색: 태그가 여러 개면 그라데이션
+      // 중앙 버튼 배경색: 그라데이션
       if (artwork.tags && artwork.tags.length > 0) {
         const colors = artwork.tags.map(tag => tagColors[tagNames.indexOf(tag)] || "#ffb347");
         if (colors.length === 1) {
           hintBtn.style.background = colors[0];
         } else {
-          const gradient = `linear-gradient(90deg, ${colors.join(", ")})`;
+          // 좀 더 부드럽고 예쁜 그라데이션
+          const gradient = `linear-gradient(135deg, ${colors.join(", ")})`;
           hintBtn.style.background = gradient;
         }
       } else {
         hintBtn.style.background = "#ffb347";
       }
 
-      // 태그와 사이즈 표시
-      const tagsText = artwork.tags && artwork.tags.length > 0 ? artwork.tags.join(", ") : "태그 없음";
+      // 사이즈만 표시
       const sizeText = artwork.size || "사이즈 없음";
-      tagSizeDisplay.textContent = `태그: ${tagsText} | 사이즈: ${sizeText}`;
+      tagSizeDisplay.textContent = `사이즈: ${sizeText}`;
 
       // 첫 번째 힌트 표시
       currentHintStep = 0;
@@ -141,7 +141,6 @@
         }
       };
 
-      // 버튼 초기 상태
       viewHintBtn.textContent = "힌트보기";
     }
 
