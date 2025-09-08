@@ -8,8 +8,7 @@
   <style>
     .art-card { display: inline-block; margin: 10px; text-align: center; }
     .art-card img { width: 150px; height: 150px; object-fit: cover; border-radius: 8px; }
-    #tag-buttons button { margin: 2px; padding: 5px 10px; cursor: pointer; }
-    #tag-buttons button.on { background-color: lightgreen; }
+    #tag-buttons button { margin: 4px; padding: 8px 16px; cursor: pointer; border-radius: 12px; border: 1px solid #ccc; }
   </style>
 </head>
 <body>
@@ -42,30 +41,34 @@
     const tagButtonsContainer = document.getElementById("tag-buttons");
     const searchInput = document.getElementById("search");
 
-    // 태그 상태 저장
-    const tagStates = Array(10).fill(false); // false = off, true = on
+    // 버튼 이름과 on 상태 색상
+    const tagNames = ["츠키","반님","테리","하유","메이","리리","하루","하네","아테","소리"];
+    const tagColors = ["#B22222", "#2F2F2F", "#D8BFD8", "#FFC0CB", "#ADFF2F", "#ADD8E6", "#FF00FF", "#00008B", "#FFFFE0", "#7CFC00"];
+    const tagStates = Array(tagNames.length).fill(false);
 
-    // 버튼 생성 (#1 ~ #10)
-    for (let i = 0; i < 10; i++) {
+    // 버튼 생성
+    tagNames.forEach((name, i) => {
       const btn = document.createElement("button");
-      btn.textContent = `#${i+1}`;
-      btn.dataset.tagIndex = i;
+      btn.textContent = name;
+      btn.dataset.index = i;
+
       btn.addEventListener("click", () => {
-        const index = parseInt(btn.dataset.tagIndex);
-        tagStates[index] = !tagStates[index];
-        btn.classList.toggle("on", tagStates[index]);
+        tagStates[i] = !tagStates[i];
+        btn.style.backgroundColor = tagStates[i] ? tagColors[i] : "";
         renderGallery();
       });
+
       tagButtonsContainer.appendChild(btn);
-    }
+    });
 
     // 갤러리 렌더링 함수
     function renderGallery() {
       const searchText = searchInput.value.trim();
       galleryContainer.innerHTML = "";
 
+      // 활성 태그 목록
       const activeTags = tagStates
-        .map((state, i) => (state ? `#${i+1}` : null))
+        .map((state, i) => (state ? tagNames[i] : null))
         .filter(t => t !== null);
 
       getAllArtworks().forEach(art => {
