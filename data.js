@@ -22,11 +22,11 @@ const artworks = [
   },
   {
     id: 3,
-    link: "https://example.com/art3",
+    link: "https://wplace.live/?lat=37.785789482476105&lng=126.25180630927736&zoom=12.550636121896222",
     image: "images/image3.jpg",
-    size: "완커",
+    size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
-    tags: ["tag1", "tag2"]
+    tags: ["하유"]
   },
   // 나머지 작품들도 같은 형식으로 추가
 ];
