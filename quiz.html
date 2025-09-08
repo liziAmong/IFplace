@@ -5,16 +5,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>퀴즈 모드 | IFplace</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    #quiz-container { padding: 20px; border: 1px solid #ccc; border-radius: 8px; margin-top: 20px; }
+    button { padding: 8px 12px; margin: 5px; cursor: pointer; }
+  </style>
 </head>
 <body>
   <div class="container">
     <h1>🧩 퀴즈 모드</h1>
     <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
-    <div id="quiz-container"></div>
+
+    <div id="quiz-container">
+      <h2 id="quiz-title"></h2>
+      <p id="quiz-hint"></p>
+      <div>
+        <button id="prev-btn">⬅ 이전</button>
+        <button id="next-btn">다음 ➡</button>
+        <button id="new-hint-btn">힌트 새로보기</button>
+      </div>
+    </div>
+
     <div class="buttons">
       <a href="index.html" class="btn">⬅ 메인으로</a>
     </div>
   </div>
-  <script src="quiz.js"></script>
+
+  <script src="data.js"></script>
+  <script>
+    const quizTitle = document.getElementById("quiz-title");
+    const quizHint = document.getElementById("quiz-hint");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+    const newHintBtn = document.getElementById("new-hint-btn");
+
+    let currentQuizIndex = 0; // 0부터 시작
+
+    function showQuiz(index) {
+      const artwork = getAllArtworks()[index];
+      if (!artwork) return;
+
+      quizTitle.textContent = artwork.title;
+      quizHint.textContent = getRandomQuizHint(artwork.id);
+    }
+
+    // 버튼 이벤트
+    prevBtn.addEventListener("click", () => {
+      currentQuizIndex--;
+      if (currentQuizIndex < 0) currentQuizIndex = getAllArtworks().length - 1;
+      showQuiz(currentQuizIndex);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      currentQuizIndex++;
+      if (currentQuizIndex >= getAllArtworks().length) currentQuizIndex = 0;
+      showQuiz(currentQuizIndex);
+    });
+
+    newHintBtn.addEventListener("click", () => {
+      showQuiz(currentQuizIndex); // 같은 작품에서 힌트 새로보기
+    });
+
+    // 키보드 이벤트 (선택)
+    document.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight") nextBtn.click();
+      if (e.key === "ArrowLeft") prevBtn.click();
+    });
+
+    // 초기 표시
+    showQuiz(currentQuizIndex);
+  </script>
 </body>
 </html>
