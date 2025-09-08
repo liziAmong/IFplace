@@ -9,10 +9,10 @@
 
     body {
       font-family: 'Nunito', sans-serif;
-      color: #222; /* 글자 어둡게 */
+      color: #222;
       margin: 0;
       padding: 0;
-      background: linear-gradient(135deg, #f0f0f0, #d0d0d0); /* 밝은 배경 */
+      background: linear-gradient(135deg, #f0f0f0, #d0d0d0);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -21,19 +21,21 @@
 
     h1 {
       margin-top: 30px;
-      font-size: 2.8rem;
+      font-size: 2.2rem;
       color: #222;
       text-shadow: 1px 1px 4px rgba(255,255,255,0.6);
+      text-align: center;
     }
 
     p {
-      font-size: 1.2rem;
+      font-size: 1rem;
       margin-bottom: 20px;
       color: #333;
       text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 0 10px;
     }
 
-    /* 태그 / 사이즈 버튼 */
     #tag-buttons, #size-buttons {
       margin: 10px 0;
       display: flex;
@@ -43,7 +45,7 @@
     }
 
     #tag-buttons button, #size-buttons button {
-      padding: 10px 18px;
+      padding: 8px 16px;
       border-radius: 20px;
       border: none;
       font-weight: 600;
@@ -51,6 +53,7 @@
       transition: all 0.3s ease;
       box-shadow: 0 3px 6px rgba(0,0,0,0.2);
       color: #222;
+      font-size: 0.9rem;
     }
 
     #tag-buttons button:hover, #size-buttons button:hover {
@@ -58,15 +61,12 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
 
-    /* 갤러리: 2x3 고정 */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(2, 300px); /* 가로 2장 */
-      grid-template-rows: repeat(3, 220px);    /* 세로 3장 */
-      gap: 20px;
-      justify-content: center; /* 가로 중앙 */
-      align-content: center;   /* 세로 중앙 */
-      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-auto-rows: 160px;
+      gap: 15px;
+      width: 90%;
       margin: 20px 0;
     }
 
@@ -92,7 +92,6 @@
       display: block;
     }
 
-    /* 메인 버튼 */
     .buttons .btn {
       display: inline-block;
       margin: 20px 0;
@@ -104,6 +103,7 @@
       text-decoration: none;
       transition: all 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      font-size: 1rem;
     }
 
     .buttons .btn:hover {
@@ -111,16 +111,16 @@
       transform: scale(1.05);
     }
 
-    /* 페이지 네비게이션 */
     .pagination {
       display: flex;
       justify-content: center;
       gap: 12px;
       margin-bottom: 30px;
+      flex-wrap: wrap;
     }
 
     .pagination button {
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 12px;
       border: none;
       background: rgba(0,0,0,0.1);
@@ -129,12 +129,22 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+      font-size: 0.9rem;
     }
 
     .pagination button:hover {
       background: rgba(0,0,0,0.2);
       transform: scale(1.05);
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      p { font-size: 0.9rem; }
+      #tag-buttons button, #size-buttons button { padding: 6px 12px; font-size: 0.8rem; }
+      .gallery { grid-auto-rows: 140px; gap: 10px; }
+      .buttons .btn { padding: 8px 16px; font-size: 0.9rem; }
+      .pagination button { padding: 8px 16px; font-size: 0.8rem; }
     }
   </style>
 </head>
