@@ -42,7 +42,7 @@ const artworks = [
     image: "images/image5.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
-    tags: ["하"]
+    tags: ["하유"]
   },
   // 나머지 작품들도 같은 형식으로 추가
 ];
