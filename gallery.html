@@ -9,26 +9,26 @@
     body { font-family: 'Nunito', sans-serif; color: #333; margin: 20px; background-color: #fff; }
     h1, p { text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
 
-    /* 갤러리 그리드 */
+    /* 갤러리: 항상 2열, 최대 3행, 중앙 정렬 */
     .gallery { 
       display: grid; 
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-      gap: 15px; 
+      grid-template-columns: repeat(2, 300px); /* 가로 2 */
+      grid-template-rows: repeat(3, 220px);    /* 세로 3 */
+      gap: 20px; 
+      justify-content: center;  /* 그리드 전체 중앙 */
+      align-content: center;    /* 세로 방향 중앙 */
       margin-top: 20px; 
-      justify-content: center; /* 그리드 전체 가운데 정렬 */
-      justify-items: center;   /* 각 카드 개별 가운데 정렬 */
     }
 
     /* 각 카드 */
     .art-card { 
       width: 100%; 
-      max-width: 300px; 
       text-align: center; 
     }
 
     .art-card img { 
       width: 100%; 
-      max-height: 200px; 
+      height: 100%; 
       object-fit: cover; 
       border-radius: 8px; 
       box-shadow: 0 2px 5px rgba(0,0,0,0.2); 
@@ -55,14 +55,11 @@
     /* 페이지 네비게이션 */
     .pagination { display: flex; justify-content: center; margin-top: 20px; gap: 10px; }
     .pagination button { 
-      padding: 14px 28px; /* 버튼 크기 확대 */
-      font-size: 1.2rem;  /* 글자 크기 증가 */
-      border-radius: 10px; border: none; 
+      padding: 14px 28px; font-size: 1.2rem; border-radius: 10px; border: none; 
       background-color: #444; color: #fff; cursor: pointer; transition: all 0.3s ease; 
     }
     .pagination button:hover { 
-      background-color: #666; 
-      transform: scale(1.05);
+      background-color: #666; transform: scale(1.05);
     }
 
     #size-buttons { margin-top: 10px; }
