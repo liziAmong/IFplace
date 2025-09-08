@@ -7,24 +7,24 @@ const artworks = [
   {
     id: 1,
     title: "들어오세요",
-    artist: "하유",
     image: "images/image1.jpg",
+    size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["tag1", "tag2"]
   },
   {
     id: 2,
     title: "사탕물어요",
-    artist: "하유",
     image: "images/image2.jpg",
+    size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["tag1", "tag2"]
   },
   {
     id: 3,
     title: "어제어땠어",
-    artist: "하유",
     image: "images/image3.jpg",
+    size: "완커",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
     tags: ["tag1", "tag2"]
   },
