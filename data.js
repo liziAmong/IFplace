@@ -7,6 +7,7 @@ const artworks = [
   {
     id: 1,
     link: "https://wplace.live/?lat=38.016038550337875&lng=126.27413052802731&zoom=12.078841361844278",
+    hintLink: "https://hint.example.com/1",
     image: "images/image1.jpg",
     size: "완커",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -15,6 +16,7 @@ const artworks = [
   {
     id: 2,
     link: "https://wplace.live/?lat=37.97157067432562&lng=126.19854459052732&zoom=12.230253549912431",
+    hintLink: "https://hint.example.com/1",
     image: "images/image2.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -23,6 +25,7 @@ const artworks = [
   {
     id: 3,
     link: "https://wplace.live/?lat=37.785789482476105&lng=126.25180630927736&zoom=12.550636121896222",
+    hintLink: "https://hint.example.com/1",
     image: "images/image3.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -31,6 +34,7 @@ const artworks = [
   {
     id: 4,
     link: "https://wplace.live/?lat=37.82995320348113&lng=126.31754849677733&zoom=13.342813453931972",
+    hintLink: "https://hint.example.com/1",
     image: "images/image4.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -39,6 +43,7 @@ const artworks = [
   {
     id: 5,
     link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
+    hintLink: "https://hint.example.com/1",
     image: "images/image5.jpg",
     size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -47,6 +52,7 @@ const artworks = [
   {
     id: 6,
     link: "https://wplace.live/?lat=36.434082561640416&lng=128.23004849677733&zoom=13.876831573294917",
+    hintLink: "https://hint.example.com/1",
     image: "images/image6.jpg",
     size: "중간",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -55,6 +61,7 @@ const artworks = [
   {
     id: 7,
     link: "https://wplace.live/?lat=38.32972973964912&lng=128.17450162177732&zoom=14.109423166041323",
+    hintLink: "https://hint.example.com/1",
     image: "images/image7.jpg",
     size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
@@ -63,6 +70,7 @@ const artworks = [
   {
     id: 8,
     link: "https://wplace.live/?lat=38.02780901836128&lng=126.32036099677731&zoom=14.848925910534648",
+    hintLink: "https://hint.example.com/1",
     image: "images/image8.jpg",
     size: "치비",
     quizHints: ["첫 번째 힌트", "두 번째 힌트", "세 번째 힌트"],
