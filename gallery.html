@@ -32,6 +32,12 @@
       object-fit: cover; 
       border-radius: 8px; 
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .art-card img:hover {
+      transform: scale(1.03);
     }
 
     #tag-buttons button, #size-buttons button { 
@@ -191,8 +197,9 @@
         const card = document.createElement("div");
         card.className="art-card";
         card.innerHTML=`
-          <img src="${art.image}" alt="${art.title}">
-          <h3>${art.title}</h3>
+          <a href="${art.link}" target="_blank">
+            <img src="${art.image}" alt="">
+          </a>
         `;
         galleryContainer.appendChild(card);
       });
