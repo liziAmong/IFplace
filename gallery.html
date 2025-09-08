@@ -8,32 +8,31 @@
   <style>
     body {
       font-family: 'Nunito', sans-serif;
-      color: #333;
+      color: #333; /* 글자 조금 어둡게 */
       margin: 20px;
-      background-color: #fff; /* 배경 어둡게 */
+      background-color: #fff; /* 배경 원래대로 */
     }
 
-  h1, h2, p {
-    font-family: 'Nunito', sans-serif;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 글자 살짝 그림자 */
-  }
+    h1, h2, p {
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
 
-.art-card { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center;
-    margin: 10px 0; 
-    text-align: center;
-    color: #222; /* 카드 안 글자 조금 어둡게 */
-  }
+    .art-card { 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center;
+      margin: 10px 0; 
+      text-align: center;
+      color: #222; /* 카드 안 글자 조금 어둡게 */
+    }
 
     .art-card img { 
-    width: 90%; 
-    max-height: 200px; 
-    object-fit: cover; 
-    border-radius: 8px; 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  }
+      width: 90%; 
+      max-height: 200px; 
+      object-fit: cover; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
 
     #tag-buttons button { 
       margin: 4px; 
@@ -153,7 +152,7 @@
 
     // 페이징
     let currentPage = 1;
-    const itemsPerPage = 4;
+    const itemsPerPage = 4; // 한 페이지 4개
 
     function renderGallery() {
       const searchText = searchInput.value.trim();
