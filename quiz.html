@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>퀴즈 모드 | IFplace</title>
+
+  <!-- ✅ Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVY8TTL074"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-YVY8TTL074');
+  </script>
+
   <link rel="stylesheet" href="style.css">
   <style>
     body {
@@ -158,43 +169,33 @@
       const artwork = artworks[index];
       if (!artwork) return;
 
-      // 배경 업데이트
       bgBlur.style.backgroundImage = `url(${artwork.image})`;
 
-      // 사이즈 + 태그 표시
       const sizeText = artwork.size || "사이즈 없음";
       const tags = artwork.tags ? artwork.tags.join(", ") : "태그 없음";
       tagSizeDisplay.textContent = `사이즈: ${sizeText} | 태그: ${tags}`;
 
-      // 첫 번째 힌트 표시
       currentHintStep = 0;
       hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
 
-      // 클릭 → 힌트 링크
       hintBtn.onclick = () => {
-        if (artwork.hintLink) {
-          window.open(artwork.hintLink, "_blank");
-        } else {
-          alert("힌트 링크가 없습니다.");
-        }
+        if (artwork.hintLink) window.open(artwork.hintLink, "_blank");
+        else alert("힌트 링크가 없습니다.");
       };
 
       viewHintBtn.textContent = "힌트보기";
     }
 
-    // 이전 버튼
     prevBtn.addEventListener("click", () => {
       currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 다음 버튼
     nextBtn.addEventListener("click", () => {
       currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
       showQuiz(currentQuizIndex);
     });
 
-    // 힌트 단계
     viewHintBtn.addEventListener("click", () => {
       const artwork = getAllArtworks()[currentQuizIndex];
       if (!artwork) return;
@@ -214,13 +215,11 @@
       }
     });
 
-    // 키보드 이동
     document.addEventListener("keydown", e => {
       if (e.key === "ArrowRight") nextBtn.click();
       if (e.key === "ArrowLeft") prevBtn.click();
     });
 
-    // 초기화
     showQuiz(currentQuizIndex);
   </script>
 </body>
