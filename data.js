@@ -182,7 +182,7 @@ const artworks = [
     image: "images/image19.jpg",
     size: "치비",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북쪽으로 가세요", "위치 공개!"],
-    tags: ["오니"]
+    tags: ["츠키"]
   },
   // 나머지 작품들도 같은 형식으로 추가
 ];
