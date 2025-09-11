@@ -6,7 +6,7 @@
 const artworks = [
 {
     id: 0,
-    link: "https://wplace.live/?lat=38.414897142801934&lng=127.59125943427733&zoom=11.972094337239767",
+    link: "https://wplace.live/?lat=38.40883675888546&lng=127.58000943427731&zoom=15.364338563126179",
     hintLink: "https://wplace.live/?lat=38.643030049034095&lng=127.35870084052732&zoom=14.621848974633494",
     image: "images/image0.jpg",
     size: "완커",
