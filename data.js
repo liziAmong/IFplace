@@ -146,14 +146,14 @@ const artworks = [
     image: "images/image15.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북쪽으로 가세요", "위치 공개!"],
-    tags: ["츠키","반님","테리","하유","메이"]
+    tags: ["츠키","반님","테리","하유","메이","리리"]
   },
  { 
     id: 16,
-    link: "https://wplace.live/?lat=35.91845251572062&lng=128.1279195905273&zoom=13.99312736966815",
+    link: "https://wplace.live/?lat=35.90677838618487&lng=128.12633755927732&zoom=14.919158693924558",
     hintLink: "https://wplace.live/?lat=35.98191821791775&lng=128.48668912177732&zoom=10.69717562386377",
     image: "images/image16.jpg",
-    size: "치비",
+    size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
@@ -192,6 +192,15 @@ const artworks = [
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "왼쪽으로 조금만 더 가세요", "위치 공개!"],
     tags: ["반님"]
+  },
+  { 
+    id: 21,
+    link: "https://wplace.live/?lat=38.30421515193053&lng=126.13069302802731&zoom=14.297349595324182",
+    hintLink: "hhttps://wplace.live/?lat=38.492122473272275&lng=126.04596646552733&zoom=13.825554835272255",
+    image: "images/image21.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "아래로 조금만 더 가세요", "위치 공개!"],
+    tags: ["하유"]
   },
   // 나머지 작품들도 같은 형식으로 추가
 ];
