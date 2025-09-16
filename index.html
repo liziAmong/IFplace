@@ -64,7 +64,6 @@ h1 {
 
 .btn:hover { transform: scale(1.05); }
 
-/* 광고 캐러셀 */
 .ad-carousel {
   position: relative;
   width: 440px;
@@ -73,21 +72,18 @@ h1 {
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   background: #fff;
   touch-action: pan-y;
-  display: flex;
-  align-items: center;   /* 세로 중앙 정렬 */
-  justify-content: center;
 }
 
 .ad-wrapper {
   position: relative;
   width: 100%;
   transition: transform 0.6s ease-in-out;
-  display: flex;
-  flex-direction: column;
-  align-items: center;   /* 광고 중앙 정렬 */
 }
 
 .ad-item {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -150,8 +146,8 @@ h1 {
   .main-wrapper { flex-direction: column; gap: 20px; }
   .container { width: 90%; padding: 30px 20px; min-height: auto !important; }
   .ad-carousel { width: 100%; height: 180px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-  .ad-wrapper { flex-direction: row; height: 100%; }
-  .ad-item { flex: 0 0 100%; height: 100%; }
+  .ad-wrapper { display: flex; flex-direction: row; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+  .ad-item { position: relative; flex: 0 0 100%; height: 100%; margin: 0; }
   .ad-item img { max-height: 120px; }
   .ad-nav { display: none; }
 }
@@ -160,7 +156,7 @@ h1 {
 <body>
 
 <div class="main-wrapper">
-  <div class="container" id="container">
+  <div class="container">
     <h1>🎨 IFplace</h1>
     <p>모드를 선택해주세요</p>
     <div class="buttons">
@@ -172,16 +168,28 @@ h1 {
   <div class="ad-carousel">
     <div class="ad-wrapper" id="adWrapper">
       <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
-        <img src="https://img.tumblbug.com/...">
+        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
         <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
       </div>
+
       <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
         <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
         <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
       </div>
+
       <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
         <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
         <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
+      </div>
+
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
+        <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
+        <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
+      </div>
+
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
+        <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
+        <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
       </div>
     </div>
     <div class="ad-nav" id="adNav"></div>
@@ -192,11 +200,10 @@ h1 {
 const wrapper = document.getElementById('adWrapper');
 const nav = document.getElementById('adNav');
 const ads = document.querySelectorAll('.ad-item');
-const container = document.getElementById('container');
 let current = 0;
 const total = ads.length;
 
-// 점 네비게이션
+// 네비게이션 점 생성
 for (let i=0;i<total;i++){
   const dot = document.createElement('div');
   dot.classList.add('ad-dot');
@@ -208,37 +215,27 @@ const dots = document.querySelectorAll('.ad-dot');
 
 let adPositions = [];
 
-function adjustAdHeight(){
-  if(window.innerWidth > 768){
-    document.querySelector('.ad-carousel').style.height = container.offsetHeight + 'px';
-  }
-}
-
 function setAdPositions(){
-  adPositions = [];
-  if(window.innerWidth <= 768){
-    ads.forEach((ad,i)=>{
-      adPositions.push(i * wrapper.offsetWidth); // 모바일 가로 슬라이드
-    });
-  } else {
-    ads.forEach((ad,i)=>{
-      adPositions.push(i * container.offsetHeight); // 컨테이너 높이 기준 → 중앙 정렬
-    });
-  }
-  adjustAdHeight();
+  let top = 0;
+  ads.forEach(ad => {
+    ad.style.top = top + 'px';
+    adPositions.push(top);
+    top += ad.offsetHeight + 20; // gap 포함
+  });
+  document.querySelector('.ad-carousel').style.height = ads[0].offsetHeight + 20 + 'px';
 }
 
 function showAd(index){
   current = index;
   if(window.innerWidth <= 768){
-    wrapper.style.transform = `translateX(-${adPositions[index]}px)`;
+    wrapper.style.transform = `translateX(-${index*100}%)`;
   } else {
     wrapper.style.transform = `translateY(-${adPositions[index]}px)`;
   }
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
-// 이미지 로드 후 위치 세팅
+// 이미지 로딩 완료 후 위치 설정
 let imagesLoaded = 0;
 ads.forEach(ad => {
   const img = ad.querySelector('img');
@@ -247,7 +244,6 @@ ads.forEach(ad => {
 });
 if(imagesLoaded === total) setAdPositions();
 
-// 자동 슬라이드
 function nextAd(){ current = (current+1)%total; showAd(current); }
 setInterval(nextAd,5000);
 
