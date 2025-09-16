@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .container {
@@ -57,22 +57,21 @@
     .ad-carousel {
       position: fixed;
       top: 50%;
-      right: 150px;
+      right: 150px; /* 데스크탑 위치 */
       transform: translateY(-50%);
       width: 440px;   
-      height: 380px;
+      height: 350px;
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
       background: #fff;
-      padding-top: 20px; /* 광고 위쪽 공간 */
+      z-index: 999;
     }
 
     .ad-wrapper {
       display: flex;
       flex-direction: column;
       transition: transform 0.6s ease-in-out;
-      padding-bottom: 20px;
     }
 
     .ad-item {
@@ -80,25 +79,24 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center; /* 세로 중앙 정렬 */
+      justify-content: center;
       padding: 10px;
       box-sizing: border-box;
-      margin-bottom: 30px; /* 광고 간격 */
-      cursor: pointer; /* 글씨 클릭 가능 표시 */
+      margin-bottom: 20px;
+      cursor: pointer;
     }
 
     .ad-item img {
-      width: auto; 
+      width: 100%;
+      height: auto;
       max-height: 220px;
-      display: block;
-      margin: 0 auto;
       object-fit: contain;
       border-radius: 12px;
       margin-bottom: 10px;
     }
 
     .ad-item .desc {
-      font-size: 0.9rem;
+      font-size: 1rem;
       text-align: center;
       color: #fff;
       background: rgba(255,111,97,0.85);
@@ -107,17 +105,15 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       line-height: 1.3;
       word-break: keep-all;
-      cursor: pointer; /* 글씨 클릭 가능 */
     }
 
     .ad-item .desc .date {
-      display: block; 
+      display: block;
       font-weight: 600;
       font-size: 0.8rem;
       margin-top: 3px;
     }
 
-    /* 네비게이션 버튼 */
     .ad-nav {
       position: absolute;
       bottom: 10px;
@@ -140,8 +136,38 @@
       background: #ff6f61;
     }
 
+    /* 모바일 스타일 */
     @media(max-width:768px){
-      .ad-carousel { display: none; }
+      .ad-carousel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 180px;
+        border-radius: 0;
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+      }
+
+      .ad-wrapper {
+        flex-direction: row;
+        transition: transform 0.6s ease-in-out;
+      }
+
+      .ad-item {
+        flex: 0 0 auto;
+        margin: 0 10px;
+        height: 100%;
+        justify-content: center;
+      }
+
+      .ad-item img {
+        max-height: 120px;
+      }
+
+      .ad-nav {
+        bottom: 5px;
+      }
     }
   </style>
 </head>
@@ -195,7 +221,6 @@
         <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
         <div class="desc">
           테리눈나 3주년 데뷔 지하철 광고 프로젝트
-          <span class="date">(2025.10.09까지)</span>
         </div>
       </div>
     </div>
@@ -222,7 +247,7 @@
 
     function showAd(index) {
       current = index;
-      wrapper.style.transform = `translateY(-${330 * index}px)`; // 광고 높이에 맞춤
+      wrapper.style.transform = `translateY(-${320 * index}px)`; // 광고 높이에 맞춤
       dots.forEach((d,i) => d.classList.toggle('active', i===index));
     }
 
