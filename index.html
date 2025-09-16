@@ -9,7 +9,7 @@
     font-family: 'Nunito', sans-serif;
     margin: 0;
     background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +20,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px; /* 좌우 간격 */
+    gap: 40px;
+    width: 100%;
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
   }
 
   .container {
@@ -30,7 +34,10 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     text-align: center;
     max-width: 400px;
-    z-index: 1;
+    /* 광고창 높이에 맞춰 수직 중앙 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   h1 {
@@ -60,14 +67,16 @@
 
   /* 광고 캐러셀 */
   .ad-carousel {
-    position: relative; /* PC에서는 부모 flex에 따라 위치 */
+    position: relative;
     width: 440px;
     height: 350px;
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     background: #fff;
-    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .ad-wrapper {
@@ -145,7 +154,9 @@
     }
 
     .container {
-      margin-bottom: 0;
+      width: 90%;
+      max-width: none;
+      padding: 30px 20px;
     }
 
     .ad-carousel {
