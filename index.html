@@ -54,18 +54,18 @@
     }
 
     /* 광고 캐러셀 */
-.ad-carousel {
-  position: fixed;
-  top: 50%;
-  right: 60px; /* 화면 오른쪽에서 조금 안쪽으로 */
-  transform: translateY(-50%);
-  width: 200px;   /* 직사각형으로 넓게 */
-  height: 300px;  /* 직사각형으로 높게 */
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-  background: #fff;
-}
+    .ad-carousel {
+      position: fixed;
+      top: 50%;
+      right: 80px; /* 화면 오른쪽에서 조금 안쪽으로 */
+      transform: translateY(-50%);
+      width: 300px;   /* 더 크게 */
+      height: 400px;  /* 더 크게 */
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+      background: #fff;
+    }
 
     .ad-wrapper {
       display: flex;
@@ -74,15 +74,28 @@
     }
 
     .ad-item {
-      flex: 0 0 250px;
+      flex: 0 0 400px; /* 높이 맞춤 */
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
+      padding: 10px;
+      box-sizing: border-box;
     }
 
     .ad-item img {
       width: 100%;
+      height: 300px;
+      object-fit: cover;
       border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .ad-item .desc {
+      font-size: 0.95rem;
+      text-align: center;
+      color: #333;
+      line-height: 1.2;
     }
 
     /* 네비게이션 버튼 */
@@ -128,36 +141,40 @@
     <div class="ad-wrapper" id="adWrapper">
       <!-- 1번 광고 -->
       <div class="ad-item">
-        <a href="https://overthewall.shop/product/list.html?cate_no=49" target="_blank" title="2025 테리 생일굿즈 (2025.10.10까지)">
+        <a href="https://overthewall.shop/product/list.html?cate_no=49" target="_blank">
           <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900" alt="2025 테리 생일굿즈">
         </a>
+        <div class="desc">2025 테리 생일굿즈 (2025.10.10까지)</div>
       </div>
       <!-- 2번 광고 -->
       <div class="ad-item">
-        <a href="https://overthewall.shop/product/list.html?cate_no=48" target="_blank" title="2025 나츠키 생일 굿즈 (2025.10.01까지)">
+        <a href="https://overthewall.shop/product/list.html?cate_no=48" target="_blank">
           <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096" alt="2025 나츠키 생일 굿즈">
         </a>
+        <div class="desc">2025 나츠키 생일 굿즈 (2025.10.01까지)</div>
       </div>
       <!-- 3번 광고 -->
       <div class="ad-item">
-        <a href="https://fondee.io/room/room_view/?room_id=517644" target="_blank" title="쪼꼬테리 판매중 (2025.09.24 오후10시까지)">
+        <a href="https://fondee.io/room/room_view/?room_id=517644" target="_blank">
           <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp" alt="쪼꼬테리 판매중">
         </a>
+        <div class="desc">쪼꼬테리 판매중 (2025.09.24 오후10시까지)</div>
       </div>
       <!-- 4번 광고 -->
       <div class="ad-item">
-        <a href="https://fondee.io/room/room_view/?room_id=515305" target="_blank" title="쪼꼬츠키 판매중 (2025.09.20 오후10시까지)">
+        <a href="https://fondee.io/room/room_view/?room_id=515305" target="_blank">
           <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp" alt="쪼꼬츠키 판매중">
         </a>
+        <div class="desc">쪼꼬츠키 판매중 (2025.09.20 오후10시까지)</div>
       </div>
       <!-- 5번 광고 -->
       <div class="ad-item">
-        <a href="https://tumblbug.com/projectd0116" target="_blank" title="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
+        <a href="https://tumblbug.com/projectd0116" target="_blank">
           <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
         </a>
+        <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트</div>
       </div>
     </div>
-    <!-- 네비게이션 점 -->
     <div class="ad-nav" id="adNav"></div>
   </div>
 
@@ -181,7 +198,7 @@
 
     function showAd(index) {
       current = index;
-      wrapper.style.transform = `translateY(-${250 * index}px)`;
+      wrapper.style.transform = `translateY(-${400 * index}px)`; // 광고 높이에 맞춤
       dots.forEach((d,i) => d.classList.toggle('active', i===index));
     }
 
