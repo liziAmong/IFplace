@@ -219,4 +219,46 @@ const dots = document.querySelectorAll('.ad-dot');
 function showAd(index){
   current = index;
   if(window.innerWidth <= 768){
-    wrapper
+    wrapper.style.transform = `translateX(-${index*100}%)`;
+  } else {
+    const itemHeight = ads[0].offsetHeight;
+    const gap = 20;
+    wrapper.style.transform = `translateY(-${index*(itemHeight + gap)}px)`;
+  }
+  dots.forEach((d,i)=>d.classList.toggle('active',i===index));
+}
+
+// 이미지 로딩 후 캐러셀 높이 자동 설정
+function adjustCarouselHeight(){
+  const adHeight = ads[0].offsetHeight + 20; // gap 포함
+  document.querySelector('.ad-carousel').style.height = adHeight + 'px';
+  document.querySelector('.container').style.minHeight = adHeight + 'px';
+}
+
+// 모든 이미지 로딩 후 높이 조정
+let imagesLoaded = 0;
+ads.forEach(imgDiv => {
+  const img = imgDiv.querySelector('img');
+  if(img.complete) imagesLoaded++;
+  else img.onload = () => { imagesLoaded++; if(imagesLoaded===total) adjustCarouselHeight(); };
+});
+if(imagesLoaded === total) adjustCarouselHeight();
+
+function nextAd(){ current = (current+1)%total; showAd(current); }
+setInterval(nextAd,5000);
+
+// 모바일 터치 슬라이드
+let startX = 0, endX = 0;
+wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX );
+wrapper.addEventListener('touchmove', e => { endX = e.touches[0].clientX; e.preventDefault(); });
+wrapper.addEventListener('touchend', () => {
+  if(window.innerWidth <= 768){
+    const diff = startX - endX;
+    if(diff > 50){ current = (current + 1) % total; showAd(current); }
+    else if(diff < -50){ current = (current - 1 + total) % total; showAd(current); }
+  }
+});
+</script>
+
+</body>
+</html>
