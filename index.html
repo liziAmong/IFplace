@@ -51,33 +51,28 @@
 
   .btn:hover { transform: scale(1.05); }
 
-  /* 데스크톱 중앙 정렬 */
-.ad-carousel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 440px;
-  height: 350px;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-  background: #fff;
-  z-index: 999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  /* 광고 캐러셀 */
+  .ad-carousel {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 440px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    background: #fff;
+    z-index: 999;
+  }
 
-.ad-wrapper {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.6s ease-in-out;
-  padding-top: 30px;   /* 첫 광고 위 공백 */
-  padding-bottom: 30px; /* 마지막 광고 아래 공백 */
-  align-items: center; /* 슬라이드 중앙 정렬 */
-}
-
+  .ad-wrapper {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.6s ease-in-out;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
 
   .ad-item {
     flex: 0 0 300px;
@@ -186,32 +181,26 @@
 
 <div class="ad-carousel">
   <div class="ad-wrapper" id="adWrapper">
-
-     <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
-      <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
-      <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
-    </div>
-
     <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
       <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
       <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
     </div>
-
     <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
       <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
       <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
     </div>
-
     <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
       <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
       <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
     </div>
-
     <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
       <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
       <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
     </div>
-   
+    <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
+      <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
+      <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
+    </div>
   </div>
   <div class="ad-nav" id="adNav"></div>
 </div>
