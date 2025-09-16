@@ -156,7 +156,7 @@ h1 {
 <body>
 
 <div class="main-wrapper">
-  <div class="container">
+  <div class="container" id="container">
     <h1>🎨 IFplace</h1>
     <p>모드를 선택해주세요</p>
     <div class="buttons">
@@ -200,10 +200,10 @@ h1 {
 const wrapper = document.getElementById('adWrapper');
 const nav = document.getElementById('adNav');
 const ads = document.querySelectorAll('.ad-item');
+const container = document.getElementById('container');
 let current = 0;
 const total = ads.length;
 
-// 네비게이션 점 생성
 for (let i=0;i<total;i++){
   const dot = document.createElement('div');
   dot.classList.add('ad-dot');
@@ -215,27 +215,39 @@ const dots = document.querySelectorAll('.ad-dot');
 
 let adPositions = [];
 
+function adjustAdHeight(){
+  if(window.innerWidth > 768){
+    document.querySelector('.ad-carousel').style.height = container.offsetHeight + 'px';
+  }
+}
+
 function setAdPositions(){
-  let top = 0;
-  ads.forEach(ad => {
-    ad.style.top = top + 'px';
-    adPositions.push(top);
-    top += ad.offsetHeight + 20; // gap 포함
-  });
-  document.querySelector('.ad-carousel').style.height = ads[0].offsetHeight + 20 + 'px';
+  adPositions = [];
+  if(window.innerWidth <= 768){
+    ads.forEach((ad,i)=>{
+      adPositions.push(i * wrapper.offsetWidth); // 모바일 가로 슬라이드
+    });
+  } else {
+    let top = 0;
+    ads.forEach(ad=>{
+      ad.style.top = top + 'px';
+      adPositions.push(top);
+      top += ad.offsetHeight + 20; // gap 포함
+    });
+  }
+  adjustAdHeight();
 }
 
 function showAd(index){
   current = index;
   if(window.innerWidth <= 768){
-    wrapper.style.transform = `translateX(-${index*100}%)`;
+    wrapper.style.transform = `translateX(-${adPositions[index]}px)`;
   } else {
     wrapper.style.transform = `translateY(-${adPositions[index]}px)`;
   }
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
-// 이미지 로딩 완료 후 위치 설정
 let imagesLoaded = 0;
 ads.forEach(ad => {
   const img = ad.querySelector('img');
@@ -247,7 +259,6 @@ if(imagesLoaded === total) setAdPositions();
 function nextAd(){ current = (current+1)%total; showAd(current); }
 setInterval(nextAd,5000);
 
-// 모바일 터치 슬라이드
 let startX = 0, endX = 0;
 wrapper.addEventListener('touchstart', e => startX = e.touches[0].clientX );
 wrapper.addEventListener('touchmove', e => { endX = e.touches[0].clientX; e.preventDefault(); });
