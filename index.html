@@ -76,9 +76,6 @@ h1 {
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   background: #fff;
   touch-action: pan-y;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 .ad-wrapper {
@@ -148,7 +145,7 @@ h1 {
 /* 모바일 */
 @media(max-width:768px){
   .main-wrapper { flex-direction: column; gap: 20px; }
-  .container { width: 90%; padding: 30px 20px; height: auto !important; }
+  .container { width: 90%; padding: 30px 20px; }
   .ad-carousel { width: 100%; height: 180px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
   .ad-wrapper { flex-direction: row; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
   .ad-item { flex: 0 0 100%; height: 100%; margin: 0; }
@@ -207,60 +204,63 @@ const ads = document.querySelectorAll('.ad-item');
 let current = 0;
 const total = ads.length;
 
-// 점 네비게이션 생성
+// 네비게이션 점 생성
 for(let i=0;i<total;i++){
   const dot = document.createElement('div');
   dot.classList.add('ad-dot');
   if(i===0) dot.classList.add('active');
-  dot.addEventListener('click',()=> showAd(i));
+  dot.addEventListener('click', ()=>showAd(i));
   nav.appendChild(dot);
 }
 const dots = document.querySelectorAll('.ad-dot');
 
+let adPositions = [];
+function setAdPositions(){
+  adPositions = [];
+  let top = 0;
+  ads.forEach(ad => {
+    adPositions.push(top);
+    top += ad.offsetHeight + 20;
+  });
+  if(window.innerWidth > 768){
+    document.querySelector('.ad-carousel').style.height = ads[0].offsetHeight + 20 + 'px';
+  }
+}
+
 function showAd(index){
-  current=index;
-  if(window.innerWidth<=768){
-    wrapper.style.transform=`translateX(-${index*100}%)`;
+  current = index;
+  if(window.innerWidth <= 768){
+    wrapper.style.transform = `translateX(-${index*100}%)`;
   } else {
-    const itemHeight=ads[0].offsetHeight+20; // 광고 margin 포함
-    wrapper.style.transform=`translateY(-${index*itemHeight}px)`;
+    wrapper.style.transform = `translateY(-${adPositions[index]}px)`;
   }
   dots.forEach((d,i)=>d.classList.toggle('active', i===index));
 }
 
-function nextAd(){ current=(current+1)%total; showAd(current); }
+// 이미지 로딩 후 위치 계산
+let imagesLoaded = 0;
+ads.forEach(ad => {
+  const img = ad.querySelector('img');
+  if(img.complete) imagesLoaded++;
+  else img.onload = () => { imagesLoaded++; if(imagesLoaded===total) setAdPositions(); };
+});
+if(imagesLoaded === total) setAdPositions();
+
+function nextAd(){ current = (current+1)%total; showAd(current); }
 setInterval(nextAd,5000);
 
-// 모바일 터치 슬라이드
-let startX=0,endX=0;
+// 모바일 터치
+let startX=0, endX=0;
 wrapper.addEventListener('touchstart', e=> startX=e.touches[0].clientX );
 wrapper.addEventListener('touchmove', e=> { endX=e.touches[0].clientX; e.preventDefault(); });
 wrapper.addEventListener('touchend', ()=>{
-  if(window.innerWidth<=768){
-    const diff=startX-endX;
-    if(diff>50){ current=(current+1)%total; showAd(current); }
+  if(window.innerWidth <=768){
+    const diff = startX - endX;
+    if(diff >50){ current=(current+1)%total; showAd(current); }
     else if(diff<-50){ current=(current-1+total)%total; showAd(current); }
   }
 });
 
-// 광고/선택창 높이 맞춤
-function adjustHeights(){
-  const container=document.querySelector('.container');
-  const ad=document.querySelector('.ad-carousel');
-  const maxHeight=Math.max(container.offsetHeight, ad.offsetHeight);
-  container.style.height=ad.style.height=maxHeight+'px';
-}
-
-// 광고 위치 계산 + 높이 맞춤
-function setAdPositions(){
-  if(window.innerWidth>768){
-    const itemHeight=ads[0].offsetHeight+20;
-    wrapper.style.height=itemHeight*total+'px';
-  } else { wrapper.style.height='100%'; }
-  adjustHeights();
-}
-
-window.addEventListener('load', setAdPositions);
 window.addEventListener('resize', setAdPositions);
 </script>
 
