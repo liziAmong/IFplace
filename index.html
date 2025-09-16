@@ -51,28 +51,33 @@
 
   .btn:hover { transform: scale(1.05); }
 
-  /* 광고 캐러셀 */
-  .ad-carousel {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-    width: 440px;
-    height: 350px;
-    overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    background: #fff;
-    z-index: 999;
-  }
+  /* 데스크톱 중앙 정렬 */
+.ad-carousel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 440px;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+  background: #fff;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  .ad-wrapper {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.6s ease-in-out;
-    padding-top: 30px;
-    padding-bottom: 30px;
-  }
+.ad-wrapper {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.6s ease-in-out;
+  padding-top: 30px;   /* 첫 광고 위 공백 */
+  padding-bottom: 30px; /* 마지막 광고 아래 공백 */
+  align-items: center; /* 슬라이드 중앙 정렬 */
+}
+
 
   .ad-item {
     flex: 0 0 300px;
