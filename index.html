@@ -52,6 +52,7 @@
       backdrop-filter: blur(8px);
       animation: floatContainer 6s ease-in-out infinite alternate;
       max-width: 500px;
+      z-index: 1;
     }
 
     @keyframes floatContainer {
@@ -112,28 +113,50 @@
       100% { transform: translateY(0px); }
     }
 
-    /* 광고 배너 */
-    .ad-banner {
-      margin-top: 20px;
+    /* 좌우 광고 배너 */
+    .side-ad {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 150px;
+      z-index: 0;
     }
-    .ad-banner img {
-      max-width: 100%;
+
+    .side-ad img {
+      width: 100%;
       border-radius: 12px;
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       transition: transform 0.3s ease;
     }
-    .ad-banner img:hover {
+
+    .side-ad img:hover {
       transform: scale(1.05);
     }
 
-    /* 반응형 */
-    @media(max-width: 500px){
+    .side-ad.left {
+      left: 10px;
+    }
+    .side-ad.right {
+      right: 10px;
+    }
+
+    /* 반응형: 모바일에서는 광고 숨김 */
+    @media(max-width: 768px){
+      .side-ad { display: none; }
       h1 { font-size: 2rem; }
       .btn { font-size: 1rem; padding: 12px 20px; }
     }
   </style>
 </head>
 <body>
+  <!-- 왼쪽 광고: 오버더월 + 트위터 이미지 -->
+  <div class="side-ad left">
+    <a href="https://overthewall.shop/index.html" target="_blank">
+      <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=small" alt="OverTheWall 광고 이미지">
+    </a>
+  </div>
+
+  <!-- 메인 컨텐츠 -->
   <div class="container">
     <h1>🎨 IFplace</h1>
     <p>모드를 선택해주세요</p>
@@ -141,14 +164,13 @@
       <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
       <a href="quiz.html" class="btn">🧩 퀴즈 모드 </a>
     </div>
+  </div>
 
-    <!-- 광고 배너 -->
-    <div class="ad-banner">
-      <a href="https://tumblbug.com/projectd0116" target="_blank">
-        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" 
-             alt="Tumblbug 프로젝트 홍보 이미지">
-      </a>
-    </div>
+  <!-- 오른쪽 광고: Tumblbug -->
+  <div class="side-ad right">
+    <a href="https://tumblbug.com/projectd0116" target="_blank">
+      <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="Tumblbug 광고 이미지">
+    </a>
   </div>
 </body>
 </html>
