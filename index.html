@@ -70,8 +70,8 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.6s ease-in-out;
-    padding-top: 45px;   /* 첫 광고 위 공백 1.5배 */
-    padding-bottom: 45px; /* 마지막 광고 아래 공백 1.5배 */
+    padding-top: 30px;    /* 첫 광고 위 공백 */
+    padding-bottom: 30px; /* 마지막 광고 아래 공백 */
   }
 
   .ad-item {
@@ -82,7 +82,7 @@
     justify-content: center;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 30px; /* 공백 1.5배 */
+    margin-bottom: 20px;
     cursor: pointer;
   }
 
@@ -163,9 +163,7 @@
     .ad-item img { max-height: 120px; }
 
     .container { margin-bottom: 200px; } /* 광고 높이 + 여유 */
-
-    /* 모바일에서 점 버튼 숨김 */
-    .ad-nav { display: none; }
+    .ad-nav { display: none; } /* 모바일에서 점 버튼 숨김 */
   }
 </style>
 </head>
@@ -225,18 +223,19 @@ const dots = document.querySelectorAll('.ad-dot');
 
 function showAd(index){
   current = index;
-  const ad = ads[0];
-  const adStyle = getComputedStyle(ad);
-  const adHeight = ad.offsetHeight + parseInt(adStyle.marginBottom);
-  const adWidth = ad.offsetWidth + parseInt(adStyle.marginRight);
   const carousel = document.querySelector('.ad-carousel');
+  const ad = ads[index];
+  const adHeight = ad.offsetHeight;
+  const gap = 20;
 
   if(window.innerWidth <= 768){
-    // 모바일: 가로 슬라이드, 중앙 정렬
-    wrapper.style.transform = `translateX(-${index*adWidth + (adWidth - carousel.offsetWidth)/2}px)`;
+    // 모바일: 가로 슬라이드
+    wrapper.style.transform = `translateX(-${index * carousel.offsetWidth}px)`;
   } else {
     // PC: 세로 슬라이드, 중앙 정렬
-    wrapper.style.transform = `translateY(-${index*adHeight + (adHeight - carousel.offsetHeight)/2}px)`;
+    const totalOffset = index * (adHeight + gap);
+    const centerOffset = (carousel.offsetHeight - adHeight) / 2;
+    wrapper.style.transform = `translateY(-${totalOffset - centerOffset}px)`;
   }
 
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
@@ -249,7 +248,8 @@ function nextAd(){
 setInterval(nextAd,5000);
 
 // 초기 위치 맞춤
-showAd(0);
+window.addEventListener('load',()=>showAd(0));
+window.addEventListener('resize',()=>showAd(current));
 </script>
 
 </body>
