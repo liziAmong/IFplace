@@ -70,12 +70,12 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.6s ease-in-out;
-    padding-top: 30px;   /* 첫 광고 위 공백 */
-    padding-bottom: 30px; /* 마지막 광고 아래 공백 */
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   .ad-item {
-    flex: 0 0 auto;
+    flex: 0 0 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -162,8 +162,9 @@
 
     .ad-item img { max-height: 120px; }
 
-    .ad-nav { display: none; } /* 모바일에서는 점 버튼 숨김 */
-    .container { margin-bottom: 200px; } /* 광고 높이 + 여유 */
+    .container { margin-bottom: 200px; }
+
+    .ad-nav { display: none; } /* 모바일에서 점 버튼 숨김 */
   }
 </style>
 </head>
@@ -180,7 +181,7 @@
 
 <div class="ad-carousel">
   <div class="ad-wrapper" id="adWrapper">
-   
+
      <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
       <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
       <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
@@ -229,20 +230,13 @@ const dots = document.querySelectorAll('.ad-dot');
 
 function showAd(index){
   current = index;
-  const carousel = document.querySelector('.ad-carousel');
-  const ad = ads[index];
-  const adHeight = ad.offsetHeight;
-  const gap = 20; 
-  const paddingTop = parseInt(window.getComputedStyle(wrapper).paddingTop);
-
   if(window.innerWidth <= 768){
-    wrapper.style.transform = `translateX(-${index * carousel.offsetWidth}px)`;
+    wrapper.style.transform = `translateX(-${index*100}%)`;
   } else {
-    const centerOffset = (carousel.offsetHeight - adHeight) / 2;
-    const totalOffset = paddingTop + index * (adHeight + gap);
-    wrapper.style.transform = `translateY(-${totalOffset - centerOffset}px)`;
+    const itemHeight = 300;
+    const gap = 20;
+    wrapper.style.transform = `translateY(-${index*(itemHeight+gap)}px)`;
   }
-
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
@@ -251,6 +245,31 @@ function nextAd(){
   showAd(current);
 }
 setInterval(nextAd,5000);
+
+// 모바일 터치 슬라이드
+let startX = 0;
+let endX = 0;
+
+wrapper.addEventListener('touchstart', (e) => {
+  startX = e.touches[0].clientX;
+});
+
+wrapper.addEventListener('touchmove', (e) => {
+  endX = e.touches[0].clientX;
+});
+
+wrapper.addEventListener('touchend', () => {
+  if(window.innerWidth <= 768){
+    const diff = startX - endX;
+    if(diff > 50){ // 왼쪽 스와이프
+      current = (current + 1) % total;
+      showAd(current);
+    } else if(diff < -50){ // 오른쪽 스와이프
+      current = (current - 1 + total) % total;
+      showAd(current);
+    }
+  }
+});
 </script>
 
 </body>
