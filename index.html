@@ -34,7 +34,6 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     text-align: center;
     max-width: 400px;
-    /* 광고창 높이에 맞춰 수직 중앙 */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -77,6 +76,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    touch-action: pan-y; /* 모바일 터치 스크롤 방지 */
   }
 
   .ad-wrapper {
@@ -157,6 +157,7 @@
       width: 90%;
       max-width: none;
       padding: 30px 20px;
+      min-height: auto !important;
     }
 
     .ad-carousel {
@@ -267,8 +268,13 @@ setInterval(nextAd,5000);
 let startX = 0;
 let endX = 0;
 
-wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
-wrapper.addEventListener('touchmove', (e) => { endX = e.touches[0].clientX; });
+wrapper.addEventListener('touchstart', (e) => { 
+  startX = e.touches[0].clientX; 
+});
+wrapper.addEventListener('touchmove', (e) => { 
+  endX = e.touches[0].clientX; 
+  e.preventDefault(); // 브라우저 스와이프 방지
+});
 wrapper.addEventListener('touchend', () => {
   if(window.innerWidth <= 768){
     const diff = startX - endX;
@@ -276,6 +282,15 @@ wrapper.addEventListener('touchend', () => {
     else if(diff < -50){ current = (current - 1 + total) % total; showAd(current); }
   }
 });
+
+// 광고 높이에 맞춰 선택창 중앙 정렬 (PC/태블릿)
+function adjustContainerHeight(){
+  const adHeight = document.querySelector('.ad-carousel').offsetHeight;
+  const container = document.querySelector('.container');
+  container.style.minHeight = adHeight + 'px';
+}
+adjustContainerHeight();
+window.addEventListener('resize', adjustContainerHeight);
 </script>
 
 </body>
