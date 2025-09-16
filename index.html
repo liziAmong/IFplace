@@ -70,8 +70,8 @@
     display: flex;
     flex-direction: column;
     transition: transform 0.6s ease-in-out;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 45px;   /* 첫 광고 위 공백 1.5배 */
+    padding-bottom: 45px; /* 마지막 광고 아래 공백 1.5배 */
   }
 
   .ad-item {
@@ -82,7 +82,7 @@
     justify-content: center;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 30px; /* 공백 1.5배 */
     cursor: pointer;
   }
 
@@ -162,9 +162,10 @@
 
     .ad-item img { max-height: 120px; }
 
-    .container { margin-bottom: 200px; }
+    .container { margin-bottom: 200px; } /* 광고 높이 + 여유 */
 
-    .ad-nav { display: none; } /* 모바일에서는 점 버튼 숨김 */
+    /* 모바일에서 점 버튼 숨김 */
+    .ad-nav { display: none; }
   }
 </style>
 </head>
@@ -212,7 +213,7 @@ const ads = document.querySelectorAll('.ad-item');
 let current = 0;
 const total = ads.length;
 
-// 점 버튼 생성
+// 네비게이션 점 생성
 for (let i=0;i<total;i++){
   const dot = document.createElement('div');
   dot.classList.add('ad-dot');
@@ -224,51 +225,31 @@ const dots = document.querySelectorAll('.ad-dot');
 
 function showAd(index){
   current = index;
+  const ad = ads[0];
+  const adStyle = getComputedStyle(ad);
+  const adHeight = ad.offsetHeight + parseInt(adStyle.marginBottom);
+  const adWidth = ad.offsetWidth + parseInt(adStyle.marginRight);
+  const carousel = document.querySelector('.ad-carousel');
+
   if(window.innerWidth <= 768){
-    wrapper.style.transform = `translateX(-${index*100}%)`;
+    // 모바일: 가로 슬라이드, 중앙 정렬
+    wrapper.style.transform = `translateX(-${index*adWidth + (adWidth - carousel.offsetWidth)/2}px)`;
   } else {
-    const itemHeight = 300;
-    const gap = 20;
-    wrapper.style.transform = `translateY(-${index*(itemHeight+gap)}px)`;
+    // PC: 세로 슬라이드, 중앙 정렬
+    wrapper.style.transform = `translateY(-${index*adHeight + (adHeight - carousel.offsetHeight)/2}px)`;
   }
 
-  // PC에서만 점 활성화
-  if(window.innerWidth > 768){
-    dots.forEach((d,i)=>d.classList.toggle('active',i===index));
-  }
+  dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
-// 자동 슬라이드
 function nextAd(){
   current = (current+1)%total;
   showAd(current);
 }
 setInterval(nextAd,5000);
 
-// 모바일 터치 슬라이드
-let startX = 0;
-let isDragging = false;
-
-wrapper.addEventListener('touchstart', e => {
-  startX = e.touches[0].clientX;
-  isDragging = true;
-});
-
-wrapper.addEventListener('touchmove', e => {
-  if(!isDragging) return;
-  const diff = e.touches[0].clientX - startX;
-  wrapper.style.transform = `translateX(${-current*100 + diff/ wrapper.offsetWidth*100}%)`;
-});
-
-wrapper.addEventListener('touchend', e => {
-  if(!isDragging) return;
-  isDragging = false;
-  const endX = e.changedTouches[0].clientX;
-  const diff = endX - startX;
-  if(diff < -50 && current < total-1) current++;
-  if(diff > 50 && current > 0) current--;
-  showAd(current);
-});
+// 초기 위치 맞춤
+showAd(0);
 </script>
 
 </body>
