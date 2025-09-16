@@ -34,6 +34,7 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     text-align: center;
     max-width: 400px;
+    /* 광고창 높이에 맞춰 수직 중앙 */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -76,19 +77,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    touch-action: pan-y;
   }
 
   .ad-wrapper {
     display: flex;
     flex-direction: column;
     transition: transform 0.6s ease-in-out;
-    padding-top: 0;    /* padding 제거 */
-    padding-bottom: 0; /* padding 제거 */
+    padding-top: 30px;
+    padding-bottom: 30px;
   }
 
   .ad-item {
-    flex: 0 0 auto;
+    flex: 0 0 300px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -157,7 +157,6 @@
       width: 90%;
       max-width: none;
       padding: 30px 20px;
-      min-height: auto !important;
     }
 
     .ad-carousel {
@@ -200,7 +199,7 @@
 
   <div class="ad-carousel">
     <div class="ad-wrapper" id="adWrapper">
-      <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
+       <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
         <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
         <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
       </div>
@@ -209,7 +208,7 @@
         <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
         <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
       </div>
-
+      
       <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
         <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
         <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
@@ -251,9 +250,9 @@ function showAd(index){
   if(window.innerWidth <= 768){
     wrapper.style.transform = `translateX(-${index*100}%)`;
   } else {
+    const itemHeight = 300;
     const gap = 20;
-    const itemHeight = ads[0].offsetHeight; // 실제 높이 기반
-    wrapper.style.transform = `translateY(-${index * (itemHeight + gap)}px)`;
+    wrapper.style.transform = `translateY(-${index*(itemHeight+gap)}px)`;
   }
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
@@ -268,13 +267,8 @@ setInterval(nextAd,5000);
 let startX = 0;
 let endX = 0;
 
-wrapper.addEventListener('touchstart', (e) => { 
-  startX = e.touches[0].clientX; 
-});
-wrapper.addEventListener('touchmove', (e) => { 
-  endX = e.touches[0].clientX; 
-  e.preventDefault(); // 스크롤 방지
-});
+wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+wrapper.addEventListener('touchmove', (e) => { endX = e.touches[0].clientX; });
 wrapper.addEventListener('touchend', () => {
   if(window.innerWidth <= 768){
     const diff = startX - endX;
@@ -282,15 +276,6 @@ wrapper.addEventListener('touchend', () => {
     else if(diff < -50){ current = (current - 1 + total) % total; showAd(current); }
   }
 });
-
-// 광고 높이에 맞춰 선택창 중앙 정렬
-function adjustContainerHeight(){
-  const adHeight = document.querySelector('.ad-carousel').offsetHeight;
-  const container = document.querySelector('.container');
-  container.style.minHeight = adHeight + 'px';
-}
-adjustContainerHeight();
-window.addEventListener('resize', adjustContainerHeight);
 </script>
 
 </body>
