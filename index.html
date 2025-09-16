@@ -11,7 +11,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-YVY8TTL074');
   </script>
 
@@ -52,6 +51,7 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.15);
       backdrop-filter: blur(8px);
       animation: floatContainer 6s ease-in-out infinite alternate;
+      max-width: 500px;
     }
 
     @keyframes floatContainer {
@@ -84,6 +84,7 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
+      margin-bottom: 30px;
     }
 
     .btn {
@@ -111,6 +112,20 @@
       100% { transform: translateY(0px); }
     }
 
+    /* 광고 배너 */
+    .ad-banner {
+      margin-top: 20px;
+    }
+    .ad-banner img {
+      max-width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .ad-banner img:hover {
+      transform: scale(1.05);
+    }
+
     /* 반응형 */
     @media(max-width: 500px){
       h1 { font-size: 2rem; }
@@ -125,6 +140,14 @@
     <div class="buttons">
       <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
       <a href="quiz.html" class="btn">🧩 퀴즈 모드 </a>
+    </div>
+
+    <!-- 광고 배너 -->
+    <div class="ad-banner">
+      <a href="https://tumblbug.com/projectd0116" target="_blank">
+        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" 
+             alt="Tumblbug 프로젝트 홍보 이미지">
+      </a>
     </div>
   </div>
 </body>
