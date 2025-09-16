@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>IFplace 🎨</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 body {
   font-family: 'Nunito', sans-serif;
@@ -29,7 +28,7 @@ body {
 }
 
 .container {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   padding: 40px;
   border-radius: 20px;
   box-shadow: 0 10px 25px rgba(0,0,0,0.15);
@@ -44,7 +43,6 @@ h1 {
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #ff6f61;
-  font-family: 'Poppins', sans-serif;
 }
 
 .buttons {
@@ -56,18 +54,16 @@ h1 {
 .btn {
   padding: 15px;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: bold;
   color: #fff;
   text-decoration: none;
   background: linear-gradient(135deg, #ff6f61, #ff9a6f);
   border-radius: 12px;
   transition: transform 0.3s ease;
-  font-family: 'Poppins', sans-serif;
 }
 
 .btn:hover { transform: scale(1.05); }
 
-/* 광고 캐러셀 */
 .ad-carousel {
   position: relative;
   width: 440px;
@@ -79,18 +75,22 @@ h1 {
 }
 
 .ad-wrapper {
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.6s ease-in-out;
   position: relative;
+  width: 100%;
+  transition: transform 0.6s ease-in-out;
 }
 
 .ad-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
+  padding: 10px;
+  box-sizing: border-box;
   cursor: pointer;
 }
 
@@ -112,7 +112,6 @@ h1 {
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   line-height: 1.3;
-  font-family: 'Poppins', sans-serif;
 }
 
 .ad-item .desc .date {
@@ -145,10 +144,10 @@ h1 {
 /* 모바일 */
 @media(max-width:768px){
   .main-wrapper { flex-direction: column; gap: 20px; }
-  .container { width: 90%; padding: 30px 20px; }
+  .container { width: 90%; padding: 30px 20px; min-height: auto !important; }
   .ad-carousel { width: 100%; height: 180px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-  .ad-wrapper { flex-direction: row; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
-  .ad-item { flex: 0 0 100%; height: 100%; margin: 0; }
+  .ad-wrapper { display: flex; flex-direction: row; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+  .ad-item { position: relative; flex: 0 0 100%; height: 100%; margin: 0; }
   .ad-item img { max-height: 120px; }
   .ad-nav { display: none; }
 }
@@ -172,22 +171,18 @@ h1 {
         <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
         <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
       </div>
-
       <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
         <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
         <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
       </div>
-
       <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
         <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
         <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
       </div>
-
       <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
         <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
         <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
       </div>
-
       <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
         <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
         <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
@@ -205,26 +200,27 @@ let current = 0;
 const total = ads.length;
 
 // 네비게이션 점 생성
-for(let i=0;i<total;i++){
+for (let i=0;i<total;i++){
   const dot = document.createElement('div');
   dot.classList.add('ad-dot');
   if(i===0) dot.classList.add('active');
-  dot.addEventListener('click', ()=>showAd(i));
+  dot.addEventListener('click',()=>showAd(i));
   nav.appendChild(dot);
 }
 const dots = document.querySelectorAll('.ad-dot');
 
 let adPositions = [];
+
+// 광고 위치 계산 및 높이 조정
 function setAdPositions(){
   adPositions = [];
   let top = 0;
   ads.forEach(ad => {
+    ad.style.top = top + 'px';
     adPositions.push(top);
     top += ad.offsetHeight + 20;
   });
-  if(window.innerWidth > 768){
-    document.querySelector('.ad-carousel').style.height = ads[0].offsetHeight + 20 + 'px';
-  }
+  adjustAdHeight();
 }
 
 function showAd(index){
@@ -234,10 +230,21 @@ function showAd(index){
   } else {
     wrapper.style.transform = `translateY(-${adPositions[index]}px)`;
   }
-  dots.forEach((d,i)=>d.classList.toggle('active', i===index));
+  dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
-// 이미지 로딩 후 위치 계산
+// 높이 자동 맞춤
+function adjustAdHeight(){
+  const container = document.querySelector('.container');
+  const adCarousel = document.querySelector('.ad-carousel');
+  if(window.innerWidth > 768){
+    adCarousel.style.height = container.offsetHeight + 'px';
+  } else {
+    adCarousel.style.height = '180px';
+  }
+}
+
+// 이미지 로딩 완료 후 위치 및 높이 설정
 let imagesLoaded = 0;
 ads.forEach(ad => {
   const img = ad.querySelector('img');
@@ -246,22 +253,24 @@ ads.forEach(ad => {
 });
 if(imagesLoaded === total) setAdPositions();
 
+// 자동 슬라이드
 function nextAd(){ current = (current+1)%total; showAd(current); }
 setInterval(nextAd,5000);
 
-// 모바일 터치
-let startX=0, endX=0;
+// 모바일 터치 슬라이드
+let startX=0,endX=0;
 wrapper.addEventListener('touchstart', e=> startX=e.touches[0].clientX );
 wrapper.addEventListener('touchmove', e=> { endX=e.touches[0].clientX; e.preventDefault(); });
 wrapper.addEventListener('touchend', ()=>{
   if(window.innerWidth <=768){
     const diff = startX - endX;
-    if(diff >50){ current=(current+1)%total; showAd(current); }
-    else if(diff<-50){ current=(current-1+total)%total; showAd(current); }
+    if(diff >50){ current = (current+1)%total; showAd(current); }
+    else if(diff < -50){ current = (current-1+total)%total; showAd(current); }
   }
 });
 
-window.addEventListener('resize', setAdPositions);
+// 창 크기 변경 시 높이 재조정
+window.addEventListener('resize', adjustAdHeight);
 </script>
 
 </body>
