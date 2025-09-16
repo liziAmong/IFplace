@@ -57,35 +57,41 @@
     .ad-carousel {
       position: fixed;
       top: 50%;
-      right: 150px; /* 왼쪽으로 살짝 이동 */
+      right: 150px;
       transform: translateY(-50%);
-      width: 440px;
-      height: 350px;
+      width: 440px;   
+      height: 380px;
       overflow: hidden;
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.3);
       background: #fff;
+      padding-top: 20px; /* 광고 위쪽 공간 */
     }
 
     .ad-wrapper {
       display: flex;
       flex-direction: column;
       transition: transform 0.6s ease-in-out;
+      padding-bottom: 20px;
     }
 
     .ad-item {
+      flex: 0 0 300px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center; /* 세로 중앙 정렬 */
       padding: 10px;
       box-sizing: border-box;
-      margin-bottom: 20px; /* 광고 간격 */
+      margin-bottom: 30px; /* 광고 간격 */
+      cursor: pointer; /* 글씨 클릭 가능 표시 */
     }
 
     .ad-item img {
-      width: 100%;
-      height: auto;
+      width: auto; 
       max-height: 220px;
+      display: block;
+      margin: 0 auto;
       object-fit: contain;
       border-radius: 12px;
       margin-bottom: 10px;
@@ -101,11 +107,11 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       line-height: 1.3;
       word-break: keep-all;
-      cursor: pointer;
+      cursor: pointer; /* 글씨 클릭 가능 */
     }
 
     .ad-item .desc .date {
-      display: block;
+      display: block; 
       font-weight: 600;
       font-size: 0.8rem;
       margin-top: 3px;
@@ -153,50 +159,40 @@
   <div class="ad-carousel">
     <div class="ad-wrapper" id="adWrapper">
       <!-- 1번 광고 -->
-      <div class="ad-item">
-        <a href="https://overthewall.shop/product/list.html?cate_no=49" target="_blank">
-          <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900" alt="2025 테리 생일굿즈">
-        </a>
+      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
+        <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900" alt="2025 테리 생일굿즈">
         <div class="desc">
           2025 테리 생일굿즈
           <span class="date">(2025.10.10까지)</span>
         </div>
       </div>
       <!-- 2번 광고 -->
-      <div class="ad-item">
-        <a href="https://overthewall.shop/product/list.html?cate_no=48" target="_blank">
-          <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096" alt="2025 나츠키 생일 굿즈">
-        </a>
+      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
+        <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096" alt="2025 나츠키 생일 굿즈">
         <div class="desc">
           2025 나츠키 생일 굿즈
           <span class="date">(2025.10.01까지)</span>
         </div>
       </div>
       <!-- 3번 광고 -->
-      <div class="ad-item">
-        <a href="https://fondee.io/room/room_view/?room_id=517644" target="_blank">
-          <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp" alt="쪼꼬테리 판매중">
-        </a>
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
+        <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp" alt="쪼꼬테리 판매중">
         <div class="desc">
           쪼꼬테리 판매중
           <span class="date">(2025.09.24 오후10시까지)</span>
         </div>
       </div>
       <!-- 4번 광고 -->
-      <div class="ad-item">
-        <a href="https://fondee.io/room/room_view/?room_id=515305" target="_blank">
-          <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp" alt="쪼꼬츠키 판매중">
-        </a>
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
+        <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp" alt="쪼꼬츠키 판매중">
         <div class="desc">
           쪼꼬츠키 판매중
           <span class="date">(2025.09.20 오후10시까지)</span>
         </div>
       </div>
       <!-- 5번 광고 -->
-      <div class="ad-item">
-        <a href="https://tumblbug.com/projectd0116" target="_blank">
-          <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
-        </a>
+      <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
+        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
         <div class="desc">
           테리눈나 3주년 데뷔 지하철 광고 프로젝트
         </div>
@@ -223,20 +219,9 @@
 
     const dots = document.querySelectorAll('.ad-dot');
 
-    // 광고 글씨 클릭 시 링크 열기
-    ads.forEach(ad => {
-      const link = ad.querySelector('a').href;
-      const desc = ad.querySelector('.desc');
-      desc.addEventListener('click', () => window.open(link, '_blank'));
-    });
-
     function showAd(index) {
       current = index;
-      let offset = 0;
-      for (let i = 0; i < index; i++) {
-        offset += ads[i].offsetHeight + 20; // margin-bottom 포함
-      }
-      wrapper.style.transform = `translateY(-${offset}px)`;
+      wrapper.style.transform = `translateY(-${330 * index}px)`; // 광고 높이에 맞춤
       dots.forEach((d,i) => d.classList.toggle('active', i===index));
     }
 
@@ -245,7 +230,7 @@
       showAd(current);
     }
 
-    setInterval(nextAd, 4000);
+    setInterval(nextAd, 4000); // 4초마다 자동 전환
   </script>
 </body>
 </html>
