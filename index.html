@@ -16,13 +16,20 @@
     overflow-x: hidden;
   }
 
+  .main-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px; /* 좌우 간격 */
+  }
+
   .container {
     background: rgba(255, 255, 255, 0.9);
     padding: 40px;
     border-radius: 20px;
     box-shadow: 0 10px 25px rgba(0,0,0,0.15);
     text-align: center;
-    max-width: 500px;
+    max-width: 400px;
     z-index: 1;
   }
 
@@ -53,17 +60,14 @@
 
   /* 광고 캐러셀 */
   .ad-carousel {
-    position: fixed;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
+    position: relative; /* PC에서는 부모 flex에 따라 위치 */
     width: 440px;
     height: 350px;
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     background: #fff;
-    z-index: 999;
+    z-index: 1;
   }
 
   .ad-wrapper {
@@ -135,23 +139,28 @@
 
   /* 모바일/태블릿 */
   @media(max-width:768px){
+    .main-wrapper {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .container {
+      margin-bottom: 0;
+    }
+
     .ad-carousel {
-      top: auto;
-      bottom: 0;
-      left: 0;
-      right: 0;
       width: 100%;
       height: 180px;
-      border-radius: 0;
-      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
 
     .ad-wrapper {
       flex-direction: row;
       width: 100%;
       height: 100%;
-      transition: transform 0.5s ease-in-out;
       padding: 0;
+      transition: transform 0.5s ease-in-out;
     }
 
     .ad-item {
@@ -161,54 +170,51 @@
     }
 
     .ad-item img { max-height: 120px; }
-
-    .container { margin-bottom: 200px; }
-
-    .ad-nav { display: none; } /* 모바일에서 점 버튼 숨김 */
+    .ad-nav { display: none; }
   }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <h1>🎨 IFplace</h1>
-  <p>모드를 선택해주세요</p>
-  <div class="buttons">
-    <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
-    <a href="quiz.html" class="btn">🧩 퀴즈 모드</a>
+<div class="main-wrapper">
+  <div class="container">
+    <h1>🎨 IFplace</h1>
+    <p>모드를 선택해주세요</p>
+    <div class="buttons">
+      <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
+      <a href="quiz.html" class="btn">🧩 퀴즈 모드</a>
+    </div>
   </div>
-</div>
 
-<div class="ad-carousel">
-  <div class="ad-wrapper" id="adWrapper">
+  <div class="ad-carousel">
+    <div class="ad-wrapper" id="adWrapper">
+       <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
+        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
+        <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
+      </div>
 
-     <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
-      <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==">
-      <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
-    </div>
+      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
+        <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
+        <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
+      </div>
+      
+      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
+        <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
+        <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
+      </div>
 
-    <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
-      <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
-      <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
-    </div>
-    
-    <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
-      <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
-      <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
-    </div>
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
+        <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
+        <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
+      </div>
 
-    <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
-      <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
-      <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
+      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
+        <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
+        <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
+      </div>
     </div>
-
-    <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
-      <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
-      <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
-    </div>
-   
+    <div class="ad-nav" id="adNav"></div>
   </div>
-  <div class="ad-nav" id="adNav"></div>
 </div>
 
 <script>
@@ -250,24 +256,13 @@ setInterval(nextAd,5000);
 let startX = 0;
 let endX = 0;
 
-wrapper.addEventListener('touchstart', (e) => {
-  startX = e.touches[0].clientX;
-});
-
-wrapper.addEventListener('touchmove', (e) => {
-  endX = e.touches[0].clientX;
-});
-
+wrapper.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; });
+wrapper.addEventListener('touchmove', (e) => { endX = e.touches[0].clientX; });
 wrapper.addEventListener('touchend', () => {
   if(window.innerWidth <= 768){
     const diff = startX - endX;
-    if(diff > 50){ // 왼쪽 스와이프
-      current = (current + 1) % total;
-      showAd(current);
-    } else if(diff < -50){ // 오른쪽 스와이프
-      current = (current - 1 + total) % total;
-      showAd(current);
-    }
+    if(diff > 50){ current = (current + 1) % total; showAd(current); }
+    else if(diff < -50){ current = (current - 1 + total) % total; showAd(current); }
   }
 });
 </script>
