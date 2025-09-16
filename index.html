@@ -71,29 +71,26 @@ h1 {
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.3);
   background: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   touch-action: pan-y;
 }
 
 .ad-wrapper {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  width: 100%;
   transition: transform 0.6s ease-in-out;
-  padding-top: 0;
-  padding-bottom: 0;
 }
 
 .ad-item {
-  flex: 0 0 auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 10px;
   box-sizing: border-box;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -149,8 +146,8 @@ h1 {
   .main-wrapper { flex-direction: column; gap: 20px; }
   .container { width: 90%; padding: 30px 20px; min-height: auto !important; }
   .ad-carousel { width: 100%; height: 180px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
-  .ad-wrapper { flex-direction: row; width: 100%; height: 100%; padding: 0; transition: transform 0.5s ease-in-out; }
-  .ad-item { flex: 0 0 100%; height: 100%; margin: 0; }
+  .ad-wrapper { display: flex; flex-direction: row; width: 100%; height: 100%; transition: transform 0.5s ease-in-out; }
+  .ad-item { position: relative; flex: 0 0 100%; height: 100%; margin: 0; }
   .ad-item img { max-height: 120px; }
   .ad-nav { display: none; }
 }
@@ -216,33 +213,36 @@ for (let i=0;i<total;i++){
 }
 const dots = document.querySelectorAll('.ad-dot');
 
+let adPositions = [];
+
+function setAdPositions(){
+  let top = 0;
+  ads.forEach(ad => {
+    ad.style.top = top + 'px';
+    adPositions.push(top);
+    top += ad.offsetHeight + 20; // gap 포함
+  });
+  document.querySelector('.ad-carousel').style.height = ads[0].offsetHeight + 20 + 'px';
+}
+
 function showAd(index){
   current = index;
   if(window.innerWidth <= 768){
     wrapper.style.transform = `translateX(-${index*100}%)`;
   } else {
-    const itemHeight = ads[0].offsetHeight;
-    const gap = 20;
-    wrapper.style.transform = `translateY(-${index*(itemHeight + gap)}px)`;
+    wrapper.style.transform = `translateY(-${adPositions[index]}px)`;
   }
   dots.forEach((d,i)=>d.classList.toggle('active',i===index));
 }
 
-// 이미지 로딩 후 캐러셀 높이 자동 설정
-function adjustCarouselHeight(){
-  const adHeight = ads[0].offsetHeight + 20; // gap 포함
-  document.querySelector('.ad-carousel').style.height = adHeight + 'px';
-  document.querySelector('.container').style.minHeight = adHeight + 'px';
-}
-
-// 모든 이미지 로딩 후 높이 조정
+// 이미지 로딩 완료 후 위치 설정
 let imagesLoaded = 0;
-ads.forEach(imgDiv => {
-  const img = imgDiv.querySelector('img');
+ads.forEach(ad => {
+  const img = ad.querySelector('img');
   if(img.complete) imagesLoaded++;
-  else img.onload = () => { imagesLoaded++; if(imagesLoaded===total) adjustCarouselHeight(); };
+  else img.onload = () => { imagesLoaded++; if(imagesLoaded===total) setAdPositions(); };
 });
-if(imagesLoaded === total) adjustCarouselHeight();
+if(imagesLoaded === total) setAdPositions();
 
 function nextAd(){ current = (current+1)%total; showAd(current); }
 setInterval(nextAd,5000);
