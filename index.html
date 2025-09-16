@@ -1,275 +1,238 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IFplace 🎨</title>
-  <style>
-    body {
-      font-family: 'Nunito', sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow-x: hidden;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IFplace 🎨</title>
+<style>
+  body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    background: linear-gradient(135deg, #FFDEE9 0%, #B5FFFC 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+  }
 
-    .container {
-      background: rgba(255, 255, 255, 0.9);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-      text-align: center;
-      max-width: 500px;
-      z-index: 1;
-    }
+  .container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+    max-width: 500px;
+    z-index: 1;
+  }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: #ff6f61;
-    }
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ff6f61;
+  }
 
-    .buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
 
-    .btn {
-      padding: 15px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #fff;
-      text-decoration: none;
-      background: linear-gradient(135deg, #ff6f61, #ff9a6f);
-      border-radius: 12px;
-      transition: transform 0.3s ease;
-    }
+  .btn {
+    padding: 15px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff6f61, #ff9a6f);
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+  }
 
-    .btn:hover {
-      transform: scale(1.05);
-    }
+  .btn:hover { transform: scale(1.05); }
 
-    /* 광고 캐러셀 */
+  /* 광고 캐러셀 */
+  .ad-carousel {
+    position: fixed;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 440px;
+    height: 350px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    background: #fff;
+    z-index: 999;
+  }
+
+  .ad-wrapper {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.6s ease-in-out;
+  }
+
+  .ad-item {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    cursor: pointer;
+  }
+
+  .ad-item img {
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 10px;
+  }
+
+  .ad-item .desc {
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    background: rgba(255,111,97,0.85);
+    padding: 6px 8px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    line-height: 1.3;
+  }
+
+  .ad-item .desc .date {
+    display: block;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-top: 3px;
+  }
+
+  .ad-nav {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+
+  .ad-dot {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .ad-dot.active { background: #ff6f61; }
+
+  /* 모바일/태블릿 */
+  @media(max-width:768px){
     .ad-carousel {
-      position: fixed;
-      top: 50%;
-      right: 150px;
-      transform: translateY(-50%);
-      width: 440px;   
-      height: 350px;
-      overflow: hidden;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-      background: #fff;
-      z-index: 999;
+      top: auto;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 180px;
+      border-radius: 0;
+      box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
     }
 
     .ad-wrapper {
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.6s ease-in-out;
+      flex-direction: row;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s ease-in-out;
     }
 
     .ad-item {
-      flex: 0 0 300px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-      box-sizing: border-box;
-      margin-bottom: 20px;
-      cursor: pointer;
+      flex: 0 0 100%;
+      height: 100%;
+      margin: 0;
     }
 
-    .ad-item img {
-      width: 100%;
-      height: auto;
-      max-height: 220px;
-      object-fit: contain;
-      border-radius: 12px;
-      margin-bottom: 10px;
-    }
+    .ad-item img { max-height: 120px; }
 
-    .ad-item .desc {
-      font-size: 1rem;
-      text-align: center;
-      color: #fff;
-      background: rgba(255,111,97,0.85);
-      padding: 6px 8px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-      line-height: 1.3;
-      word-break: keep-all;
-    }
-
-    .ad-item .desc .date {
-      display: block;
-      font-weight: 600;
-      font-size: 0.8rem;
-      margin-top: 3px;
-    }
-
-    .ad-nav {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
-
-    .ad-dot {
-      width: 10px;
-      height: 10px;
-      background: #ccc;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .ad-dot.active {
-      background: #ff6f61;
-    }
-
-    /* 모바일/태블릿 광고 개선 */
-    @media(max-width:768px){
-      .ad-carousel {
-        top: auto;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 180px;
-        border-radius: 0;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
-        z-index: 998;
-        overflow-x: auto;
-        overflow-y: hidden;
-      }
-
-      .ad-wrapper {
-        flex-direction: row;
-        gap: 10px;
-        min-width: max-content; /* 광고를 한 줄로 나열 */
-        transition: none;
-      }
-
-      .ad-item {
-        flex: 0 0 auto;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .ad-item img {
-        max-height: 120px;
-      }
-
-      .ad-nav {
-        bottom: 5px;
-      }
-
-      /* 버튼과 겹치지 않도록 여유 추가 */
-      .container {
-        margin-bottom: 200px;
-      }
-    }
-  </style>
+    .container { margin-bottom: 200px; }
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>🎨 IFplace</h1>
-    <p>모드를 선택해주세요</p>
-    <div class="buttons">
-      <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
-      <a href="quiz.html" class="btn">🧩 퀴즈 모드</a>
+
+<div class="container">
+  <h1>🎨 IFplace</h1>
+  <p>모드를 선택해주세요</p>
+  <div class="buttons">
+    <a href="gallery.html" class="btn">🖼 감상 모드 (스포주의!)</a>
+    <a href="quiz.html" class="btn">🧩 퀴즈 모드</a>
+  </div>
+</div>
+
+<div class="ad-carousel">
+  <div class="ad-wrapper" id="adWrapper">
+    <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
+      <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900">
+      <div class="desc">2025 테리 생일굿즈 <span class="date">(2025.10.10까지)</span></div>
+    </div>
+    <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
+      <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096">
+      <div class="desc">2025 나츠키 생일 굿즈 <span class="date">(2025.10.01까지)</span></div>
+    </div>
+    <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
+      <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp">
+      <div class="desc">쪼꼬테리 판매중 <span class="date">(2025.09.24 오후10시까지)</span></div>
+    </div>
+    <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
+      <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp">
+      <div class="desc">쪼꼬츠키 판매중 <span class="date">(2025.09.20 오후10시까지)</span></div>
+    </div>
+    <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
+      <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGci">
+      <div class="desc">테리눈나 3주년 데뷔 지하철 광고 프로젝트 <span class="date">(2025.10.09까지)</span></div>
     </div>
   </div>
+  <div class="ad-nav" id="adNav"></div>
+</div>
 
-  <!-- 광고 캐러셀 -->
-  <div class="ad-carousel">
-    <div class="ad-wrapper" id="adWrapper">
-      <!-- 광고 항목 -->
-      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=49','_blank')">
-        <img src="https://pbs.twimg.com/media/G0Dr9T0akAAkdGb?format=jpg&name=900x900" alt="2025 테리 생일굿즈">
-        <div class="desc">
-          2025 테리 생일굿즈
-          <span class="date">(2025.10.10까지)</span>
-        </div>
-      </div>
+<script>
+const wrapper = document.getElementById('adWrapper');
+const nav = document.getElementById('adNav');
+const ads = document.querySelectorAll('.ad-item');
+let current = 0;
+const total = ads.length;
 
-      <div class="ad-item" onclick="window.open('https://overthewall.shop/product/list.html?cate_no=48','_blank')">
-        <img src="https://pbs.twimg.com/media/GzuO2k9bMAA9fIM?format=jpg&name=4096x4096" alt="2025 나츠키 생일 굿즈">
-        <div class="desc">
-          2025 나츠키 생일 굿즈
-          <span class="date">(2025.10.01까지)</span>
-        </div>
-      </div>
+// 네비게이션 점 생성
+for (let i=0;i<total;i++){
+  const dot = document.createElement('div');
+  dot.classList.add('ad-dot');
+  if(i===0) dot.classList.add('active');
+  dot.addEventListener('click',()=>showAd(i));
+  nav.appendChild(dot);
+}
+const dots = document.querySelectorAll('.ad-dot');
 
-      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=517644','_blank')">
-        <img src="https://cdn.fondee.io/room/517644/2025_09_04_164318_main_img.webp" alt="쪼꼬테리 판매중">
-        <div class="desc">
-          쪼꼬테리 판매중
-          <span class="date">(2025.09.24 오후10시까지)</span>
-        </div>
-      </div>
+function showAd(index){
+  current = index;
+  if(window.innerWidth <= 768){
+    wrapper.style.transform = `translateX(-${index*100}%)`;
+  } else {
+    wrapper.style.transform = `translateY(-${320*index}px)`;
+  }
+  dots.forEach((d,i)=>d.classList.toggle('active',i===index));
+}
 
-      <div class="ad-item" onclick="window.open('https://fondee.io/room/room_view/?room_id=515305','_blank')">
-        <img src="https://cdn.fondee.io/room/515305/2025_08_29_140031_main_img.webp" alt="쪼꼬츠키 판매중">
-        <div class="desc">
-          쪼꼬츠키 판매중
-          <span class="date">(2025.09.20 오후10시까지)</span>
-        </div>
-      </div>
+function nextAd(){
+  current = (current+1)%total;
+  showAd(current);
+}
+setInterval(nextAd,5000);
+</script>
 
-      <div class="ad-item" onclick="window.open('https://tumblbug.com/projectd0116','_blank')">
-        <img src="https://img.tumblbug.com/eyJidWNrZXQiOiJ0dW1ibGJ1Zy1pbWctYXNzZXRzIiwia2V5IjoiY292ZXIvNGRiMDY3MzgtOTEwYi00NTA3LTg4Y2QtMzU2ZTYyZGIyZjliL2JkZmUyNTk4LThiODQtNDAwYS1iOWE5LTY3MmYyZDRlMTkwNi5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEwMDAsImhlaWdodCI6MTAwMCwid2l0aG91dEVubGFyZ2VtZW50Ijp0cnVlLCJmaXQiOm51bGx9LCJyb3VuZENyb3AiOmZhbHNlLCJyb3RhdGUiOm51bGx9fQ==" alt="테리눈나 3주년 데뷔 지하철 광고 프로젝트">
-        <div class="desc">
-          테리눈나 3주년 데뷔 지하철 광고 프로젝트
-          <span class="date">(2025.10.09까지)</span>
-        </div>
-      </div>
-    </div>
-    <div class="ad-nav" id="adNav"></div>
-  </div>
-
-  <script>
-    const wrapper = document.getElementById('adWrapper');
-    const nav = document.getElementById('adNav');
-    const ads = document.querySelectorAll('.ad-item');
-    let current = 0;
-    const total = ads.length;
-
-    // 네비게이션 점 생성
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement('div');
-      dot.classList.add('ad-dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => showAd(i));
-      nav.appendChild(dot);
-    }
-
-    const dots = document.querySelectorAll('.ad-dot');
-
-    function showAd(index) {
-      current = index;
-      wrapper.style.transform = `translateY(-${320 * index}px)`; // 데스크탑용
-      dots.forEach((d,i) => d.classList.toggle('active', i===index));
-    }
-
-    function nextAd() {
-      current = (current + 1) % total;
-      showAd(current);
-    }
-
-    setInterval(nextAd, 8000);
-  </script>
 </body>
 </html>
