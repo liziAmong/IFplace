@@ -247,6 +247,42 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 조금만 더 가세요", "위치 공개!"],
     tags: ["하루"]
   },
+{ 
+    id: 27,
+    link: "https://wplace.live/?lat=38.425226171004425&lng=126.49666959052735&zoom=11.854993163458614",
+    hintLink: "https://wplace.live/?lat=38.452074731737625&lng=126.47346646552732&zoom=13.636823028581489",
+    image: "images/image27.jpg",
+    size: "완커",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "아래로 조금만 더 가세요", "위치 공개!"],
+    tags: ["츠키"]
+  },
+{ 
+    id: 28,
+    link: "https://wplace.live/?lat=35.862628918572014&lng=129.35223599677732&zoom=15.534599494098254",
+    hintLink: "https://wplace.live/?lat=35.8599221830637&lng=129.21618130927732&zoom=13.787886020670316",
+    image: "images/image28.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["테리"]
+  },
+{ 
+    id: 29,
+    link: "",
+    hintLink: "https://wplace.live/?lat=35.8599221830637&lng=129.21618130927732&zoom=13.787886020670316",
+    image: "images/image29.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["테리"]
+  },
+  {
+    id: 30,
+    link: "https://wplace.live/?lat=38.03833160046862&lng=126.35551724677734&zoom=13.3523622257006",
+    hintLink: "https://wplace.live/?lat=37.97655906789116&lng=126.55415005927733&zoom=12.8520626485129",
+    image: "images/image30.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
+    tags: ["리리"]
+  },
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
