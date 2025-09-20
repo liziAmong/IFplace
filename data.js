@@ -196,7 +196,7 @@ const artworks = [
   { 
     id: 21,
     link: "https://wplace.live/?lat=38.30421515193053&lng=126.13069302802731&zoom=14.297349595324182",
-    hintLink: "hhttps://wplace.live/?lat=38.492122473272275&lng=126.04596646552733&zoom=13.825554835272255",
+    hintLink: "https://wplace.live/?lat=38.492122473272275&lng=126.04596646552733&zoom=13.825554835272255",
     image: "images/image21.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "아래로 조금만 더 가세요", "위치 공개!"],
