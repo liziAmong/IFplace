@@ -173,7 +173,7 @@ const artworks = [
     image: "images/image18.jpg",
     size: "완커",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["테리"]
+    tags: ["테리","하유"]
   },
   { 
     id: 19,
