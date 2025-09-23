@@ -303,7 +303,7 @@ const artworks = [
   },
 {
     id: 33,
-    link: "https://wplace.live/?lat=59.37319755702916&lng=133.62002896552733&zoom=13.93521285960281",
+    link: "https://wplace.live/?lat=59.37095871553877&lng=133.62073209052733&zoom=11.83300042249616",
     hintLink: "https://wplace.live/?lat=37.32411257818241&lng=126.82239224677733&zoom=14.25559543158663",
     image: "images/image33.jpg",
     size: "치비",
