@@ -355,7 +355,33 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
- 
+     {
+    id: 39,
+    link: "https://wplace.live/?lat=38.555795184369565&lng=127.73082974677733&zoom=12.309068652524866",
+    hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
+    image: "images/image39.jpg",
+    size: "완커",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
+    tags: ["츠키"]
+  },
+        {
+    id: 40,
+    link: "https://wplace.live/?lat=38.575586873849126&lng=127.54168912177734&zoom=12.763305216729322",
+    hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
+    image: "images/image40.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
+    tags: ["테리"]
+  },
+    { 
+    id: 41,
+    link: "https://wplace.live/?lat=38.469968224255226&lng=127.80483365302732&zoom=13.113432238860636",
+    hintLink: "https://wplace.live/?lat=38.49790072266623&lng=128.0913570905273&zoom=12.862654096323025",
+    image: "images/image41.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["하네"]
+  },
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
