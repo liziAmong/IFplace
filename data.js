@@ -418,6 +418,26 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
+
+        { 
+    id: 46,
+    link: "https://wplace.live/?lat=38.13255199691374&lng=126.34356412177732&zoom=13.339409950081725",
+    hintLink: "https://wplace.live/?lat=38.7684070849143&lng=129.90278287177733&zoom=10.982103705549827",
+    image: "images/image46.jpg",
+    size: "완커",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
+    tags: ["하유"]
+  },
+
+    {
+    id: 47,
+    link: "https://wplace.live/?lat=38.607599380190685&lng=127.64504849677732&zoom=12.525341682435524",
+    hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
+    image: "images/image47.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
+    tags: ["테리"]
+  },
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
