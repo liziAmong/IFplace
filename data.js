@@ -479,7 +479,7 @@ const artworks = [
     id: 52,
    link: "https://wplace.live/?lat=71.79990063525537&lng=139.7815133405273&zoom=13.292565929559261",
     hintLink: "https://wplace.live/?lat=37.32411257818241&lng=126.82239224677733&zoom=14.25559543158663",
-    image: "images/image33.jpg",
+    image: "images/image52.jpg",
     size: "치비",
     quizHints: ["클릭하시면 작품의 시작으로 이동합니다.", "쭈우우욱 따라 가세요", "위치 공개!"],
     tags: ["아테"]
