@@ -457,7 +457,33 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동북쪽으로 조금만 더 가세요", "위치 공개!"],
     tags: ["하루"]
   },
-    
+{ 
+    id: 50,
+    link: "https://wplace.live/?lat=38.446568148752704&lng=127.7684469342773&zoom=13.200611939029645",
+    hintLink: "https://wplace.live/?lat=38.49790072266623&lng=128.0913570905273&zoom=12.862654096323025",
+    image: "images/image50.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["아테"]
+  },
+    { 
+    id: 51,
+    link: "https://wplace.live/?lat=41.38452465300105&lng=127.27186490302732&zoom=11.89057683395873",
+    hintLink: "https://wplace.live/?lat=41.75144730044384&lng=126.77897427802733&zoom=11.791839233433066",
+    image: "images/image51.jpg",
+    size: "완커",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "국경선 따라 동쪽으로..?", "위치 공개!"],
+    tags: ["아테"]
+  },
+       { 
+    id: 52,
+   link: "https://wplace.live/?lat=71.79990063525537&lng=139.7815133405273&zoom=13.292565929559261",
+    hintLink: "https://wplace.live/?lat=37.32411257818241&lng=126.82239224677733&zoom=14.25559543158663",
+    image: "images/image33.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품의 시작으로 이동합니다.", "쭈우우욱 따라 가세요", "위치 공개!"],
+    tags: ["아테"]
+  },
   // 나머지 작품들도 같은 형식으로 추가
 ];
 
