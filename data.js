@@ -289,7 +289,7 @@ const artworks = [
     hintLink: "https://wplace.live/?lat=35.166983262215034&lng=126.85016568427733&zoom=13.74297758107425",
     image: "images/image31.jpg",
     size: "중간",
-    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동북쪽으로 가세요", "위치 공개!"],
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북서쪽으로 가세요", "위치 공개!"],
     tags: ["하루"]
   },
 {
