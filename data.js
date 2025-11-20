@@ -422,7 +422,7 @@ const artworks = [
     
         { 
     id: 46,
-    link: "https://wplace.live/?lat=38.7627876613096&lng=131.1235836530273&zoom=10.679279329413486",
+    link: "https://wplace.live/?lat=38.80868949702187&lng=131.25454068427732&zoom=12.612521382604513",
     hintLink: "https://wplace.live/?lat=38.7684070849143&lng=129.90278287177733&zoom=10.982103705549827",
     image: "images/image46.jpg",
     size: "완커",
