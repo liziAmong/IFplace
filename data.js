@@ -51,7 +51,7 @@ const artworks = [
   },
   {
     id: 5,
-    link: "https://wplace.samuelscheit.com/#z=13.60&lat=36.38657&lng=128.25243&time=2025-09-22T17-49-18.014Z&zoom=2.00",
+    link: "https://wplace.live/?lat=36.3868328548721&lng=128.24850552802735&zoom=12.860072072591741",
     hintLink: "https://wplace.live/?lat=36.207192269375824&lng=128.24903287177733&zoom=12.86007207259177",
     image: "images/image5.jpg",
     size: "치비",
@@ -360,7 +360,7 @@ const artworks = [
   },
     {
     id: 39,
-    link: "https://wplace.samuelscheit.com/#z=12.08&lat=38.54668&lng=127.73813&time=2025-10-24T23-09-24.923Z&zoom=2.00",
+    link: "https://wplace.live/?lat=38.54988410914896&lng=127.74471646552733&zoom=11.674915083116046",
     hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
     image: "images/image39.jpg",
     size: "완커",
@@ -426,7 +426,7 @@ const artworks = [
     
         { 
     id: 46,
-    link: "https://wplace.samuelscheit.com/#z=10.64&lat=38.73608&lng=131.12206&time=2025-11-09T15-37-15.485Z&zoom=2.00",
+    link: "https://wplace.live/?lat=38.809237400096535&lng=131.2526070905273&zoom=12.30969700646821",
     hintLink: "https://wplace.live/?lat=38.7684070849143&lng=129.90278287177733&zoom=10.982103705549827",
     image: "images/image46.jpg",
     size: "완커",
@@ -506,6 +506,27 @@ const artworks = [
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동남쪽으로 가세요", "위치 공개!"],
     tags: ["아테"]
+    },
+
+       {
+    id: 99,
+    link: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
+    hintLink: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
+    image: "images/image99.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "시작점 입니당", "위치 공개!"],
+    tags: ["아테"]
+    },
+
+
+       {
+    id: 100,
+    link: "https://wplace.live/?lat=41.382018754486424&lng=133.17793912177734&zoom=14.260497255506719",
+    hintLink: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
+    image: "images/image100.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "그냥 쭉 가시면됩니다 ", "위치 공개!"],
+    tags: ["아테"]
     }
   // 나머지 작품들도 같은 형식으로 추가
   //status: "deleted"
@@ -529,22 +550,22 @@ function getRandomQuizHint(id) {
 }
 
 // ==============================
-// 갤러리/감상 모드 함수 (삭제 체크 제거)
+// 갤러리/감상 모드 함수
 // ==============================
 function getArtworkById(id) {
-  const artwork = artworks.find(a => a.id === id);  // 삭제 체크 제거
+  const artwork = artworks.find(a => a.id === id); // deleted 여부 무시
   return artwork || null;
 }
 
 function getAllArtworks() {
-  return artworks;  // 삭제 체크 제거
+  return artworks; // 모든 작품 반환
 }
 
 // ==============================
-// 태그 검색 함수 (삭제 체크 제거)
+// 태그 검색 함수
 // ==============================
 function getArtworksByTag(tag) {
-  return artworks.filter(a => a.tags.includes(tag)); // 삭제 체크 제거
+  return artworks.filter(a => a.tags.includes(tag) && a.status !== "deleted");
 }
 
 // ==============================
