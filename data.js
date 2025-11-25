@@ -51,7 +51,7 @@ const artworks = [
   },
   {
     id: 5,
-    link: "https://wplace.live/?lat=36.3868328548721&lng=128.24850552802735&zoom=12.860072072591741",
+    link: "https://wplace.eralyon.net/?lat=36.383449&lng=128.250249&zoom=13.11&version=v38.052",
     hintLink: "https://wplace.live/?lat=36.207192269375824&lng=128.24903287177733&zoom=12.86007207259177",
     image: "images/image5.jpg",
     size: "치비",
@@ -360,7 +360,7 @@ const artworks = [
   },
     {
     id: 39,
-    link: "https://wplace.live/?lat=38.54988410914896&lng=127.74471646552733&zoom=11.674915083116046",
+    link: "https://wplace.eralyon.net/?lat=38.553542&lng=127.730294&zoom=12.40&version=v42.148",
     hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
     image: "images/image39.jpg",
     size: "완커",
@@ -426,7 +426,7 @@ const artworks = [
     
         { 
     id: 46,
-    link: "https://wplace.live/?lat=38.809237400096535&lng=131.2526070905273&zoom=12.30969700646821",
+    link: "https://wplace.eralyon.net/?lat=38.754858&lng=131.110016&zoom=10.77&version=v46",
     hintLink: "https://wplace.live/?lat=38.7684070849143&lng=129.90278287177733&zoom=10.982103705549827",
     image: "images/image46.jpg",
     size: "완커",
