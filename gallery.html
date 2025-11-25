@@ -5,13 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>감상 모드 | IFplace</title>
 
- <!-- ✅ Google tag (gtag.js) -->
+ <!-- Google tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVY8TTL074"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-YVY8TTL074');
   </script>
   
@@ -88,6 +87,7 @@
       width: 100%;
       border-radius: 12px;
       overflow: hidden;
+      position: relative; /* ← 사선 배지 위치 고정 위해 필수 */
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
@@ -104,6 +104,29 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    /* ✅ 여기에 "두꺼운 사선" 스타일 추가 */
+    .art-badge {
+      position: absolute;
+      top: 0;
+      left: -20px;
+      width: 120px;   /* 길이 */
+      height: 10px;   /* 두께 */
+      transform: rotate(-45deg);
+      transform-origin: left top;
+      pointer-events: none;
+      border-radius: 4px;
+    }
+
+    /* 삭제됨 = 검은 두꺼운 사선 */
+    .badge-deleted {
+      background: rgba(0,0,0,0.8);
+    }
+
+    /* 테러 피해 = 빨간 두꺼운 사선 */
+    .badge-attacked {
+      background: rgba(255,0,0,0.8);
     }
 
     .buttons .btn {
@@ -152,7 +175,6 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
 
-    /* 모바일 대응 */
     @media (max-width: 768px) {
       h1 { font-size: 1.8rem; }
       p { font-size: 0.9rem; }
@@ -198,7 +220,6 @@
       btn.addEventListener("click",()=>{
         tagStates[i]=!tagStates[i];
         btn.style.backgroundColor = tagStates[i]?tagColors[i]:"";
-        btn.style.color = "#222";
         currentPage=1; renderGallery();
       });
       tagButtonsContainer.appendChild(btn);
@@ -212,11 +233,9 @@
       const btn=document.createElement("button");
       btn.textContent=name;
       btn.style.backgroundColor=sizeColors[i];
-      btn.style.color="#222";
       btn.addEventListener("click",()=>{
         sizeStates[i]=!sizeStates[i];
         btn.style.backgroundColor = sizeStates[i]?sizeColors[i]:"";
-        btn.style.color = "#222";
         currentPage=1; renderGallery();
       });
       sizeButtonsContainer.appendChild(btn);
@@ -243,7 +262,23 @@
       pageItems.forEach(art=>{
         const card=document.createElement("div");
         card.className="art-card";
-        card.innerHTML=`<a href="${art.link}" target="_blank"><img src="${art.image}" alt=""></a>`;
+
+        /* 상태에 따른 사선 추가 */
+        let badgeHTML = "";
+        if (art.status === "deleted") {
+          badgeHTML = `<div class="art-badge badge-deleted"></div>`;
+        }
+        else if (art.status === "attacked") {
+          badgeHTML = `<div class="art-badge badge-attacked"></div>`;
+        }
+
+        card.innerHTML = `
+          ${badgeHTML}
+          <a href="${art.link}" target="_blank">
+            <img src="${art.image}" alt="">
+          </a>
+        `;
+
         galleryContainer.appendChild(card);
       });
 
