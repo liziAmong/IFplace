@@ -170,12 +170,13 @@ const artworks = [
   },
   { 
     id: 18,
-    link: "https://wplace.live/?lat=38.120106926168816&lng=126.31491177802732&zoom=12.043724970149347",
+    link: "https://wplace.eralyon.net/?lat=38.099018&lng=126.317446&zoom=12.99&version=v46.121",
     hintLink: "https://wplace.live/?lat=38.140432777691956&lng=126.49614224677734&zoom=12.666931918269457",
     image: "images/image18.jpg",
     size: "완커",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["테리","하유"]
+    tags: ["테리","하유"],
+    status: "deleted"
   },
   { 
     id: 19,
@@ -446,12 +447,13 @@ const artworks = [
   },
   { 
     id: 48,
-    link: "https://wplace.live/?lat=38.13324332752555&lng=126.31877896552731&zoom=13.894389769142506",
+    link: "https://wplace.eralyon.net/?lat=38.133087&lng=126.317636&zoom=13.58&version=v46.025",
     hintLink: "https://wplace.live/?lat=38.140432777691956&lng=126.49614224677734&zoom=12.666931918269457",
     image: "images/image48.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["테리"]
+    tags: ["테리"],
+    status: "deleted"
   },
 { 
     id: 49,
