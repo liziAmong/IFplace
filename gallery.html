@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>감상 모드 | IFplace</title>
 
- <!-- Google tag -->
+  <!-- Google tag -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-YVY8TTL074"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -13,7 +13,7 @@
     gtag('js', new Date());
     gtag('config', 'G-YVY8TTL074');
   </script>
-  
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
 
@@ -71,7 +71,6 @@
       box-shadow: 0 6px 12px rgba(0,0,0,0.3);
     }
 
-    /* PC: 고정 2x3 갤러리 */
     .gallery {
       display: grid;
       grid-template-columns: repeat(2, 300px);
@@ -87,11 +86,11 @@
       width: 100%;
       border-radius: 12px;
       overflow: hidden;
-      position: relative; /* ← 사선 배지 위치 고정 위해 필수 */
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
       background: rgba(255,255,255,0.1);
+      position: relative; /* 사선 배지 위치용 */
     }
 
     .art-card:hover {
@@ -106,28 +105,21 @@
       display: block;
     }
 
-    /* ✅ 여기에 "두꺼운 사선" 스타일 추가 */
+    /* 사선 배지 */
     .art-badge {
       position: absolute;
       top: 0;
       left: -20px;
-      width: 120px;   /* 길이 */
-      height: 10px;   /* 두께 */
+      width: 120px;
+      height: 10px;
       transform: rotate(-45deg);
       transform-origin: left top;
       pointer-events: none;
       border-radius: 4px;
     }
 
-    /* 삭제됨 = 검은 두꺼운 사선 */
-    .badge-deleted {
-      background: rgba(0,0,0,0.8);
-    }
-
-    /* 테러 피해 = 빨간 두꺼운 사선 */
-    .badge-attacked {
-      background: rgba(255,0,0,0.8);
-    }
+    .badge-deleted { background: rgba(0,0,0,0.8); }
+    .badge-attacked { background: rgba(255,0,0,0.8); }
 
     .buttons .btn {
       display: inline-block;
@@ -179,12 +171,7 @@
       h1 { font-size: 1.8rem; }
       p { font-size: 0.9rem; }
       #tag-buttons button, #size-buttons button { padding: 6px 12px; font-size: 0.8rem; }
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        grid-auto-rows: 160px;
-        gap: 15px;
-        width: 90%;
-      }
+      .gallery { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); grid-auto-rows: 160px; gap: 15px; width: 90%; }
       .buttons .btn { padding: 8px 16px; font-size: 0.9rem; }
       .pagination button { padding: 8px 16px; font-size: 0.8rem; }
     }
@@ -233,6 +220,7 @@
       const btn=document.createElement("button");
       btn.textContent=name;
       btn.style.backgroundColor=sizeColors[i];
+      btn.style.color="#222";
       btn.addEventListener("click",()=>{
         sizeStates[i]=!sizeStates[i];
         btn.style.backgroundColor = sizeStates[i]?sizeColors[i]:"";
@@ -263,14 +251,9 @@
         const card=document.createElement("div");
         card.className="art-card";
 
-        /* 상태에 따른 사선 추가 */
         let badgeHTML = "";
-        if (art.status === "deleted") {
-          badgeHTML = `<div class="art-badge badge-deleted"></div>`;
-        }
-        else if (art.status === "attacked") {
-          badgeHTML = `<div class="art-badge badge-attacked"></div>`;
-        }
+        if (art.status === "deleted") badgeHTML = `<div class="art-badge badge-deleted"></div>`;
+        else if (art.status === "attacked") badgeHTML = `<div class="art-badge badge-attacked"></div>`;
 
         card.innerHTML = `
           ${badgeHTML}
@@ -278,7 +261,6 @@
             <img src="${art.image}" alt="">
           </a>
         `;
-
         galleryContainer.appendChild(card);
       });
 
