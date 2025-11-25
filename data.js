@@ -220,7 +220,8 @@ const artworks = [
     image: "images/image23.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "아래로 조금만 더 가세요", "위치 공개!"],
-    tags: ["츠키"]
+    tags: ["츠키"],
+    status: "attacked"
   },
 { 
     id: 24,
