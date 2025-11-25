@@ -11,7 +11,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-YVY8TTL074');
   </script>
 
@@ -32,7 +31,6 @@
       position: relative;
     }
 
-    /* 전체 블러 배경 */
     #bg-blur {
       position: fixed;
       inset: 0;
@@ -52,7 +50,6 @@
       padding: 0 10px;
     }
 
-    /* 버튼 (투명) */
     #hint-btn {
       position: relative;
       padding: 120px 160px;
@@ -110,7 +107,6 @@
       background-color: #444;
     }
 
-    /* 모바일 대응 */
     @media (max-width: 600px) {
       #hint-btn {
         padding: 60px 40px;
@@ -131,15 +127,12 @@
   </style>
 </head>
 <body>
-  <!-- 블러 배경 -->
   <div id="bg-blur"></div>
 
   <h1>🧩 퀴즈 모드</h1>
   <p>힌트를 따라가며 작품의 위치를 맞춰보세요!</p>
 
-  <!-- 태그 & 사이즈 -->
   <div id="tag-size-display"></div>
-
   <button id="hint-btn"></button>
 
   <div id="controls">
@@ -164,16 +157,15 @@
     let currentQuizIndex = 0;
     let currentHintStep = 0;
 
+    // ✅ 삭제된 작품 제외
+    const activeArtworks = artworks.filter(a => a.status !== "deleted");
+
     function showQuiz(index) {
-      const artworks = getAllArtworks();
-      const artwork = artworks[index];
+      const artwork = activeArtworks[index];
       if (!artwork) return;
 
       bgBlur.style.backgroundImage = `url(${artwork.image})`;
-
-      const sizeText = artwork.size || "사이즈 없음";
-      const tags = artwork.tags ? artwork.tags.join(", ") : "태그 없음";
-      tagSizeDisplay.textContent = `사이즈: ${sizeText} | 태그: ${tags}`;
+      tagSizeDisplay.textContent = `사이즈: ${artwork.size || "없음"} | 태그: ${artwork.tags?.join(", ") || "없음"}`;
 
       currentHintStep = 0;
       hintBtn.textContent = artwork.quizHints[0] || "힌트 없음";
@@ -187,17 +179,17 @@
     }
 
     prevBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex - 1 + getAllArtworks().length) % getAllArtworks().length;
+      currentQuizIndex = (currentQuizIndex - 1 + activeArtworks.length) % activeArtworks.length;
       showQuiz(currentQuizIndex);
     });
 
     nextBtn.addEventListener("click", () => {
-      currentQuizIndex = (currentQuizIndex + 1) % getAllArtworks().length;
+      currentQuizIndex = (currentQuizIndex + 1) % activeArtworks.length;
       showQuiz(currentQuizIndex);
     });
 
     viewHintBtn.addEventListener("click", () => {
-      const artwork = getAllArtworks()[currentQuizIndex];
+      const artwork = activeArtworks[currentQuizIndex];
       if (!artwork) return;
 
       if (currentHintStep === 0 && artwork.quizHints.length > 1) {
