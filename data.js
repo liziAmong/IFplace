@@ -51,7 +51,7 @@ const artworks = [
   },
   {
     id: 5,
-    link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
+    link: "https://wplace.samuelscheit.com/#z=13.60&lat=36.38657&lng=128.25243&time=2025-09-22T17-49-18.014Z&zoom=2.00",
     hintLink: "https://wplace.live/?lat=36.207192269375824&lng=128.24903287177733&zoom=12.86007207259177",
     image: "images/image5.jpg",
     size: "치비",
@@ -516,7 +516,7 @@ const artworks = [
 // 퀴즈 모드 함수
 // ==============================
 function getQuizHints(id) {
-  const artwork = artworks.find(a => a.id === id);
+  const artwork = artworks.find(a => a.id === id && a.status !== "deleted");
   return artwork ? artwork.quizHints : [];
 }
 
@@ -531,18 +531,19 @@ function getRandomQuizHint(id) {
 // 갤러리/감상 모드 함수
 // ==============================
 function getArtworkById(id) {
-  return artworks.find(a => a.id === id) || null;
+  const artwork = artworks.find(a => a.id === id && a.status !== "deleted");
+  return artwork || null;
 }
 
 function getAllArtworks() {
-  return artworks;
+  return artworks.filter(a => a.status !== "deleted");
 }
 
 // ==============================
 // 태그 검색 함수
 // ==============================
 function getArtworksByTag(tag) {
-  return artworks.filter(a => a.tags.includes(tag));
+  return artworks.filter(a => a.tags.includes(tag) && a.status !== "deleted");
 }
 
 // ==============================
