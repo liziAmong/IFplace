@@ -359,7 +359,7 @@ const artworks = [
   },
     {
     id: 39,
-    link: "https://wplace.live/?lat=38.555795184369565&lng=127.73082974677733&zoom=12.309068652524866",
+    link: "https://wplace.samuelscheit.com/#z=12.08&lat=38.54668&lng=127.73813&time=2025-10-24T23-09-24.923Z&zoom=2.00",
     hintLink: "https://wplace.live/?lat=38.593174910301855&lng=127.32389615302733&zoom=13.299349539555392",
     image: "images/image39.jpg",
     size: "완커",
