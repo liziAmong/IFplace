@@ -49,15 +49,17 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["테리"]
   },
-  /*{
+  {
     id: 5,
     link: "https://wplace.live/?lat=36.3868328548721&lng=128.25026334052734&zoom=13.599574817085038",
     hintLink: "https://wplace.live/?lat=36.207192269375824&lng=128.24903287177733&zoom=12.86007207259177",
     image: "images/image5.jpg",
     size: "치비",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북쪽으로 가세요", "위치 공개!"],
-    tags: ["하유"]
-  },*/
+    tags: ["하유"],
+    status: "deleted"
+      
+  },
   {
     id: 6,
     link: "https://wplace.live/?lat=36.434082561640416&lng=128.23004849677733&zoom=13.876831573294917",
