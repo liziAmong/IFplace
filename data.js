@@ -535,10 +535,17 @@ const artworks = [
 
 
 // ==============================
+// 상태 체크 함수
+// ==============================
+function isDeleted(artwork) {
+  return artwork.status === "deleted";
+}
+
+// ==============================
 // 퀴즈 모드 함수
 // ==============================
 function getQuizHints(id) {
-  const artwork = artworks.find(a => a.id === id && a.status !== "deleted");
+  const artwork = artworks.find(a => a.id === id && !isDeleted(a)); // deleted만 제외
   return artwork ? artwork.quizHints : [];
 }
 
@@ -553,19 +560,19 @@ function getRandomQuizHint(id) {
 // 갤러리/감상 모드 함수
 // ==============================
 function getArtworkById(id) {
-  const artwork = artworks.find(a => a.id === id); // deleted 여부 무시
+  const artwork = artworks.find(a => a.id === id); // deleted/attacked 무시
   return artwork || null;
 }
 
 function getAllArtworks() {
-  return artworks; // 모든 작품 반환
+  return artworks; // 모두 반환
 }
 
 // ==============================
 // 태그 검색 함수
 // ==============================
 function getArtworksByTag(tag) {
-  return artworks.filter(a => a.tags.includes(tag) && a.status !== "deleted");
+  return artworks.filter(a => a.tags.includes(tag) && !isDeleted(a)); // 태그 검색 시 deleted만 제외
 }
 
 // ==============================
