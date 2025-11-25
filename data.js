@@ -362,7 +362,7 @@ const artworks = [
     image: "images/image39.jpg",
     size: "완커",
     quizHints: ["삭제된 작품입니다 ㅠ", "동쪽으로 가세요", "위치 공개!"],
-    tags: ["츠키"]
+    tags: ["츠키"],
     status: "deleted"
   }, 
         {
@@ -428,7 +428,7 @@ const artworks = [
     image: "images/image46.jpg",
     size: "완커",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
-    tags: ["하유"]
+    tags: ["하유"],
     status: "deleted"
   },
 
