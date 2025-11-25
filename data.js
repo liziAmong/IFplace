@@ -529,22 +529,22 @@ function getRandomQuizHint(id) {
 }
 
 // ==============================
-// 갤러리/감상 모드 함수
+// 갤러리/감상 모드 함수 (삭제 체크 제거)
 // ==============================
 function getArtworkById(id) {
-  const artwork = artworks.find(a => a.id === id && a.status !== "deleted");
+  const artwork = artworks.find(a => a.id === id);  // 삭제 체크 제거
   return artwork || null;
 }
 
 function getAllArtworks() {
-  return artworks.filter(a => a.status !== "deleted");
+  return artworks;  // 삭제 체크 제거
 }
 
 // ==============================
-// 태그 검색 함수
+// 태그 검색 함수 (삭제 체크 제거)
 // ==============================
 function getArtworksByTag(tag) {
-  return artworks.filter(a => a.tags.includes(tag) && a.status !== "deleted");
+  return artworks.filter(a => a.tags.includes(tag)); // 삭제 체크 제거
 }
 
 // ==============================
