@@ -510,6 +510,16 @@ const artworks = [
     tags: ["아테"]
     },
 
+    { 
+    id: 55,
+    link: "https://wplace.live/?lat=38.442024901462936&lng=127.80500943427732&zoom=14.5",
+    hintLink: "https://wplace.live/?lat=38.49790072266623&lng=128.0913570905273&zoom=12.862654096323025",
+    image: "images/image55.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["소리"]
+  },
+
        {
     id: 99,
     link: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
@@ -523,7 +533,7 @@ const artworks = [
 
        {
     id: 100,
-    link: "https://wplace.live/?lat=41.382018754486424&lng=133.17793912177734&zoom=14.260497255506719",
+    link: "https://wplace.live/?lat=41.382018754486424&lng=135.70391568427732&zoom=14.109085067438562",
     hintLink: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
     image: "images/image100.jpg",
     size: "치비",
