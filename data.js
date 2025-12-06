@@ -443,7 +443,7 @@ const artworks = [
     image: "images/image47.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
-    tags: ["테리"]
+    tags: ["츠키","테리"]
   },
   { 
     id: 48,
