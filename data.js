@@ -520,6 +520,16 @@ const artworks = [
     tags: ["소리"]
   },
 
+{ 
+    id: 56,
+    link: "https://wplace.live/?lat=38.53764801421898&lng=125.47327115302733&zoom=12.915345758740822",
+    hintLink: "https://wplace.live/?lat=38.325592848895795&lng=125.41666959052733&zoom=11.604843374864792",
+    image: "images/image56.jpg",
+    size: "중간",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동북쪽으로 조금만 더 가세요", "위치 공개!"],
+    tags: ["하루"]
+  },
+
        {
     id: 99,
     link: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
@@ -540,6 +550,8 @@ const artworks = [
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "그냥 쭉 가시면됩니다 ", "위치 공개!"],
     tags: ["아테"]
     }
+
+    
   // 나머지 작품들도 같은 형식으로 추가
   //status: "deleted"
   //status: "attacked"
