@@ -148,7 +148,7 @@ const artworks = [
     image: "images/image15.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "북쪽으로 가세요", "위치 공개!"],
-    tags: ["츠키","테리","하유","메이","리리","하루","아테","소리","하네"]
+    tags: ["츠키","테리","하유","메이","리리","하루","아테","소리","하네"],
     status: "attacked"
   },
  { 
@@ -331,7 +331,7 @@ const artworks = [
     image: "images/image35.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["하유"]
+    tags: ["하유"].
     status: "deleted"
   },
     { 
@@ -534,9 +534,9 @@ const artworks = [
 
 { 
     id: 57,
-    link: "https://wplace.eralyon.net/?lat=38.754858&lng=131.110016&zoom=10.77&version=v46",
+    link: "https://wplace.live/?lat=37.049495688502546&lng=126.70180630927734&zoom=13.03859122827593",
     hintLink: "https://wplace.live/?lat=38.7684070849143&lng=129.90278287177733&zoom=10.982103705549827",
-    image: "images/image46.jpg",
+    image: "images/image57.jpg",
     size: "치비",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "동쪽으로 가세요", "위치 공개!"],
     tags: ["하유"],
