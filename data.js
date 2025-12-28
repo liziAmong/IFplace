@@ -331,7 +331,7 @@ const artworks = [
     image: "images/image35.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
-    tags: ["하유"].
+    tags: ["하유"],
     status: "deleted"
   },
     { 
