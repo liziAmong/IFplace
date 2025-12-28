@@ -325,12 +325,13 @@ const artworks = [
   },
  { 
     id: 35,
-    link: "https://wplace.live/?lat=35.88598847728268&lng=128.08608365302732&zoom=12.968358444886062",
+    link: "https://wplace.eralyon.net/?lat=35.886136&lng=128.087749&zoom=13.28&version=v50.146",
     hintLink: "https://wplace.live/?lat=35.98191821791775&lng=128.48668912177732&zoom=10.69717562386377",
     image: "images/image35.jpg",
     size: "중간",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "서쪽으로 가세요", "위치 공개!"],
     tags: ["하유"]
+    status: "deleted"
   },
     { 
     id: 36,
