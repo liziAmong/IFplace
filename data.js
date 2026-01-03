@@ -561,8 +561,19 @@ const artworks = [
     size: "치비",
     quizHints: ["클릭하시면 작품 근처로 이동합니다.", "그냥 쭉 가시면됩니다 ", "위치 공개!"],
     tags: ["아테"]
-    }
+    },
 
+
+    
+       {
+    id: 101,
+    link: "https://wplace.live/?lat=41.386766690869536&lng=156.0947164655273&zoom=13.218170134877123",
+    hintLink: "https://wplace.live/?lat=41.38215064628942&lng=127.38260709052733&zoom=14.411909443574867",
+    image: "images/image101.jpg",
+    size: "치비",
+    quizHints: ["클릭하시면 작품 근처로 이동합니다.", "그냥 쭉 가시면됩니다 ", "위치 공개!"],
+    tags: ["아테"]
+    }
     
   // 나머지 작품들도 같은 형식으로 추가
   //status: "deleted"
